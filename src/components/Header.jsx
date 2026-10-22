@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { Link, usePath } from '../lib/router.jsx'
 import { site, navLinks } from '../data/site.js'
+import LogoMark from './LogoMark.jsx'
 
 const SECTION_IDS = ['about', 'skills', 'work', 'services', 'process', 'contact']
 
@@ -32,25 +33,25 @@ export default function Header() {
   return (
     <>
       <header className="sticky top-0 z-40 border-b border-line bg-navy/90 backdrop-blur">
-        <div className="mx-auto flex max-w-shell items-center justify-between gap-4 px-5 py-3.5 sm:px-10">
-          <Link href="/" className="flex items-center gap-3" ariaLabel={`${site.name} — home`}>
-            <span aria-hidden="true" className="btn-primary flex h-11 w-11 shrink-0 items-center justify-center rounded-xl font-display text-base font-bold text-white">SR</span>
-            <span className="leading-none">
-              <span className="block font-display text-[1.3rem] font-bold tracking-tight text-ink">{site.name}</span>
-              <span className="folio mt-1 block text-[0.58rem] text-muted">{site.role} — Portfolio</span>
+        <div className="mx-auto flex max-w-shell items-center justify-between gap-4 px-5 py-3 sm:px-10 sm:py-3.5">
+          <Link href="/" className="flex min-w-0 items-center gap-3" ariaLabel={`${site.name} — home`}>
+            <LogoMark className="h-10 w-10 shrink-0 sm:h-11 sm:w-11" />
+            <span className="min-w-0 leading-none">
+              <span className="block whitespace-nowrap font-display text-[1.12rem] font-bold tracking-tight text-ink sm:text-[1.3rem]">{site.name}</span>
+              <span className="folio mt-1 hidden whitespace-nowrap text-[0.58rem] text-muted sm:block">{site.role} — Portfolio</span>
             </span>
           </Link>
 
-          <nav className="hidden items-center gap-6 xl:gap-7 lg:flex" aria-label="Primary">
+          <nav className="hidden items-center gap-5 xl:gap-7 lg:flex" aria-label="Primary">
             {navLinks.map((l) => {
               const isActive = active && l.href === `/#${active}`
               return (
-                <Link key={l.href} href={l.href} className={`link-line text-[0.92rem] font-medium hover:text-ink ${isActive ? 'text-cyan' : 'text-soft'}`}>
+                <Link key={l.href} href={l.href} className={`link-line whitespace-nowrap text-[0.92rem] font-medium hover:text-ink ${isActive ? 'text-cyan' : 'text-soft'}`}>
                   {l.label}
                 </Link>
               )
             })}
-            <Link href="/#contact" className="btn-primary rounded-lg px-5 py-2.5 font-display text-sm font-semibold text-white">
+            <Link href="/#contact" className="btn-primary whitespace-nowrap rounded-lg px-5 py-2.5 font-display text-sm font-semibold text-white">
               Discuss your project
             </Link>
           </nav>
@@ -76,15 +77,15 @@ export default function Header() {
           header would trap a fixed child inside its box). */}
       <div
         id="mobile-menu"
-        className={`fixed inset-0 z-50 flex flex-col bg-surface text-ink lg:hidden ${open ? '' : 'hidden'}`}
+        className={`fixed inset-0 z-50 flex flex-col overflow-y-auto bg-surface text-ink lg:hidden ${open ? 'menu-panel' : 'hidden'}`}
         role="dialog"
         aria-modal="true"
         aria-label="Menu"
       >
-        <div className="flex items-center justify-between px-5 py-3.5">
-          <span className="flex items-center gap-3">
-            <span aria-hidden="true" className="btn-primary flex h-11 w-11 items-center justify-center rounded-xl font-display text-base font-bold text-white">SR</span>
-            <span className="font-display text-xl font-bold">{site.name}</span>
+        <div className="flex items-center justify-between px-5 pb-3 pt-[max(0.75rem,env(safe-area-inset-top))]">
+          <span className="flex min-w-0 items-center gap-3">
+            <LogoMark className="h-10 w-10 shrink-0" />
+            <span className="whitespace-nowrap font-display text-lg font-bold">{site.name}</span>
           </span>
           <button
             type="button"
@@ -95,15 +96,18 @@ export default function Header() {
         </div>
         <nav className="flex flex-1 flex-col justify-center px-6" aria-label="Mobile">
           {navLinks.map((l) => (
-            <Link key={l.href} href={l.href} onClick={() => setOpen(false)} className="block border-b border-line py-5">
-              <span className="font-display text-4xl font-bold">{l.label}</span>
+            <Link key={l.href} href={l.href} onClick={() => setOpen(false)} className="block border-b border-line py-4 sm:py-5">
+              <span className="font-display text-3xl font-bold sm:text-4xl">{l.label}</span>
             </Link>
           ))}
+          <Link href="/#contact" onClick={() => setOpen(false)} className="btn-primary mt-7 flex items-center justify-center rounded-xl px-6 py-4 font-display text-base font-semibold text-white">
+            Discuss your project
+          </Link>
           <Link href={site.socials.github} className="block py-5">
             <span className="font-display text-2xl font-semibold text-cyan">GitHub — {site.socials.githubHandle} ↗</span>
           </Link>
         </nav>
-        <p className="px-6 pb-8 font-mono text-[10px] uppercase tracking-widest2 text-muted">{site.name} — {site.role}</p>
+        <p className="px-6 pb-[max(2rem,env(safe-area-inset-bottom))] font-mono text-[10px] uppercase tracking-widest2 text-muted">{site.name} — {site.role}</p>
       </div>
     </>
   )
