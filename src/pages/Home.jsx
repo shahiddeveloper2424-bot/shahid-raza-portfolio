@@ -274,7 +274,7 @@ function Skills() {
 function ProjectPanel({ project, flip }) {
   const live = ['Live preview', 'Live', 'Live Project'].includes(project.status)
   return (
-    <article className="reveal overflow-hidden rounded-3xl border border-line bg-card">
+    <article className="panel-in overflow-hidden rounded-3xl border border-line bg-card">
       <div className={`grid items-center gap-8 p-6 sm:p-9 lg:grid-cols-2 lg:gap-12 lg:p-11 ${flip ? '' : ''}`}>
         <div className={`visual-zoom ${flip ? 'lg:order-2' : ''}`}>
           <div className="visual-inner"><ProjectVisual slug={project.slug} /></div>
@@ -341,16 +341,54 @@ function ProjectFilters({ active, onChange }) {
   )
 }
 
+const WORK_INITIAL = 3
+const WORK_STEP = 3
+
 function Work() {
   const [filter, setFilter] = useState('All')
+  const [visibleCount, setVisibleCount] = useState(WORK_INITIAL)
+  const filtered = filter === 'All' ? projects : projects.filter((p) => p.category === filter)
+  const visible = filtered.slice(0, visibleCount)
+  const allShown = visibleCount >= filtered.length
+
+  const changeFilter = (f) => {
+    setFilter(f)
+    setVisibleCount(WORK_INITIAL)
+  }
+  const toggleMore = () => {
+    if (allShown) {
+      setVisibleCount(WORK_INITIAL)
+      // Collapsing removes most of the section — bring its heading back
+      // into view so the visitor is not left stranded at the page foot.
+      document.getElementById('work')?.scrollIntoView({ behavior: 'smooth' })
+    } else {
+      setVisibleCount((c) => c + WORK_STEP)
+    }
+  }
+
   return (
     <section id="work" className="scroll-mt-24 bg-surface">
       <div className="mx-auto max-w-shell px-5 py-20 sm:px-10 sm:py-24">
         <SectionHeading index="04" eyebrow="Featured projects" title="Real products, honestly presented." intro="Live links where they are published, public source where the code is open, and a clear, honest status on every project." />
-        <ProjectFilters active={filter} onChange={setFilter} />
+        <ProjectFilters active={filter} onChange={changeFilter} />
         <div className="space-y-8">
-          {projects.map((p, i) => (<div key={p.slug} className={filter === 'All' || p.category === filter ? '' : 'hidden'}><ProjectPanel project={p} flip={i % 2 === 1} /></div>))}
+          {visible.map((p, i) => (<ProjectPanel key={p.slug} project={p} flip={i % 2 === 1} />))}
         </div>
+        {filtered.length > WORK_INITIAL && (
+          <div className="mt-12 text-center">
+            <button
+              type="button"
+              onClick={toggleMore}
+              aria-expanded={allShown}
+              className="rounded-full border border-line bg-card px-8 py-3.5 font-display text-sm font-semibold text-ink transition hover:border-accent hover:text-cyan focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
+            >
+              {allShown ? 'Show Less' : 'Load More Projects'} <span aria-hidden="true">{allShown ? '↑' : '↓'}</span>
+            </button>
+            <p aria-live="polite" className="mt-3 font-mono text-[11px] uppercase tracking-widest2 text-muted">
+              Showing {visible.length} of {filtered.length} projects
+            </p>
+          </div>
+        )}
         <p className="reveal mx-auto mt-12 max-w-2xl text-center leading-relaxed text-soft">
           This portfolio itself is also my work — designed and built with React, Vite and Tailwind CSS, and deployed on Vercel.
           Its source is public: <a href={site.socials.github} target="_blank" rel="noreferrer" className="link-line font-medium text-cyan">github.com/{site.socials.githubHandle} ↗</a>
