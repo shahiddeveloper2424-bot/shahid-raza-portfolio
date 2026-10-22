@@ -16,7 +16,7 @@
   --cyan: #38BDF8;
 }
 
-html { scroll-behavior: smooth; }
+html { scroll-behavior: smooth; scroll-padding-top: 6rem; }
 
 body {
   @apply bg-paper font-sans text-ink antialiased;

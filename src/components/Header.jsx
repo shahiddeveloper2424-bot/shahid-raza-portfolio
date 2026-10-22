@@ -31,7 +31,7 @@ export default function Header() {
 
   return (
     <>
-      <header className="sticky top-0 z-40 border-b border-line bg-navy/90 backdrop-blur">
+      <header className="sticky top-0 z-40 border-b border-line bg-navy/95 pt-[env(safe-area-inset-top)] backdrop-blur">
         <div className="mx-auto flex max-w-shell items-center justify-between gap-4 px-5 py-3 sm:px-10 sm:py-3.5">
           <Link href="/" className="flex min-w-0 items-center gap-3" ariaLabel={`${site.name} — home`}>
             <img src="/images/shahid-raza-sr-logo.png" alt="" aria-hidden="true" className="h-10 w-auto shrink-0 sm:h-11" />

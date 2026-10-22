@@ -31,7 +31,7 @@ function Routes() {
   else page = <NotFound />
 
   return (
-    <div className="flex min-h-screen flex-col bg-paper text-ink">
+    <div className="flex min-h-dvh flex-col bg-paper text-ink">
       <Header />
       <main id="main" className="flex-1">{page}</main>
       <Footer />
