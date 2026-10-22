@@ -20,7 +20,8 @@ export default function Portrait({ caption = true }) {
           <img
             src={site.photo}
             alt={`${site.name} — ${site.role}`}
-            loading="lazy"
+            loading="eager"
+            decoding="async"
             onLoad={() => setLoaded(true)}
             onError={() => setFailed(true)}
             className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-500 ${loaded ? 'opacity-100' : 'opacity-0'}`}
