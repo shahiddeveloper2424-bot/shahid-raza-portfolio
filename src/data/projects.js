@@ -10,8 +10,9 @@
  *   README + its live deployment (8 client-side tools, 53/53 tests).
  * - EduCore: no repository or demo evidence is available yet, so its
  *   fields stay explicit placeholders (`detailsPending: true`).
- * - No screenshots are included because no real screenshots were supplied.
- *   Each project renders a labelled visual placeholder instead.
+ * - No real app screenshots were supplied; projects render labelled
+ *   design compositions, except PDF Toolkit Pro whose cover is the
+ *   owner's promotional concept artwork (labelled as artwork in the UI).
  */
 export const projects = [
   {
@@ -85,7 +86,7 @@ export const projects = [
     index: '03',
     title: 'PDF Toolkit Pro',
     subtitle: 'Browser-Based PDF Tools',
-    status: 'Live',
+    status: 'Live Project',
     statusNote: 'Live and fully client-side. Stated limitations, from the project itself: files over ~50 MB trigger a warning and may be slow on low-RAM devices; password-protected PDFs must be unlocked first; .docx conversion is content-faithful, not pixel-faithful.',
     year: '2026',
     role: 'Design & development',
@@ -125,7 +126,8 @@ export const projects = [
       github: 'https://github.com/shahiddeveloper2424-bot/pdf-toolkit-pro',
       githubNote: null,
     },
-    screenshot: '/images/pdf-toolkit-pro.jpg', // Official preview image from the live site (owner-supplied asset).
+    screenshot: '/images/pdf-toolkit-pro-cover.jpg', // Owner-supplied promotional artwork (concept visual — NOT an app screenshot).
+    screenshotNote: 'Promotional concept artwork — not an application screenshot',
     detailsPending: false,
   },
 ]

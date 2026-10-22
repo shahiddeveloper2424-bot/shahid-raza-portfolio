@@ -188,7 +188,7 @@ function Skills() {
 }
 
 function ProjectPanel({ project, flip }) {
-  const live = project.status === 'Live preview' || project.status === 'Live'
+  const live = project.status.startsWith('Live')
   return (
     <article className="reveal overflow-hidden rounded-3xl border border-line bg-card">
       <div className={`grid items-center gap-8 p-6 sm:p-9 lg:grid-cols-2 lg:gap-12 lg:p-11 ${flip ? '' : ''}`}>

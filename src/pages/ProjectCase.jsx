@@ -43,7 +43,7 @@ export default function ProjectCase({ slug }) {
     sections.push({ id: 'outcomes', title: 'Outcomes' }, { id: 'technology', title: 'Technology' })
   }
   const num = (id) => sections.findIndex((s) => s.id === id) + 1
-  const live = project.status === 'Live preview' || project.status === 'Live'
+  const live = project.status.startsWith('Live')
 
   return (
     <article>
@@ -61,6 +61,13 @@ export default function ProjectCase({ slug }) {
               <h1 className="display-1 mt-5 text-ink">{project.title}</h1>
               <p className="mt-3 font-display text-2xl font-medium text-gradient">{project.subtitle}</p>
               <p className="lede mt-6 max-w-xl text-soft">{project.summary}</p>
+              {(project.role || project.year) && (
+                <p className="folio mt-7 text-muted">
+                  {project.role && <>Role — <span className="text-soft">{project.role}</span></>}
+                  {project.role && project.year && <span aria-hidden="true" className="mx-3 text-line">|</span>}
+                  {project.year && <>Year — <span className="text-soft">{project.year}</span></>}
+                </p>
+              )}
               <div className="mt-8 flex flex-wrap gap-4">
                 {project.links.live && (
                   <a href={project.links.live} target="_blank" rel="noreferrer" className="btn-primary rounded-lg px-6 py-3 font-display text-sm font-semibold text-white">{project.links.liveLabel || 'View live project'} ↗</a>

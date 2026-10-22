@@ -125,17 +125,17 @@ function RealImage({ project, fallback }) {
       <div className="overflow-hidden rounded-2xl border border-line bg-card">
         <img
           src={project.screenshot}
-          alt={`${project.title} — official preview image from the live website`}
-          width="1200"
-          height="630"
+          alt={`${project.title} project preview`}
+          width="1400"
+          height="933"
           loading="lazy"
           decoding="async"
           onError={() => setFailed(true)}
-          className="block aspect-[1200/630] w-full object-cover"
+          className="block h-auto w-full"
         />
       </div>
       <figcaption className="mt-3 font-mono text-[10px] uppercase tracking-widest2 text-muted">
-        Official preview image — from the live {project.title} website
+        {project.screenshotNote || `Official preview image — from the live ${project.title} website`}
       </figcaption>
     </figure>
   )
