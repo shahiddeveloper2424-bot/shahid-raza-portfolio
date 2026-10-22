@@ -281,7 +281,7 @@ function ProjectPanel({ project, flip }) {
             <Link href={`/projects/${project.slug}`} className="arrow-link font-display font-semibold text-accent hover:text-cyan">View case study <span className="arr" aria-hidden="true">→</span></Link>
             {project.demo && (<Link href={`/projects/${project.slug}`} className="arrow-link font-display font-semibold text-accent hover:text-cyan">Try the demo <span className="arr" aria-hidden="true">→</span></Link>)}
             {project.links.live && (
-              <a href={project.links.live} target="_blank" rel="noreferrer" className="arrow-link font-display font-semibold text-accent hover:text-cyan">View live project <span className="arr" aria-hidden="true">↗</span></a>
+              <a href={project.links.live} target="_blank" rel="noreferrer" className="arrow-link font-display font-semibold text-accent hover:text-cyan">{project.links.liveLabel || 'View live project'} <span className="arr" aria-hidden="true">↗</span></a>
             )}
             {project.links.github && (
               <a href={project.links.github} target="_blank" rel="noreferrer" className="arrow-link font-display font-semibold text-accent hover:text-cyan">View source code <span className="arr" aria-hidden="true">↗</span></a>
