@@ -124,10 +124,10 @@ function RealImage({ project, fallback }) {
     <figure>
       <div className="overflow-hidden rounded-2xl border border-line bg-card">
         <img
-          src={project.screenshot}
+          src={project.cardImage || project.screenshot}
           alt={`${project.title} project preview`}
-          width={project.screenshotSize ? project.screenshotSize[0] : 1400}
-          height={project.screenshotSize ? project.screenshotSize[1] : 933}
+          width={project.cardImageSize ? project.cardImageSize[0] : (project.screenshotSize ? project.screenshotSize[0] : 1400)}
+          height={project.cardImageSize ? project.cardImageSize[1] : (project.screenshotSize ? project.screenshotSize[1] : 933)}
           loading="lazy"
           decoding="async"
           onError={() => setFailed(true)}
@@ -135,7 +135,7 @@ function RealImage({ project, fallback }) {
         />
       </div>
       <figcaption className="mt-3 font-mono text-[10px] uppercase tracking-widest2 text-muted">
-        {project.screenshotNote || `Official preview image — from the live ${project.title} website`}
+        {project.cardImage ? (project.cardImageNote || project.screenshotNote) : (project.screenshotNote || `Official preview image — from the live ${project.title} website`)}
       </figcaption>
     </figure>
   )

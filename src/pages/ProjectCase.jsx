@@ -47,6 +47,7 @@ export default function ProjectCase({ slug }) {
     sections.push({ id: 'features', title: 'Key features' })
     if (project.challenges) sections.push({ id: 'challenges', title: 'Challenges & solutions' })
     if (project.gallery?.length) sections.push({ id: 'gallery', title: 'Gallery' })
+    if (project.roadmap) sections.push({ id: 'roadmap', title: 'Roadmap' })
     sections.push({ id: 'outcomes', title: 'Outcomes' }, { id: 'technology', title: 'Technology' })
   }
   const num = (id) => sections.findIndex((s) => s.id === id) + 1
@@ -74,6 +75,9 @@ export default function ProjectCase({ slug }) {
                   {project.role && project.year && <span aria-hidden="true" className="mx-3 text-line">|</span>}
                   {project.year && <>Year — <span className="text-soft">{project.year}</span></>}
                 </p>
+              )}
+              {project.edition && (
+                <p className="mt-7"><span className="rounded-full border border-cyan/40 px-4 py-2 font-mono text-[11px] uppercase tracking-widest2 text-cyan">{project.edition}</span></p>
               )}
               {!project.links.live && project.status.includes('Coming Soon') && (
                 <p className="mt-7"><span className="rounded-full border border-accent/50 px-4 py-2 font-mono text-[11px] uppercase tracking-widest2 text-cyan">Live Demo Coming Soon</span></p>
@@ -230,6 +234,29 @@ export default function ProjectCase({ slug }) {
                     <p className="mt-4 max-w-2xl leading-relaxed text-soft">Select any image to view it larger.</p>
                     <div className="mt-7">
                       <Gallery items={project.gallery} projectTitle={project.title} />
+                    </div>
+                  </section>
+                )}
+
+                {project.roadmap && (
+                  <section id="roadmap" className="reveal mt-16 scroll-mt-28">
+                    <div className="flex items-baseline gap-4">
+                      <SectionNum n={num('roadmap')} />
+                      <h2 className="display-2 text-ink">Roadmap</h2>
+                    </div>
+                    <p className="lede mt-6 text-soft">{project.roadmap.heading}</p>
+                    <div className="mt-7 grid gap-5 lg:grid-cols-2">
+                      <article className="rounded-3xl border border-accent/40 bg-card p-7">
+                        {project.edition && (<p><span className="rounded-full border border-cyan/40 px-3 py-1.5 font-mono text-[10px] uppercase tracking-widest2 text-cyan">{project.edition}</span></p>)}
+                        <h3 className="mt-4 font-display text-xl font-semibold text-ink">{project.roadmap.currentTitle}</h3>
+                        <p className="mt-3 leading-relaxed text-soft">{project.roadmap.currentText}</p>
+                      </article>
+                      <article className="rounded-3xl border border-dashed border-line bg-surface p-7">
+                        <p><span className="rounded-full border border-line px-3 py-1.5 font-mono text-[10px] uppercase tracking-widest2 text-muted">{project.roadmap.futureBadge}</span></p>
+                        <h3 className="mt-4 font-display text-xl font-semibold text-soft">{project.roadmap.futureTitle}</h3>
+                        <p className="mt-3 leading-relaxed text-soft">{project.roadmap.futureText}</p>
+                        <p className="mt-4 font-mono text-[10px] uppercase tracking-widest2 text-muted">Concept — planned for the future · not yet built · no launch date promised</p>
+                      </article>
                     </div>
                   </section>
                 )}

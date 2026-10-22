@@ -208,6 +208,9 @@ function ProjectPanel({ project, flip }) {
               <span aria-hidden="true" className={`h-1.5 w-1.5 rounded-full ${live ? 'bg-cyan' : 'bg-muted'}`} />
               {project.status}
             </span>
+            {project.edition && (
+              <span className="inline-flex items-center rounded-full border border-cyan/40 px-3 py-1.5 font-mono text-[10px] uppercase tracking-widest2 text-cyan">{project.edition}</span>
+            )}
             <span className="folio text-muted">{project.role || project.subtitle}</span>
           </div>
           <h3 className="display-2 mt-5 text-ink">{project.title}</h3>

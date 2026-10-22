@@ -62,7 +62,22 @@ export const projects = [
     screenshot: '/images/printora-product-showcase.webp', // Product showcase artwork composed for this portfolio from AI-generated product photography in PRINTORA's branding; product names/prices are the real catalogue's.
     screenshotNote: 'Product showcase artwork — PRINTORA branding & real product range',
     screenshotSize: [1600, 1440],
+    cardImage: '/images/projects/printora-original-collection.webp',
+    cardImageNote: 'Original PRINTORA collection — custom product design concepts created for this portfolio',
+    cardImageSize: [1920, 1280],
     gallery: [
+      {
+        src: '/images/projects/printora-original-collection.webp',
+        alt: 'Original PRINTORA collection — flat-lay of a graphic tee, hoodie, tote, phone case and mug with original designs',
+        caption: 'Original Printora Collection — custom product design concepts created for this portfolio showcase: a sun-and-mountain line design on the tee and mug, a geometric emblem on the hoodie, and a coordinated abstract pattern on the tote and phone case. These are design concepts for presentation — not products currently on sale.',
+        size: [1920, 1280],
+      },
+      {
+        src: '/images/printora-product-showcase.webp',
+        alt: 'PRINTORA storefront showcase artwork — homepage with the featured product range',
+        caption: 'The storefront concept — showcase artwork of the PRINTORA homepage (Make It Yours.) with the featured product range. The live demo link stays “Coming Soon” by the owner’s decision.',
+        size: [1600, 1440],
+      },
       {
         src: '/images/projects/printora-gallery-shop.webp',
         alt: 'PRINTORA shop page artwork — the six-product catalogue in a storefront grid',
@@ -86,62 +101,100 @@ export const projects = [
   },
   {
     slug: 'educore',
-    category: 'Web Applications',
+    category: 'School Management Software',
     index: '02',
     title: 'EduCore',
     subtitle: 'School Management System',
     status: 'In development',
-    statusNote: 'A working build exists and is in active development — the dashboard screenshot on this page is from the running application, supplied by the owner (the figures shown are the app\'s working data). It is not yet publicly deployed, so no live-demo link is published.',
+    statusNote: 'A working build exists and is in active development as the Small School Edition — every screenshot on this page is from the actual application, run locally with the project\'s own demo dataset (records are visibly marked “Demo” in the app). It is not yet publicly deployed, so no live-demo link is published.',
     year: '2026',
     role: 'Design & development',
-    stack: [], // To be confirmed by the owner — not claimed from a screenshot alone.
+    stack: ['React', 'Vite', 'Tailwind CSS', 'Node.js', 'Express', 'MongoDB', 'Mongoose'], // Verified from the supplied project source (client + server package.json), 2026-10-22.
     summary:
-      'A school management system that brings a school\'s daily operations into one admin dashboard — student and staff records, attendance, classes, and complete fee management, from fee structures and invoices to collection reports.',
+      'EduCore is a practical school management system designed for small private schools that need a centralized way to manage essential day-to-day academic and administrative operations — student records, fees, attendance, examinations and staff, in one web application.',
     challenge:
       'Running a school on registers and spreadsheets means student records, attendance and fee collection live in different places: fee status is hard to track, attendance takes time to compile, and the administration never gets one current overview of the whole school.',
     approach:
       'EduCore is built as one modular admin system around how a school actually runs — academics (students, guardians, classes, sections, subjects, teacher assignments) and finance (fee structures, invoices, collections, reports) in a single dashboard, with today\'s attendance and the current billing period\'s fee position visible the moment an administrator signs in.',
     features: [
-      'Admin dashboard with a live school overview — active students, staff, teacher logins, classes and sections at a glance',
-      'Student & guardian records, with classes, sections and subjects management and teacher assignments',
-      'Attendance for students and staff, with a same-day summary (present / absent / late / leave) on the dashboard',
-      'Complete fee management — fee structures, class fee setup, invoice generation, and a fee dashboard tracking invoiced, collected, outstanding and overdue amounts',
-      'Examinations & results, assignments, homework and timetable management',
-      'Notices for school-wide communication',
-      'Role-based access (administrator and teacher logins), light/dark themes and a language selector',
+      'Admin dashboard with a live school overview — active students, staff, teacher logins, classes and sections, today\'s attendance and the current fee collection position at a glance',
+      'Complete student admission records — guardians and emergency contacts, class/section enrollment, attendance and fee history per student',
+      'Staff records with teacher login accounts, designations, subjects and teacher-to-section assignments',
+      'Classes, sections and subjects management with safe-delete rules',
+      'Attendance for students and staff — daily registers, same-day summaries (present / absent / late / leave), CSV export and printable registers',
+      'Complete fee management — per-class fee structures, invoice generation, payments and receipts, a fee dashboard (invoiced / collected / outstanding / overdue) and defaulter reports',
+      'Examinations & results — exam setup, marks entry and printable result cards',
+      'Timetable, homework and school notices',
+      'Private document storage for staff and student records — uploads are verified by file content and only ever served through role-authorized access',
+      'Role-based access with privacy rules (for example, teachers never see student medical notes or identity numbers), school settings with logo and login-page branding, light/dark themes and a language selector',
     ],
     users:
       'School administrators who need one current view of their school, teaching staff whose classes and attendance are managed in the system, and the office staff handling student records and fee collection.',
     outcomes: [
-      'A working application build exists today — the dashboard screenshot on this page is from the running system, not a mockup',
+      'A working application build exists today — every screenshot on this page was captured from the running system with its demo dataset, not drawn as a mockup',
       'The core school modules are implemented in one system: students, staff, attendance, classes, exams, homework, timetable and notices',
       'Fee operations are covered end to end in the admin: structures, invoices, collection tracking and reports',
       'Still in development: not yet publicly deployed — demo and source links will be published as the owner releases them',
     ],
     links: { live: null, liveLabel: null, github: null, githubNote: 'Demo and source links will be added here when the owner publishes them.' },
-    screenshot: '/images/educore-dashboard.jpg', // Real screenshot of the running app, supplied by the owner.
-    screenshotNote: 'Real screenshot — EduCore admin dashboard, supplied by the owner',
-    screenshotSize: [1400, 875],
+    screenshot: '/images/projects/educore-dashboard-real.webp', // Real screenshot captured 2026-10-22 from the running app (demo dataset).
+    screenshotNote: 'Real screenshot — the EduCore admin dashboard, running locally with the project’s own demo dataset',
+    screenshotSize: [1440, 900],
+    edition: 'SMALL SCHOOL EDITION',
     gallery: [
       {
-        src: '/images/projects/educore-gallery-students.webp',
-        alt: 'EduCore student records interface — representative mockup',
-        caption: 'Student records — representative mockup of the module visible in the real dashboard above: searchable student and guardian records organised by class and section.',
-        size: [1600, 1150],
+        src: '/images/projects/educore-students-real.webp',
+        alt: 'EduCore student records — real screenshot',
+        caption: 'Student records — a real screenshot of the running application: admission numbers, classes, guardians and record actions, with the demo dataset visibly marked “Demo”.',
+        size: [1440, 900],
       },
       {
-        src: '/images/projects/educore-gallery-fees.webp',
-        alt: 'EduCore fee management interface — representative mockup',
-        caption: 'Fee management — representative mockup: invoiced, collected, outstanding and overdue totals with per-student invoice status, matching the fee dashboard in the application.',
-        size: [1600, 1150],
+        src: '/images/projects/educore-fees-real.webp',
+        alt: 'EduCore fee dashboard — real screenshot',
+        caption: 'Fee dashboard — a real screenshot: the current billing period’s invoiced, collected, outstanding and overdue position, with paid / unpaid / overdue invoice counts.',
+        size: [1440, 900],
       },
       {
-        src: '/images/projects/educore-gallery-attendance.webp',
-        alt: 'EduCore attendance interface — representative mockup',
-        caption: 'Attendance — representative mockup: the same-day present / absent / late / leave summary that the real dashboard surfaces for students and staff.',
-        size: [1600, 1150],
+        src: '/images/projects/educore-attendance-real.webp',
+        alt: 'EduCore attendance register — real screenshot',
+        caption: 'Attendance register — a real screenshot: a class register loaded by date, class and section, with the day’s present / absent / late / leave totals and print / CSV options.',
+        size: [1440, 900],
+      },
+      {
+        src: '/images/projects/educore-staff-real.webp',
+        alt: 'EduCore staff management — real screenshot',
+        caption: 'Staff management — a real screenshot: teacher and staff records with designations, categories, login status and “create login” actions for teacher accounts.',
+        size: [1440, 900],
+      },
+      {
+        src: '/images/projects/educore-exams-real.webp',
+        alt: 'EduCore exams and results — real screenshot',
+        caption: 'Exams & results — a real screenshot: exams by class and term with publish controls; marks entry and printable result cards sit behind each exam.',
+        size: [1440, 900],
+      },
+      {
+        src: '/images/projects/educore-login.webp',
+        alt: 'EduCore branded sign-in page — real screenshot',
+        caption: 'Sign-in — a real screenshot: the login page branding (panel text, theme and image) is editable by the school admin in Settings, without touching code.',
+        size: [1440, 900],
+      },
+      {
+        src: '/images/projects/educore-dashboard-mobile.webp',
+        alt: 'EduCore dashboard on a mobile-width screen — real screenshot',
+        caption: 'On mobile — a real screenshot at phone width: the admin dashboard stacks cleanly, with the same live counts and sections.',
+        size: [390, 844],
       },
     ],
+    roadmap: {
+      heading: 'Built for Small Schools. More Coming Soon.',
+      currentTitle: 'Small School Management System — Current Focus',
+      currentText:
+        'EduCore is focused on the essential needs of small private schools, including student records, fee management, attendance, examinations, report cards, and staff administration where these features are implemented.',
+      futureTitle: 'Advanced & Large School Management System — Coming Soon',
+      futureText:
+        'We are planning a more advanced school management solution for larger schools with broader operational requirements, expanded administrative workflows, and additional capabilities.',
+      futureBadge: 'ADVANCED & LARGE SCHOOL EDITION — COMING SOON',
+    },
     detailsPending: false,
   },
   {
