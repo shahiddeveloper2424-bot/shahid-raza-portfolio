@@ -3,19 +3,17 @@
 @tailwind utilities;
 
 /*
- * SHAHID RAZA — COLORFUL PREMIUM SYSTEM
- * Tokens: cobalt #635BFF (primary / PRINTORA) · coral #FF6B6B (EduCore) ·
- * acid lime #D9F75D (PDF Toolkit / highlights) · deep ink #171717 ·
- * soft white #F8F7F2. Loud color sits on disciplined neutrals; every
- * decorative device (hard shadows, dot grids, marquee) is structural.
+ * SHAHID RAZA — MIDNIGHT NAVY SYSTEM (strict palette, one brand)
+ * navy #0B1220 · surface #111C2E · card #162238 · line #29374E ·
+ * white #F7FAFF · slate #AAB7CC · electric blue #3478F6 (primary accent) ·
+ * soft cyan #38BDF8 (sparing) · violet #7465F5 (CTA gradient end only).
+ * ~70% dark neutrals, ~25% light text, ~5% accents. No other hues.
  */
 
 :root {
-  --paper: #F8F7F2;
-  --ink: #171717;
-  --cobalt: #635BFF;
-  --coral: #FF6B6B;
-  --lime: #D9F75D;
+  --navy: #0B1220;
+  --accent: #3478F6;
+  --cyan: #38BDF8;
 }
 
 html { scroll-behavior: smooth; }
@@ -25,12 +23,12 @@ body {
   text-rendering: optimizeLegibility;
 }
 
-::selection { background: var(--lime); color: var(--ink); }
+::selection { background: var(--accent); color: #fff; }
 
 :focus-visible {
-  outline: 3px solid var(--cobalt);
+  outline: 2px solid var(--cyan);
   outline-offset: 3px;
-  border-radius: 2px;
+  border-radius: 4px;
 }
 
 /* ——— Type scale (Space Grotesk display) ——— */
@@ -38,24 +36,24 @@ body {
   font-family: theme('fontFamily.display');
   font-weight: 700;
   letter-spacing: -0.025em;
-  line-height: 1.0;
-  font-size: clamp(2.75rem, 6.2vw, 5.1rem);
+  line-height: 1.04;
+  font-size: clamp(2.6rem, 5.6vw, 4.6rem);
 }
 .display-1 {
   font-family: theme('fontFamily.display');
   font-weight: 700;
   letter-spacing: -0.02em;
-  line-height: 1.05;
-  font-size: clamp(2.1rem, 4.2vw, 3.4rem);
+  line-height: 1.08;
+  font-size: clamp(2rem, 4vw, 3.2rem);
 }
 .display-2 {
   font-family: theme('fontFamily.display');
   font-weight: 600;
   letter-spacing: -0.015em;
-  line-height: 1.12;
-  font-size: clamp(1.55rem, 2.6vw, 2.15rem);
+  line-height: 1.15;
+  font-size: clamp(1.5rem, 2.5vw, 2.05rem);
 }
-.lede { font-size: clamp(1.06rem, 1.5vw, 1.28rem); line-height: 1.65; }
+.lede { font-size: clamp(1.05rem, 1.5vw, 1.24rem); line-height: 1.7; }
 
 .folio {
   font-family: theme('fontFamily.mono');
@@ -65,22 +63,38 @@ body {
   font-weight: 500;
 }
 
-/* Big outline numerals behind project rows */
-.ghost-num {
-  font-family: theme('fontFamily.display');
-  font-weight: 700;
-  font-size: clamp(6rem, 14vw, 11rem);
-  line-height: 0.8;
+/* Gradient text — headline accent only */
+.text-gradient {
+  background: linear-gradient(92deg, #3478F6 0%, #38BDF8 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
   color: transparent;
-  -webkit-text-stroke: 2px rgba(23, 23, 23, 0.14);
-  user-select: none;
+}
+
+/* Primary CTA — the one restrained blue→violet gradient */
+.btn-primary {
+  background-image: linear-gradient(135deg, #3478F6 0%, #7465F5 100%);
+  transition: filter 0.25s ease, transform 0.25s ease;
+}
+.btn-primary:hover { filter: brightness(1.12); }
+.btn-primary:active { transform: translateY(1px); }
+
+/* Subtle dot texture for hero fields */
+.dotgrid {
+  background-image: radial-gradient(rgba(247, 250, 255, 0.055) 1.5px, transparent 1.5px);
+  background-size: 22px 22px;
+}
+
+/* Restrained blue ambience behind the hero portrait */
+.glow {
+  background: radial-gradient(closest-side, rgba(52, 120, 246, 0.22), transparent 72%);
 }
 
 /* Drop cap for case-study intros */
 .dropcap::first-letter {
   font-family: theme('fontFamily.display');
   font-weight: 700;
-  color: var(--cobalt);
+  color: var(--accent);
   float: left;
   font-size: 3.1em;
   line-height: 0.82;
@@ -88,25 +102,7 @@ body {
   padding-top: 0.05em;
 }
 
-/* ——— Signature hard offset shadows (no blur, no glow) ——— */
-.hard { box-shadow: 10px 10px 0 var(--ink); }
-.hard-sm { box-shadow: 6px 6px 0 var(--ink); }
-.hard-cobalt { box-shadow: 10px 10px 0 var(--cobalt); }
-.hard-lime { box-shadow: 10px 10px 0 var(--lime); }
-.hard-coral { box-shadow: 10px 10px 0 var(--coral); }
-.hard-white { box-shadow: 10px 10px 0 rgba(248, 247, 242, 0.9); }
-
-/* Dot-grid texture for color fields */
-.dotgrid {
-  background-image: radial-gradient(rgba(255, 255, 255, 0.16) 1.5px, transparent 1.5px);
-  background-size: 22px 22px;
-}
-.dotgrid-ink {
-  background-image: radial-gradient(rgba(23, 23, 23, 0.10) 1.5px, transparent 1.5px);
-  background-size: 22px 22px;
-}
-
-/* ——— Marquee service strip ——— */
+/* ——— Marquee strip ——— */
 @keyframes marquee {
   from { transform: translateX(0); }
   to { transform: translateX(-50%); }
@@ -114,7 +110,7 @@ body {
 .marquee-track {
   display: flex;
   width: max-content;
-  animation: marquee 36s linear infinite;
+  animation: marquee 40s linear infinite;
 }
 .marquee:hover .marquee-track { animation-play-state: paused; }
 
@@ -134,13 +130,13 @@ body {
 
 .visual-zoom { overflow: hidden; }
 .visual-zoom .visual-inner { transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1); }
-.visual-zoom:hover .visual-inner { transform: scale(1.025); }
+.visual-zoom:hover .visual-inner { transform: scale(1.02); }
 
-.lift { transition: transform 0.3s ease, box-shadow 0.3s ease; }
-.lift:hover { transform: translate(-3px, -3px); }
+.lift { transition: transform 0.3s ease, border-color 0.3s ease, background-color 0.3s ease; }
+.lift:hover { transform: translateY(-3px); }
 
-.service-row { transition: background-color 0.25s ease, padding-left 0.25s ease; }
-.service-row:hover { background-color: rgba(255, 255, 255, 0.045); }
+.service-row { transition: background-color 0.25s ease; }
+.service-row:hover { background-color: rgba(247, 250, 255, 0.03); }
 
 /* ——— Fail-safe reveal ——— */
 .reveal { opacity: 1; transform: none; }
@@ -154,7 +150,7 @@ body {
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   .js .reveal { opacity: 1; transform: none; transition: none; }
-  .visual-zoom .visual-inner, .lift, .service-row { transition: none; }
+  .visual-zoom .visual-inner, .lift, .service-row, .btn-primary { transition: none; }
   .marquee-track { animation: none; }
   *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
 }

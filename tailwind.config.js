@@ -4,23 +4,18 @@ export default {
   theme: {
     extend: {
       colors: {
-        // ——— Colorful premium system (documented in README > Design) ———
-        paper: '#F8F7F2',      // soft white — light base
-        ink: '#171717',        // deep ink — text + dark sections
-        ink2: '#212121',
-        soft: '#45453F',       // body text on light
-        muted: '#6F6F66',      // secondary text on light
-        line: '#E2E0D5',       // borders on light
-        cobalt: '#635BFF',     // primary brand — PRINTORA
-        cobaltdeep: '#4A43D6', // cobalt hover/depth
-        cobaltlt: '#A5A1FF',   // cobalt tint for dark backgrounds
-        ice: '#ECEAFF',        // cobalt tint surface
-        coral: '#FF6B6B',      // secondary — EduCore
-        coraldeep: '#D94343',  // coral for text on light
-        blush: '#FFEDED',      // coral tint surface
-        lime: '#D9F75D',       // highlight — PDF Toolkit Pro
-        limedeep: '#7C9A16',   // lime for text on light
-        limetint: '#F6FCD9',   // lime tint surface
+        // ——— Midnight navy system (strict — documented in README > Design) ———
+        paper: '#0B1220',    // primary background (midnight navy)
+        navy: '#0B1220',
+        surface: '#111C2E',  // secondary surface
+        card: '#162238',     // elevated cards
+        line: '#29374E',     // borders & dividers
+        ink: '#F7FAFF',      // main text (clean white)
+        soft: '#AAB7CC',     // secondary text (cool slate)
+        muted: '#8296B1',    // tertiary text / labels on navy
+        accent: '#3478F6',   // primary accent (electric blue)
+        cyan: '#38BDF8',     // supporting accent (soft cyan, sparing)
+        violet: '#7465F5',   // CTA gradient end only
       },
       fontFamily: {
         display: ['"Space Grotesk"', 'Inter', 'system-ui', 'sans-serif'],

@@ -1,197 +1,250 @@
-import React from 'react'
-import { Link, useDocumentTitle } from '../lib/router.jsx'
-import { getProject, projects } from '../data/projects.js'
+import React, { useEffect } from 'react'
+import { Link } from '../lib/router.jsx'
 import ProjectVisual from '../components/ProjectVisual.jsx'
-import { ContactSection } from './Home.jsx'
+import { projects } from '../data/projects.js'
+import { useReveal } from '../hooks/useReveal.js'
 
-/* Per-project colour worlds (mirrors the homepage panels). */
-const WORLDS = {
-  printora: { band: 'bg-cobalt text-white', sub: 'text-white/75', folio: 'text-lime', num: 'text-cobalt', tint: 'bg-ice', chip: 'bg-lime text-ink' },
-  educore: { band: 'bg-coral text-ink', sub: 'text-ink/70', folio: 'text-ink/60', num: 'text-coraldeep', tint: 'bg-blush', chip: 'bg-ink text-white' },
-  'pdf-toolkit-pro': { band: 'bg-lime text-ink', sub: 'text-ink/70', folio: 'text-ink/60', num: 'text-limedeep', tint: 'bg-limetint', chip: 'bg-ink text-white' },
+const META_DESC = {
+  printora: 'PRINTORA case study — a print-on-demand e-commerce platform with a customer design studio, multi-currency storefront and full admin panel, built with the MERN stack by Shahid Raza.',
+  educore: 'EduCore case study — a school management system in development by Shahid Raza. Honest project status; full details are published as they are verified.',
+  'pdf-toolkit-pro': 'PDF Toolkit Pro case study — eight client-side PDF tools (merge, convert, split, extract, rotate, reorder, watermark) built with React and pdf-lib by Shahid Raza. Files never leave the device.',
 }
 
-function CaseSection({ index, title, accent, children, narrow = false }) {
-  return (
-    <section className="reveal grid gap-6 border-t-2 border-ink py-12 md:grid-cols-12 md:gap-10">
-      <div className="md:col-span-4">
-        <p className={`font-display text-3xl font-bold ${accent}`}>{index}</p>
-        <h2 className="display-2 mt-2">{title}</h2>
-      </div>
-      <div className={`md:col-span-8 ${narrow ? 'max-w-2xl' : ''}`}>{children}</div>
-    </section>
-  )
+function setMetaDescription(text) {
+  let el = document.querySelector('meta[name="description"]')
+  if (!el) { el = document.createElement('meta'); el.setAttribute('name', 'description'); document.head.appendChild(el) }
+  el.setAttribute('content', text)
+}
+
+function SectionNum({ n }) {
+  return <span className="folio text-cyan">{String(n).padStart(2, '0')}</span>
 }
 
 export default function ProjectCase({ slug }) {
-  const project = getProject(slug)
-  useDocumentTitle(project ? `${project.title} — ${project.subtitle} | Shahid Raza` : 'Project not found | Shahid Raza')
+  useReveal()
+  const project = projects.find((p) => p.slug === slug) || projects[0]
+  const next = projects[(projects.indexOf(project) + 1) % projects.length]
 
-  /* Per-page meta description (restored on unmount). */
-  React.useEffect(() => {
-    if (!project) return undefined
-    const tag = document.querySelector('meta[name="description"]')
-    if (!tag) return undefined
-    const original = tag.getAttribute('content')
-    tag.setAttribute('content', `${project.title} (${project.subtitle}) by Shahid Raza — ${project.summary}`)
-    return () => { tag.setAttribute('content', original) }
+  useEffect(() => {
+    document.title = `${project.title} — Case Study · Shahid Raza`
+    setMetaDescription(META_DESC[project.slug] || META_DESC.printora)
+    return () => {
+      document.title = 'Shahid Raza — Software Developer | Web Applications & MERN Stack'
+      setMetaDescription('Shahid Raza is a software developer building business websites, e-commerce stores, custom web applications and admin systems with React, JavaScript, Node.js and MongoDB.')
+    }
   }, [project])
 
-  if (!project) return null
-
-  const w = WORLDS[slug] || WORLDS.printora
-  const others = projects.filter((p) => p.slug !== slug)
+  // Build the section list dynamically so numbering always matches content.
+  const sections = [{ id: 'problem', title: 'The problem' }]
+  if (!project.detailsPending) {
+    if (project.users) sections.push({ id: 'audience', title: "Who it's for" })
+    sections.push({ id: 'features', title: 'Key features' })
+    if (project.challenges) sections.push({ id: 'challenges', title: 'Challenges & solutions' })
+    sections.push({ id: 'outcomes', title: 'Outcomes' }, { id: 'technology', title: 'Technology' })
+  }
+  const num = (id) => sections.findIndex((s) => s.id === id) + 1
+  const live = project.status === 'Live preview' || project.status === 'Live'
 
   return (
-    <>
-      <article>
-        {/* Colour band hero */}
-        <div className={`dotgrid ${w.band} ${slug === 'printora' ? '' : 'dotgrid-ink'}`}>
-          <div className="mx-auto max-w-shell px-5 pb-14 pt-12 sm:px-10">
-            <Link href="/#work" className="arrow-link folio"><span className="arr inline-block rotate-180" aria-hidden="true">→</span> All work</Link>
-            <div className="mt-10 grid gap-10 lg:grid-cols-12">
-              <div className="lg:col-span-8">
-                <p className={`folio ${w.folio}`}>Case study {project.index} — {project.status}</p>
-                <h1 className="display-hero mt-5">{project.title}</h1>
-                <p className={`mt-4 font-display text-2xl font-medium sm:text-3xl ${w.sub}`}>{project.subtitle}</p>
+    <article>
+      {/* ——— Case-study hero ——— */}
+      <header className="border-b border-line bg-surface">
+        <div className="mx-auto max-w-shell px-5 pb-14 pt-10 sm:px-10 lg:pb-16">
+          <Link href="/#work" className="arrow-link font-display text-sm font-semibold text-soft hover:text-cyan"><span aria-hidden="true">←</span> All projects</Link>
+          <div className="mt-10 grid items-center gap-10 lg:grid-cols-2 lg:gap-14">
+            <div>
+              <p className="folio flex flex-wrap items-center gap-3 text-cyan">
+                <span>Case study</span>
+                <span aria-hidden="true" className="h-1.5 w-1.5 rounded-full bg-accent" />
+                <span className="text-soft">{project.subtitle}</span>
+              </p>
+              <h1 className="display-1 mt-5 text-ink">{project.title}</h1>
+              <p className="mt-3 font-display text-2xl font-medium text-gradient">{project.subtitle}</p>
+              <p className="lede mt-6 max-w-xl text-soft">{project.summary}</p>
+              <div className="mt-8 flex flex-wrap gap-4">
+                {project.links.live && (
+                  <a href={project.links.live} target="_blank" rel="noreferrer" className="btn-primary rounded-lg px-6 py-3 font-display text-sm font-semibold text-white">{project.links.liveLabel || 'View live project'} ↗</a>
+                )}
+                {project.links.github && (
+                  <a href={project.links.github} target="_blank" rel="noreferrer" className="rounded-lg border border-line px-6 py-3 font-display text-sm font-semibold text-ink transition-colors hover:border-accent hover:text-cyan">View source code ↗</a>
+                )}
               </div>
-              <dl className="grid grid-cols-2 gap-x-6 gap-y-7 self-end lg:col-span-4">
-                <div>
-                  <dt className={`folio ${w.folio}`}>Role</dt>
-                  <dd className="mt-1.5 font-display text-lg font-semibold leading-snug">{project.role || <span className="font-sans text-base font-normal opacity-70">To be added by owner</span>}</dd>
-                </div>
-                <div>
-                  <dt className={`folio ${w.folio}`}>Year</dt>
-                  <dd className="mt-1.5 font-display text-lg font-semibold leading-snug">{project.year || <span className="font-sans text-base font-normal opacity-70">To be added</span>}</dd>
-                </div>
-                <div>
-                  <dt className={`folio ${w.folio}`}>Status</dt>
-                  <dd className="mt-1.5 font-display text-lg font-semibold leading-snug">{project.status}</dd>
-                </div>
-                <div>
-                  <dt className={`folio ${w.folio}`}>Links</dt>
-                  <dd className="mt-1.5 flex flex-col items-start gap-1.5">
-                    {project.links.live
-                      ? <Link href={project.links.live} className="arrow-link font-display font-semibold underline decoration-2 underline-offset-4">{project.links.liveLabel} <span className="arr" aria-hidden="true">↗</span></Link>
-                      : <span className="opacity-70">No demo link yet</span>}
-                    {project.links.github
-                      ? <Link href={project.links.github} className="arrow-link font-display font-semibold underline decoration-2 underline-offset-4">Source on GitHub <span className="arr" aria-hidden="true">↗</span></Link>
-                      : <span className="text-sm leading-snug opacity-75">{project.links.githubNote}</span>}
-                  </dd>
-                </div>
-              </dl>
+            </div>
+            <div className="visual-zoom">
+              <div className="visual-inner"><ProjectVisual slug={project.slug} /></div>
             </div>
           </div>
+          <dl className="mt-12 grid grid-cols-2 gap-px overflow-hidden rounded-2xl border border-line bg-line lg:grid-cols-4">
+            {[
+              ['Status', project.status],
+              ['Project type', project.subtitle],
+              ['Technology', project.stack.length ? project.stack.slice(0, 4).join(' · ') : 'To be confirmed'],
+              ['Live demo', project.links.live ? 'Available — link above' : 'Not published yet'],
+            ].map(([k, v]) => (
+              <div key={k} className="bg-card p-5">
+                <dt className="folio text-muted">{k}</dt>
+                <dd className="mt-2 font-display font-semibold text-ink">{v}</dd>
+              </div>
+            ))}
+          </dl>
         </div>
+      </header>
 
-        <div className="mx-auto max-w-shell px-5 sm:px-10">
-          <p className="dropcap lede mt-12 max-w-3xl text-soft">{project.summary}</p>
+      {/* ——— Body with meta rail ——— */}
+      <div className="bg-navy">
+        <div className="mx-auto grid max-w-shell gap-12 px-5 py-16 sm:px-10 lg:grid-cols-[13rem_1fr] lg:py-20">
+          <aside className="hidden lg:block">
+            <div className="sticky top-28">
+              <p className="folio text-muted">On this page</p>
+              <ol className="mt-5 space-y-3.5">
+                {sections.map((s, i) => (
+                  <li key={s.id}>
+                    <a href={`#${s.id}`} className="group flex items-baseline gap-3 text-soft hover:text-ink">
+                      <span className="folio text-cyan">{String(i + 1).padStart(2, '0')}</span>
+                      <span className="font-medium">{s.title}</span>
+                    </a>
+                  </li>
+                ))}
+              </ol>
+              <div className="mt-9 rounded-2xl border border-line bg-card p-5">
+                <p className="folio text-muted">Status</p>
+                <p className="mt-2 flex items-center gap-2 font-display font-semibold text-ink">
+                  <span aria-hidden="true" className={`h-2 w-2 rounded-full ${live ? 'bg-cyan' : 'bg-muted'}`} />
+                  {project.status}
+                </p>
+                <p className="mt-2 text-sm leading-relaxed text-soft">{project.statusNote || 'Stated exactly as it is — no project on this site is presented as more finished than it is.'}</p>
+              </div>
+            </div>
+          </aside>
 
-          <div className="mt-10 border-2 border-ink bg-paper p-3 sm:p-4">
-            <ProjectVisual project={project} large />
-          </div>
+          <div className="max-w-3xl">
+            <section id="problem" className="reveal scroll-mt-28">
+              <div className="flex items-baseline gap-4">
+                <SectionNum n={num('problem')} />
+                <h2 className="display-2 text-ink">The problem</h2>
+              </div>
+              <p className="dropcap lede mt-6 text-soft">{project.challenge || project.statusNote}</p>
+            </section>
 
-          {project.detailsPending ? (
-            <div className="mt-4">
-              <CaseSection index="—" title="Full case study, in preparation" accent={w.num}>
-                <div className={`border-2 border-dashed border-ink/40 p-7 ${w.tint}`} role="note">
-                  <p className="leading-relaxed text-soft">{project.statusNote}</p>
-                  <p className="mt-3 leading-relaxed text-soft">
-                    When the owner supplies the confirmed scope, this page will document the problem, the approach, the implemented functionality, the technology and the honest outcomes — in the same format as the PRINTORA case study. Nothing is claimed here in the meantime.
-                  </p>
+            {project.detailsPending ? (
+              <section className="reveal mt-14 rounded-3xl border border-line bg-card p-7 sm:p-9">
+                <p className="folio text-cyan">Project details — being prepared</p>
+                <h3 className="display-2 mt-4 text-ink">This project is in development.</h3>
+                <p className="lede mt-4 text-soft">
+                  Its full case study — verified features, technology and outcomes — will be published here as the work is completed and can be described accurately. No feature list is published before it exists, and this project is never presented as production-ready before it is.
+                </p>
+                <p className="mt-5 leading-relaxed text-soft">
+                  Current confirmed status: <strong className="font-semibold text-ink">{project.status}</strong>. If you need a system like this for your school or organisation, you are welcome to discuss it — I will tell you honestly what exists today and what building yours would involve.
+                </p>
+                <div className="mt-8 flex flex-wrap gap-4">
+                  <Link href="/#contact" className="btn-primary rounded-lg px-6 py-3 font-display text-sm font-semibold text-white">Discuss a similar project</Link>
+                  <Link href="/#work" className="rounded-lg border border-line px-6 py-3 font-display text-sm font-semibold text-ink transition-colors hover:border-accent hover:text-cyan">See live projects instead</Link>
                 </div>
-              </CaseSection>
-            </div>
-          ) : (
-            <div className="mt-4">
-              {(() => {
-                let n = 0
-                const num = () => String(++n).padStart(2, '0')
-                return (
-                  <>
-                    <CaseSection index={num()} title="The problem" accent={w.num} narrow>
-                      <p className="lede text-soft">{project.challenge}</p>
-                    </CaseSection>
+              </section>
+            ) : (
+              <>
+                {project.users && (
+                  <section id="audience" className="reveal mt-16 scroll-mt-28">
+                    <div className="flex items-baseline gap-4">
+                      <SectionNum n={num('audience')} />
+                      <h2 className="display-2 text-ink">Who it&apos;s for</h2>
+                    </div>
+                    <p className="lede mt-6 text-soft">{project.users}</p>
+                  </section>
+                )}
 
-                    {project.users && (
-                      <CaseSection index={num()} title="Who it’s for" accent={w.num} narrow>
-                        <p className="lede text-soft">{project.users}</p>
-                      </CaseSection>
-                    )}
+                <section id="features" className="reveal mt-16 scroll-mt-28">
+                  <div className="flex items-baseline gap-4">
+                    <SectionNum n={num('features')} />
+                    <h2 className="display-2 text-ink">Key features</h2>
+                  </div>
+                  <ul className="mt-7 grid gap-3.5 sm:grid-cols-2">
+                    {project.features.map((h) => (
+                      <li key={h} className="flex gap-3 rounded-2xl border border-line bg-card p-5">
+                        <span aria-hidden="true" className="mt-0.5 font-bold text-accent">✓</span>
+                        <span className="leading-relaxed text-soft">{h}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </section>
 
-                    <CaseSection index={num()} title="The approach" accent={w.num} narrow>
-                      <p className="lede text-soft">{project.approach}</p>
-                    </CaseSection>
+                {project.challenges && (
+                  <section id="challenges" className="reveal mt-16 scroll-mt-28">
+                    <div className="flex items-baseline gap-4">
+                      <SectionNum n={num('challenges')} />
+                      <h2 className="display-2 text-ink">Challenges &amp; solutions</h2>
+                    </div>
+                    <div className="mt-7 space-y-5">
+                      {project.challenges.map((c) => (
+                        <article key={c.title} className="rounded-2xl border border-line bg-card p-6 sm:p-7">
+                          <h3 className="font-display text-xl font-semibold text-ink">{c.title}</h3>
+                          <p className="mt-3 leading-relaxed text-soft">{c.text}</p>
+                        </article>
+                      ))}
+                    </div>
+                  </section>
+                )}
 
-                    <CaseSection index={num()} title="What was built" accent={w.num}>
-                      <ul className="grid gap-x-10 gap-y-5 md:grid-cols-2">
-                        {project.features.map((f, i) => (
-                          <li key={f} className="flex gap-4 leading-relaxed text-soft">
-                            <span className={`font-display text-sm font-bold ${w.num}`} aria-hidden="true">{String(i + 1).padStart(2, '0')}</span>
-                            <span>{f}</span>
-                          </li>
-                        ))}
-                      </ul>
-                    </CaseSection>
+                <section id="outcomes" className="reveal mt-16 scroll-mt-28">
+                  <div className="flex items-baseline gap-4">
+                    <SectionNum n={num('outcomes')} />
+                    <h2 className="display-2 text-ink">Outcomes</h2>
+                  </div>
+                  <div className="mt-7 rounded-3xl border border-line bg-surface p-7 sm:p-8">
+                    <ul className="space-y-4">
+                      {project.outcomes.map((o) => (
+                        <li key={o} className="flex gap-3.5 leading-relaxed text-soft">
+                          <span aria-hidden="true" className="mt-1 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-accent/20 text-[11px] font-bold text-cyan">✓</span>
+                          <span>{o}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                </section>
 
-                    {project.challenges && project.challenges.length > 0 && (
-                      <CaseSection index={num()} title="Challenges & solutions" accent={w.num}>
-                        <div className="grid gap-6 md:grid-cols-3">
-                          {project.challenges.map((ch) => (
-                            <div key={ch.title} className={`border-2 border-ink p-6 ${w.tint}`}>
-                              <h3 className="font-display text-lg font-semibold leading-snug">{ch.title}</h3>
-                              <p className="mt-2.5 text-sm leading-relaxed text-soft">{ch.text}</p>
-                            </div>
-                          ))}
-                        </div>
-                      </CaseSection>
-                    )}
+                <section id="technology" className="reveal mt-16 scroll-mt-28">
+                  <div className="flex items-baseline gap-4">
+                    <SectionNum n={num('technology')} />
+                    <h2 className="display-2 text-ink">Technology</h2>
+                  </div>
+                  <ul className="mt-7 flex flex-wrap gap-2">
+                    {project.stack.map((t) => (
+                      <li key={t} className="rounded-full border border-line bg-surface px-4 py-2 text-sm font-medium text-soft">{t}</li>
+                    ))}
+                  </ul>
+                  {!project.links.github && project.links.githubNote && (
+                    <p className="mt-6 leading-relaxed text-soft">Source code: {project.links.githubNote}</p>
+                  )}
+                </section>
+              </>
+            )}
 
-                    <CaseSection index={num()} title="Verified outcomes" accent={w.num}>
-                      <div className={`border-2 border-ink p-7 ${w.tint}`}>
-                        <ul className="space-y-3.5">
-                          {project.outcomes.map((o) => (
-                            <li key={o} className="flex gap-3.5 leading-relaxed text-soft">
-                              <span aria-hidden="true" className={`font-bold ${w.num}`}>✓</span><span>{o}</span>
-                            </li>
-                          ))}
-                        </ul>
-                        <p className="mt-6 border-t border-ink/15 pt-4 text-sm leading-relaxed text-muted">{project.statusNote}</p>
-                      </div>
-                    </CaseSection>
-
-                    {project.stack.length > 0 && (
-                      <CaseSection index={num()} title="Technology" accent={w.num}>
-                        <ul className="flex flex-wrap gap-2.5">
-                          {project.stack.map((s) => (
-                            <li key={s} className="border-2 border-ink bg-white px-4 py-2 font-mono text-xs uppercase tracking-wide transition-colors hover:bg-lime">{s}</li>
-                          ))}
-                        </ul>
-                      </CaseSection>
-                    )}
-                  </>
-                )
-              })()}
-            </div>
-          )}
+            {/* CTA band */}
+            <section className="reveal mt-16 rounded-3xl border border-line bg-card p-8 text-center sm:p-10">
+              <h2 className="display-2 text-ink">Have a similar project in mind?</h2>
+              <p className="mx-auto mt-3 max-w-lg leading-relaxed text-soft">Tell me what your business needs — I will reply with an honest scope, approach and next steps.</p>
+              <div className="mt-7 flex flex-wrap justify-center gap-4">
+                <Link href="/#contact" className="btn-primary rounded-lg px-7 py-3.5 font-display font-semibold text-white">Start a project →</Link>
+                <Link href="/#services" className="rounded-lg border border-line px-7 py-3.5 font-display font-semibold text-ink transition-colors hover:border-accent hover:text-cyan">View services</Link>
+              </div>
+            </section>
+          </div>
         </div>
-      </article>
+      </div>
 
-      {/* Next projects — in their own colour worlds */}
-      <nav aria-label="More projects" className="grid border-t-2 border-ink md:grid-cols-2">
-        {others.map((p) => {
-          const ow = WORLDS[p.slug]
-          return (
-            <Link key={p.slug} href={`/projects/${p.slug}`} className={`group block px-6 py-12 sm:px-10 ${ow.band} border-ink max-md:border-b-2 md:odd:border-r-2`}>
-              <p className={`folio ${ow.folio}`}>Next case study — {p.index} · {p.status}</p>
-              <p className="display-2 mt-3">{p.title} <span aria-hidden="true" className="inline-block transition-transform group-hover:translate-x-1.5">→</span></p>
-              <p className={`mt-1.5 font-display text-lg font-medium ${ow.sub}`}>{p.subtitle}</p>
-            </Link>
-          )
-        })}
+      {/* ——— Next project ——— */}
+      <nav className="border-t border-line bg-surface" aria-label="Next project">
+        <div className="mx-auto max-w-shell px-5 py-14 sm:px-10">
+          <p className="folio text-muted">Next project</p>
+          <Link href={`/projects/${next.slug}`} className="group mt-5 flex flex-wrap items-center justify-between gap-6 rounded-3xl border border-line bg-card p-7 transition-colors hover:border-accent/60 sm:p-9">
+            <span>
+              <span className="block font-display text-3xl font-bold text-ink sm:text-4xl">{next.title}</span>
+              <span className="mt-2 block text-lg text-soft">{next.subtitle}</span>
+            </span>
+            <span aria-hidden="true" className="font-display text-4xl font-bold text-accent transition-transform group-hover:translate-x-2">→</span>
+          </Link>
+        </div>
       </nav>
-
-      <ContactSection />
-    </>
+    </article>
   )
 }

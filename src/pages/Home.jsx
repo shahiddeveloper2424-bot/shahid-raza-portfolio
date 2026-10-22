@@ -1,149 +1,132 @@
 import React from 'react'
 import { Link } from '../lib/router.jsx'
-import { site } from '../data/site.js'
-import { projects, getProject } from '../data/projects.js'
-import { skillGroups, services, process } from '../data/skills.js'
 import SectionHeading from '../components/SectionHeading.jsx'
 import ProjectVisual from '../components/ProjectVisual.jsx'
 import Portrait from '../components/Portrait.jsx'
+import { site } from '../data/site.js'
+import { projects } from '../data/projects.js'
+import { skillGroups, services, process } from '../data/skills.js'
+import { useReveal } from '../hooks/useReveal.js'
 
-/* Per-project colour worlds — one signature hue each. */
-const WORLDS = {
-  printora: { panel: 'bg-cobalt text-white', chip: 'bg-lime text-ink', cta: 'bg-lime text-ink hover:bg-white', note: 'border-white/30 bg-white/10', sub: 'text-white/75' },
-  educore: { panel: 'bg-coral text-ink', chip: 'bg-ink text-white', cta: 'bg-ink text-white hover:bg-cobalt', note: 'border-ink/25 bg-white/25', sub: 'text-ink/70' },
-  'pdf-toolkit-pro': { panel: 'bg-lime text-ink', chip: 'bg-ink text-white', cta: 'bg-ink text-white hover:bg-cobalt', note: 'border-ink/25 bg-white/40', sub: 'text-ink/70' },
-}
+const TECH_CHIPS = ['React', 'JavaScript', 'Node.js', 'Express', 'MongoDB', 'Tailwind CSS']
 
-/* ————————————————— HERO ————————————————— */
+const projectTypes = [
+  'Business website',
+  'E-commerce website',
+  'Custom management system (school / business)',
+  'Admin dashboard or internal tool',
+  'Web application or online tool',
+  'Redesign or fix an existing website',
+  'Something else',
+]
+
+const budgetRanges = [
+  'Under PKR 50,000',
+  'PKR 50,000 – 150,000',
+  'PKR 150,000 – 300,000',
+  'Above PKR 300,000',
+]
+
+const TRUST = [
+  { title: 'Live, verifiable work', text: 'Two projects are deployed on Vercel right now — open them, use them, and judge the work yourself.', icon: 'M5 13l4 4L19 7' },
+  { title: 'Honest scope & status', text: 'Every project page states what is finished, what is in development, and what is still planned. No inflated claims.', icon: 'M12 3l7 3v5c0 5-3.5 8.5-7 10-3.5-1.5-7-5-7-10V6l7-3z' },
+  { title: 'Real engineering evidence', text: 'PDF Toolkit Pro ships with 53 passing engine tests; PRINTORA includes a full admin panel, design studio and multi-currency checkout.', icon: 'M8 6l-6 6 6 6M16 6l6 6-6 6' },
+  { title: 'Built for your business', text: 'Software shaped around how your business actually runs — customers, orders, students, documents — not generic templates.', icon: 'M4 19V5a2 2 0 012-2h13v16H6a2 2 0 00-2 2zm0 0a2 2 0 002 2h13' },
+]
+
 function Hero() {
-  const featured = getProject('printora')
-  const others = projects.filter((p) => p.slug !== 'printora')
   return (
-    <section className="dotgrid relative overflow-hidden bg-cobalt text-white">
-      <div className="mx-auto max-w-shell px-5 pb-16 pt-14 sm:px-10 sm:pt-20">
-        <div className="grid items-start gap-14 lg:grid-cols-12">
-          <div className="lg:col-span-7">
-            <p className="reveal folio flex items-center gap-3 text-lime">
-              <span aria-hidden="true" className="h-3 w-3 bg-coral" />
-              {site.name} — {site.positioning}
-            </p>
-            <h1 className="reveal display-hero mt-7">
-              Turning business ideas into <span className="text-lime">powerful web software.</span>
-            </h1>
-            <p className="reveal lede mt-7 max-w-xl text-white/85">
-              I design and build custom websites, e-commerce stores, dashboards and business management systems with React, JavaScript, Node.js and MongoDB — scoped honestly, built in verified stages, and handed over with documentation.
-            </p>
-            <div className="reveal mt-10 flex flex-wrap items-center gap-5">
-              <Link href="/#contact" className="hard-sm lift bg-lime px-7 py-3.5 font-display text-sm font-semibold text-ink">
-                Start a project →
-              </Link>
-              <Link href="/#work" className="border-2 border-white px-7 py-3.5 font-display text-sm font-semibold text-white transition-colors hover:bg-white hover:text-cobalt">
-                Explore my work
-              </Link>
-            </div>
-            <ul className="reveal mt-10 flex flex-wrap gap-2" aria-label="Core technologies">
-              {['React', 'JavaScript', 'Node.js', 'Express', 'MongoDB', 'Tailwind CSS'].map((t) => (
-                <li key={t} className="border border-white/40 px-3 py-1.5 font-mono text-[11px] uppercase tracking-wide text-white/90">{t}</li>
-              ))}
-            </ul>
-            <dl className="reveal mt-12 grid grid-cols-3 gap-6 border-t border-white/25 pt-6">
-              <div>
-                <dt className="folio text-white/60">Focus</dt>
-                <dd className="mt-2 font-display text-base font-semibold leading-snug sm:text-lg">Business · Commerce · Education</dd>
-              </div>
-              <div>
-                <dt className="folio text-white/60">Live work</dt>
-                <dd className="mt-2 font-display text-base font-semibold leading-snug sm:text-lg">2 projects live on Vercel</dd>
-              </div>
-              <div>
-                <dt className="folio text-white/60">Based</dt>
-                <dd className="mt-2 font-display text-base font-semibold leading-snug sm:text-lg">{site.location || <span className="font-sans text-sm font-normal text-white/60">To be added</span>}</dd>
-              </div>
-            </dl>
+    <section className="dotgrid relative overflow-hidden bg-navy">
+      <div aria-hidden="true" className="glow pointer-events-none absolute -left-40 top-10 h-[560px] w-[560px]" />
+      <div className="relative mx-auto grid max-w-shell gap-12 px-5 pb-20 pt-12 sm:px-10 lg:grid-cols-12 lg:gap-10 lg:pb-28 lg:pt-16">
+        {/* Portrait — left (spec order); second on mobile after the intro */}
+        <div className="order-2 lg:order-1 lg:col-span-5">
+          <div className="reveal mx-auto max-w-[380px] lg:mx-0">
+            <Portrait />
           </div>
+          <div className="reveal mx-auto mt-5 max-w-[380px] rounded-2xl border border-line bg-card p-5 lg:mx-0">
+            <p className="folio text-cyan">Featured project — live preview</p>
+            <p className="mt-2.5 font-display text-lg font-semibold leading-snug text-ink">PRINTORA — print-on-demand e-commerce platform.</p>
+            <div className="mt-3.5 flex flex-wrap gap-x-6 gap-y-2">
+              <Link href="/projects/printora" className="arrow-link font-display font-semibold text-accent hover:text-cyan">Case study <span className="arr" aria-hidden="true">→</span></Link>
+              <a href="https://printora-crfs.vercel.app" target="_blank" rel="noreferrer" className="arrow-link font-display font-semibold text-accent hover:text-cyan">View live project <span className="arr" aria-hidden="true">↗</span></a>
+            </div>
+          </div>
+        </div>
 
-          {/* Portrait + featured-work composition. */}
-          <div className="reveal relative lg:col-span-5">
-            <div aria-hidden="true" className="absolute -right-3 -top-3 h-full w-full rotate-2 bg-coral" />
-            <div className="hard relative border-2 border-ink bg-paper p-4 text-ink sm:p-5">
-              <div className="mx-auto max-w-[320px]">
-                <Portrait />
-              </div>
-              <div className="mt-4 border-t-2 border-ink pt-4">
-                <div className="flex items-start justify-between gap-4">
-                  <div>
-                    <p className="folio text-cobalt">Featured project — {featured.status}</p>
-                    <p className="mt-1.5 font-display text-lg font-semibold leading-snug">PRINTORA — print-on-demand e-commerce platform.</p>
-                  </div>
-                </div>
-                <div className="mt-3.5 flex flex-wrap gap-x-6 gap-y-2">
-                  <Link href="/projects/printora" className="arrow-link font-display font-semibold text-cobalt">Case study <span className="arr" aria-hidden="true">→</span></Link>
-                  <Link href={featured.links.live} className="arrow-link font-display font-semibold text-cobalt">View live project <span className="arr" aria-hidden="true">↗</span></Link>
-                </div>
-              </div>
-            </div>
-            <div className="relative mt-6 grid grid-cols-2 gap-4">
-              {others.map((p) => (
-                <Link key={p.slug} href={`/projects/${p.slug}`} className={`lift border-2 border-ink p-4 ${p.slug === 'educore' ? 'bg-coral text-ink' : 'bg-lime text-ink'}`}>
-                  <p className="folio text-ink/60">{p.index} — {p.status}</p>
-                  <p className="mt-1.5 font-display text-base font-bold leading-tight">{p.title} →</p>
-                </Link>
-              ))}
-            </div>
+        {/* Introduction — right */}
+        <div className="order-1 lg:order-2 lg:col-span-7 lg:pl-4">
+          <p className="reveal folio flex items-start gap-3 leading-relaxed text-cyan">
+            <span aria-hidden="true" className="mt-[3px] h-2.5 w-2.5 shrink-0 rounded-[3px] bg-accent" />
+            <span>{site.name} — Software Developer · Web Application Developer · MERN Stack Developer</span>
+          </p>
+          <h1 className="reveal display-hero mt-7 text-ink">
+            Turning business ideas into <span className="text-gradient">powerful digital products.</span>
+          </h1>
+          <p className="reveal lede mt-7 max-w-xl text-soft">
+            I build responsive websites, e-commerce experiences, custom business applications, and database-driven web solutions focused on practical business needs.
+          </p>
+          <div className="reveal mt-9 flex flex-wrap gap-4">
+            <Link href="/#contact" className="btn-primary rounded-lg px-7 py-3.5 font-display font-semibold text-white">Start a project →</Link>
+            <Link href="/#work" className="rounded-lg border border-line px-7 py-3.5 font-display font-semibold text-ink transition-colors hover:border-accent hover:text-cyan">Explore my work</Link>
           </div>
+          <ul className="reveal mt-9 flex flex-wrap gap-2" aria-label="Core technologies">
+            {TECH_CHIPS.map((t) => (
+              <li key={t} className="rounded-full border border-line bg-surface px-3.5 py-1.5 font-mono text-[11px] uppercase tracking-widest2 text-soft">{t}</li>
+            ))}
+          </ul>
+          <dl className="reveal mt-12 grid max-w-xl grid-cols-3 gap-6 border-t border-line pt-6">
+            <div>
+              <dt className="folio text-muted">Focus</dt>
+              <dd className="mt-2 font-display font-semibold leading-snug text-ink">Business · Commerce · Education</dd>
+            </div>
+            <div>
+              <dt className="folio text-muted">Live work</dt>
+              <dd className="mt-2 font-display font-semibold leading-snug text-ink">2 projects live on Vercel</dd>
+            </div>
+            <div>
+              <dt className="folio text-muted">Based</dt>
+              <dd className="mt-2 font-display font-semibold leading-snug text-muted">To be added</dd>
+            </div>
+          </dl>
         </div>
       </div>
     </section>
   )
 }
 
-/* ————————————————— MARQUEE ————————————————— */
 function Marquee() {
-  const items = ['Website Development', 'E-Commerce', 'Custom Business Software', 'Web Applications', 'Design Studio', 'Admin Dashboards', 'Multi-Currency Stores']
-  const row = (hidden) => (
-    <div className="flex shrink-0 items-center" aria-hidden={hidden || undefined}>
-      {items.map((s) => (
-        <span key={s} className="flex items-center font-display text-sm font-semibold uppercase tracking-wide">
-          <span className="px-5">{s}</span>
-          <span aria-hidden="true" className="text-cobalt">✦</span>
+  const items = ['Website Development', 'E-Commerce', 'Custom Business Software', 'Web Applications', 'Admin Dashboards', 'Database-Driven Apps', 'Design Studio Tools', 'Multi-Currency Stores']
+  const row = (ariaHidden) => (
+    <div aria-hidden={ariaHidden || undefined} className="flex shrink-0 items-center">
+      {items.map((t) => (
+        <span key={t} className="flex items-center font-display text-sm font-semibold uppercase tracking-[0.14em] text-soft">
+          <span className="px-6">{t}</span>
+          <span aria-hidden="true" className="text-cyan">✦</span>
         </span>
       ))}
     </div>
   )
   return (
-    <div className="marquee overflow-hidden border-b-2 border-ink bg-lime py-3.5 text-ink" role="presentation">
+    <div className="marquee overflow-hidden border-y border-line bg-surface py-4" role="presentation">
       <div className="marquee-track">{row(false)}{row(true)}</div>
     </div>
   )
 }
 
-/* ————————————————— TRUST / CREDIBILITY ————————————————— */
 function Trust() {
-  const printora = getProject('printora')
-  const pdf = getProject('pdf-toolkit-pro')
-  const cards = [
-    { accent: 'bg-cobalt', title: 'A live store, not a mockup', text: 'PRINTORA — a full print-on-demand storefront with a design studio and operations admin — is deployed and publicly reachable right now.', link: { href: printora.links.live, label: 'Visit the live store' } },
-    { accent: 'bg-lime', title: 'A live tool with public source', text: 'PDF Toolkit Pro runs eight PDF tools entirely in the browser. It is live, and its complete source is public on GitHub for anyone to inspect.', link: { href: pdf.links.live, label: 'Open PDF Toolkit Pro' } },
-    { accent: 'bg-coral', title: 'Real code, real history', text: 'My GitHub holds the actual repositories behind this work — commit history, tests and documentation included. Nothing here is a screenshot of someone else’s project.', link: { href: site.socials.github, label: 'Browse GitHub' } },
-    { accent: 'bg-cobalt', title: 'Verified, or labelled honestly', text: 'Every claim on this site was checked against the real project. Anything unfinished is labelled “in development” or “in preparation” — never dressed up as done.', link: { href: '/#process', label: 'See how I work' } },
-  ]
   return (
-    <section aria-label="Credibility" className="border-b-2 border-ink bg-paper">
-      <div className="mx-auto max-w-shell px-5 py-16 sm:px-10 sm:py-20">
-        <div className="reveal flex items-center gap-4">
-          <span aria-hidden="true" className="h-3 w-3 bg-coral" />
-          <p className="folio text-cobalt">Proof, not promises</p>
-          <span aria-hidden="true" className="h-px flex-1 bg-line" />
-        </div>
-        <h2 className="reveal display-1 mt-7 max-w-3xl">Credibility, the verifiable kind.</h2>
-        <p className="reveal lede mt-4 max-w-2xl text-soft">No invented client counts, logos or revenue figures. The evidence offered instead is work you can open, run and read — today.</p>
-        <div className="mt-12 grid gap-6 sm:grid-cols-2 xl:grid-cols-4">
-          {cards.map((c) => (
-            <article key={c.title} className="reveal lift flex flex-col border-2 border-ink bg-white p-6">
-              <span aria-hidden="true" className={`h-3.5 w-3.5 ${c.accent}`} />
-              <h3 className="mt-4 font-display text-xl font-semibold leading-snug">{c.title}</h3>
-              <p className="mt-2.5 flex-1 text-sm leading-relaxed text-soft">{c.text}</p>
-              <Link href={c.link.href} className="arrow-link mt-5 font-display text-sm font-semibold text-cobalt">{c.link.label} <span className="arr" aria-hidden="true">↗</span></Link>
+    <section className="bg-navy" aria-label="Why work with me">
+      <div className="mx-auto max-w-shell px-5 py-20 sm:px-10 sm:py-24">
+        <SectionHeading index="01" eyebrow="Why work with me" title={<>Proof, <span className="text-gradient">not promises.</span></>} intro="Everything on this page can be checked — live deployments, public source code, and honest project statuses." />
+        <div className="grid gap-5 sm:grid-cols-2 xl:grid-cols-4">
+          {TRUST.map((c) => (
+            <article key={c.title} className="reveal lift rounded-2xl border border-line bg-card p-6 hover:border-accent/60">
+              <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-accent/15 text-accent">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d={c.icon} /></svg>
+              </span>
+              <h3 className="mt-5 font-display text-lg font-semibold text-ink">{c.title}</h3>
+              <p className="mt-2.5 leading-relaxed text-soft">{c.text}</p>
             </article>
           ))}
         </div>
@@ -152,271 +135,293 @@ function Trust() {
   )
 }
 
-/* ————————————————— WORK ————————————————— */
-function Work() {
+function About() {
   return (
-    <section id="work" className="scroll-mt-24 border-b-2 border-ink">
+    <section id="about" className="scroll-mt-24 bg-surface">
       <div className="mx-auto max-w-shell px-5 py-20 sm:px-10 sm:py-24">
-        <SectionHeading index="01" eyebrow="Selected Work" title={<>Real projects.<br />Real code.</>} intro="Three real projects, each in its own colour world — presented honestly: what is verified, what is in progress, and what is still a placeholder is stated on every page. No invented results, no fake screenshots." />
-
-        <div className="flex flex-col gap-16">
-          {projects.map((p, i) => {
-            const w = WORLDS[p.slug]
-            return (
-              <article key={p.slug} className={`reveal hard border-2 border-ink ${w.panel}`}>
-                <div className="grid gap-8 p-6 sm:p-10 lg:grid-cols-12 lg:gap-12">
-                  <div className={`lg:col-span-7 ${i % 2 ? 'lg:order-2' : ''}`}>
-                    <div className="border-2 border-ink bg-paper p-3 text-ink sm:p-4">
-                      <ProjectVisual project={p} large />
-                    </div>
-                  </div>
-                  <div className="flex flex-col lg:col-span-5">
-                    <p><span className={`folio inline-block px-2.5 py-1.5 ${w.chip}`}>{p.index} — {p.status}</span></p>
-                    <h3 className="display-1 mt-5">{p.title}</h3>
-                    <p className={`mt-1.5 font-display text-xl font-medium ${w.sub}`}>{p.subtitle}</p>
-                    <p className="mt-5 leading-relaxed">{p.summary}</p>
-                    {p.slug === 'printora' && (
-                      <ul className="mt-6 space-y-2.5 text-sm font-medium" aria-label="PRINTORA highlights">
-                        <li>▸ Design studio with genuine print validation</li>
-                        <li>▸ Full operations admin — 17 sections</li>
-                        <li>▸ Multi-currency display, PKR base accounting</li>
-                      </ul>
-                    )}
-                    {!p.detailsPending && p.slug !== 'printora' && (
-                      <ul className="mt-6 space-y-2.5 text-sm font-medium" aria-label={`${p.title} highlights`}>
-                        {p.features.slice(0, 4).map((f) => <li key={f}>▸ {f.split(' — ')[0]}</li>)}
-                      </ul>
-                    )}
-                    {p.detailsPending && (
-                      <p className={`mt-5 border-2 p-4 text-sm leading-relaxed ${w.note}`}>{p.statusNote}</p>
-                    )}
-                    <div className="mt-auto flex flex-wrap items-center gap-x-6 gap-y-3 pt-8">
-                      <Link href={`/projects/${p.slug}`} className={`px-6 py-3 font-display text-sm font-semibold transition-colors ${w.cta}`}>
-                        {p.detailsPending ? 'View case study status' : 'Read case study'} →
-                      </Link>
-                      {p.links.live && <Link href={p.links.live} className="arrow-link font-display font-semibold underline decoration-2 underline-offset-4">Live project <span className="arr" aria-hidden="true">↗</span></Link>}
-                      {p.links.github && <Link href={p.links.github} className="arrow-link font-display font-semibold underline decoration-2 underline-offset-4">Source code <span className="arr" aria-hidden="true">↗</span></Link>}
-                    </div>
-                  </div>
-                </div>
-              </article>
-            )
-          })}
+        <SectionHeading index="02" eyebrow="About" title="A developer who builds for the business, not just the browser." />
+        <div className="grid items-start gap-10 lg:grid-cols-[auto_1fr] lg:gap-14">
+          <div className="reveal mx-auto w-full max-w-[240px] lg:mx-0">
+            <Portrait />
+          </div>
+          <div className="reveal max-w-3xl">
+            <p className="lede text-soft">
+              I&apos;m <strong className="font-semibold text-ink">Shahid Raza</strong>, a software developer specialising in web applications built with React, JavaScript, Node.js, Express, MongoDB and Tailwind CSS. My work focuses on practical software for real operations: an e-commerce platform with a customer design studio and a full admin panel, and a browser-based PDF toolkit whose files never leave the user&apos;s device.
+            </p>
+            <p className="lede mt-5 text-soft">
+              I work in verified stages — scope first, then build, test and deploy — and I present my work honestly: live projects are linked so you can try them, and anything still in development is labelled as such.
+            </p>
+            <div className="mt-8 rounded-2xl border border-dashed border-line bg-navy/60 p-6">
+              <p className="folio text-cyan">Education & experience</p>
+              <p className="mt-2.5 leading-relaxed text-soft">Formal education and work-history details will be published here as soon as the owner adds the verified information — nothing is listed until it can be stated accurately.</p>
+            </div>
+          </div>
         </div>
       </div>
     </section>
   )
 }
 
-/* ————————————————— SERVICES ————————————————— */
-const ACCENTS = ['text-cobalt', 'text-coraldeep', 'text-limedeep']
+function Skills() {
+  return (
+    <section id="skills" className="scroll-mt-24 bg-navy">
+      <div className="mx-auto max-w-shell px-5 py-20 sm:px-10 sm:py-24">
+        <SectionHeading index="03" eyebrow="Technical skills" title="The stack behind the work." intro="Every skill below is demonstrated in a shipped project on this page — grouped the way the work actually divides." />
+        <div className="grid gap-5 md:grid-cols-2">
+          {skillGroups.map((g, i) => (
+            <article key={g.title} className="reveal lift rounded-2xl border border-line bg-card p-7 hover:border-accent/50">
+              <div className="flex items-baseline gap-4">
+                <span className="folio text-cyan">{String(i + 1).padStart(2, '0')}</span>
+                <h3 className="font-display text-xl font-semibold text-ink">{g.title}</h3>
+              </div>
+              <ul className="mt-6 flex flex-wrap gap-2">
+                {g.skills.map((s) => (
+                  <li key={s} className="rounded-full border border-line bg-surface px-3.5 py-1.5 text-sm font-medium text-soft transition-colors hover:border-cyan/60 hover:text-ink">{s}</li>
+                ))}
+              </ul>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+  )
+}
+
+function ProjectPanel({ project, flip }) {
+  const live = project.status === 'Live preview' || project.status === 'Live'
+  return (
+    <article className="reveal overflow-hidden rounded-3xl border border-line bg-card">
+      <div className={`grid items-center gap-8 p-6 sm:p-9 lg:grid-cols-2 lg:gap-12 lg:p-11 ${flip ? '' : ''}`}>
+        <div className={`visual-zoom ${flip ? 'lg:order-2' : ''}`}>
+          <div className="visual-inner"><ProjectVisual slug={project.slug} /></div>
+        </div>
+        <div>
+          <div className="flex flex-wrap items-center gap-3">
+            <span className={`inline-flex items-center gap-2 rounded-full border px-3 py-1.5 font-mono text-[10px] uppercase tracking-widest2 ${live ? 'border-accent/50 text-cyan' : 'border-line text-soft'}`}>
+              <span aria-hidden="true" className={`h-1.5 w-1.5 rounded-full ${live ? 'bg-cyan' : 'bg-muted'}`} />
+              {project.status}
+            </span>
+            <span className="folio text-muted">{project.role || project.subtitle}</span>
+          </div>
+          <h3 className="display-2 mt-5 text-ink">{project.title}</h3>
+          <p className="mt-2 font-display text-lg font-medium text-cyan">{project.subtitle}</p>
+          <p className="mt-4 leading-relaxed text-soft">{project.summary}</p>
+          <ul className="mt-6 space-y-2.5">
+            {project.features.slice(0, 3).map((h) => (
+              <li key={h} className="flex gap-3 text-soft">
+                <span aria-hidden="true" className="mt-0.5 font-bold text-accent">✓</span>
+                <span>{h}</span>
+              </li>
+            ))}
+          </ul>
+          <p className="mt-6 font-mono text-[11px] uppercase tracking-widest2 text-muted">{project.stack.join(' · ')}</p>
+          <div className="mt-7 flex flex-wrap gap-x-7 gap-y-3">
+            <Link href={`/projects/${project.slug}`} className="arrow-link font-display font-semibold text-accent hover:text-cyan">View case study <span className="arr" aria-hidden="true">→</span></Link>
+            {project.links.live && (
+              <a href={project.links.live} target="_blank" rel="noreferrer" className="arrow-link font-display font-semibold text-accent hover:text-cyan">View live project <span className="arr" aria-hidden="true">↗</span></a>
+            )}
+            {project.links.github && (
+              <a href={project.links.github} target="_blank" rel="noreferrer" className="arrow-link font-display font-semibold text-accent hover:text-cyan">View source code <span className="arr" aria-hidden="true">↗</span></a>
+            )}
+          </div>
+        </div>
+      </div>
+    </article>
+  )
+}
+
+function Work() {
+  return (
+    <section id="work" className="scroll-mt-24 bg-surface">
+      <div className="mx-auto max-w-shell px-5 py-20 sm:px-10 sm:py-24">
+        <SectionHeading index="04" eyebrow="Featured projects" title="Real products, honestly presented." intro="Live links where a deployment exists, public source where the code is open, and a clear status on every project — including the one still being built." />
+        <div className="space-y-8">
+          {projects.map((p, i) => (<ProjectPanel key={p.slug} project={p} flip={i % 2 === 1} />))}
+        </div>
+        <p className="reveal mx-auto mt-12 max-w-2xl text-center leading-relaxed text-soft">
+          This portfolio itself is also my work — designed and built with React, Vite and Tailwind CSS, and deployed on Vercel.
+          Its source is public: <a href={site.socials.github} target="_blank" rel="noreferrer" className="link-line font-medium text-cyan">github.com/{site.socials.githubHandle} ↗</a>
+        </p>
+      </div>
+    </section>
+  )
+}
 
 function Services() {
   return (
-    <section id="services" className="scroll-mt-24 border-b-2 border-ink bg-paper">
+    <section id="services" className="scroll-mt-24 bg-navy">
       <div className="mx-auto max-w-shell px-5 py-20 sm:px-10 sm:py-24">
-        <SectionHeading accent="bg-coral" index="02" eyebrow="Services" title={<>What I can build<br />for your business.</>} intro="No made-up pricing — every project is scoped first, and you approve the scope and cost before any work begins. Each service below states plainly what you receive and who it is for." />
+        <SectionHeading index="05" eyebrow="Services" title="What I can build for your business." intro="Practical software, scoped honestly before any work begins. Choose a starting point — or describe your project and I will recommend one." />
         <div>
           {services.map((s, i) => (
-            <div key={s.title} className="reveal grid gap-4 border-t-2 border-ink py-10 md:grid-cols-12 md:gap-8">
-              <p className={`font-display text-2xl font-bold md:col-span-1 ${ACCENTS[i % 3]}`}>{s.index}</p>
-              <div className="md:col-span-5">
-                <h3 className="display-2">{s.title}</h3>
-                <p className="mt-2 font-display text-lg font-medium text-cobalt">{s.value}</p>
+            <article key={s.title} className="reveal service-row grid gap-5 border-t border-line py-9 lg:grid-cols-[3.5rem_1.2fr_1fr_auto] lg:gap-8">
+              <span className="folio pt-1.5 text-cyan">{String(i + 1).padStart(2, '0')}</span>
+              <div>
+                <h3 className="display-2 text-ink">{s.title}</h3>
+                <p className="mt-3 max-w-md leading-relaxed text-soft">{s.text}</p>
               </div>
-              <div className="md:col-span-6">
-                <p className="leading-relaxed text-soft">{s.text}</p>
-                <dl className="mt-4 space-y-2 text-sm leading-relaxed">
-                  <div className="flex gap-3"><dt className="folio shrink-0 pt-0.5 text-cobalt">You receive</dt><dd className="text-soft">{s.deliver}</dd></div>
-                  <div className="flex gap-3"><dt className="folio shrink-0 pt-0.5 text-cobalt">Best for</dt><dd className="text-soft">{s.forWho}</dd></div>
-                </dl>
-                <Link href="/#contact" className="arrow-link mt-5 inline-block font-display text-sm font-semibold text-cobalt">Request a quote <span className="arr" aria-hidden="true">→</span></Link>
-              </div>
-            </div>
+              <dl className="space-y-4">
+                <div>
+                  <dt className="folio text-muted">You receive</dt>
+                  <dd className="mt-1.5 leading-relaxed text-soft">{s.deliver}</dd>
+                </div>
+                <div>
+                  <dt className="folio text-muted">Best for</dt>
+                  <dd className="mt-1.5 leading-relaxed text-soft">{s.forWho}</dd>
+                </div>
+              </dl>
+              <Link href="/#contact" className="arrow-link self-start font-display font-semibold text-accent hover:text-cyan lg:pt-2">Request a quote <span className="arr" aria-hidden="true">→</span></Link>
+            </article>
           ))}
+        </div>
+        <div className="reveal mt-4 flex flex-col items-start justify-between gap-5 rounded-2xl border border-line bg-card p-7 sm:flex-row sm:items-center">
+          <p className="max-w-xl leading-relaxed text-soft"><strong className="font-semibold text-ink">Not sure which fits?</strong> Describe your project in the contact form — I will recommend the right approach and a clear scope before any commitment.</p>
+          <Link href="/#contact" className="btn-primary shrink-0 rounded-lg px-6 py-3 font-display text-sm font-semibold text-white">Discuss your project</Link>
         </div>
       </div>
     </section>
   )
 }
-
-/* ————————————————— PROCESS ————————————————— */
-const P_ACCENTS = ['text-cobaltlt', 'text-coral', 'text-lime', 'text-cobaltlt', 'text-coral', 'text-lime', 'text-cobaltlt']
 
 function Process() {
   return (
-    <section id="process" className="scroll-mt-24 bg-ink text-paper">
+    <section id="process" className="scroll-mt-24 bg-surface">
       <div className="mx-auto max-w-shell px-5 py-20 sm:px-10 sm:py-24">
-        <SectionHeading dark accent="bg-lime" index="03" eyebrow="Working Process" title={<>How your project<br />actually runs.</>} intro="A clear, staged process — scope, delivery dates and cost are confirmed with you before development begins, and every stage ends with something you can see and verify." />
-        <ol className="grid gap-x-8 gap-y-12 sm:grid-cols-2 lg:grid-cols-4">
+        <SectionHeading index="06" eyebrow="Working process" title="How your project gets built." intro="A clear sequence from first conversation to handover — scope, cost and delivery expectations are discussed and agreed before work begins." />
+        <ol className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
           {process.map((p, i) => (
-            <li key={p.step} className="reveal border-t-2 border-paper/25 pt-6">
-              <p className={`font-display text-4xl font-bold ${P_ACCENTS[i]}`}>0{i + 1}</p>
-              <h3 className="mt-3 font-display text-xl font-semibold leading-snug">{p.step}</h3>
-              <p className="mt-2 text-sm leading-relaxed text-paper/60">{p.text}</p>
+            <li key={p.step} className="reveal lift rounded-2xl border border-line bg-card p-7 hover:border-accent/50">
+              <p className="font-display text-4xl font-bold text-accent">{String(i + 1).padStart(2, '0')}</p>
+              <h3 className="mt-4 font-display text-xl font-semibold text-ink">{p.step}</h3>
+              <p className="mt-2.5 leading-relaxed text-soft">{p.text}</p>
             </li>
           ))}
-          <li className="reveal flex items-center border-2 border-dashed border-paper/30 p-6">
-            <p className="text-sm leading-relaxed text-paper/70">Every stage is verified before the next begins — the same rule behind every project on this site.</p>
-          </li>
         </ol>
+        <ul className="reveal mt-8 flex flex-wrap gap-x-10 gap-y-3" aria-label="Commitments">
+          {['Written scope before work begins', 'Cost agreed upfront', 'Progress updates at every stage'].map((t) => (
+            <li key={t} className="flex items-center gap-2.5 font-medium text-soft">
+              <span aria-hidden="true" className="flex h-5 w-5 items-center justify-center rounded-full bg-accent/20 text-[11px] font-bold text-cyan">✓</span>{t}
+            </li>
+          ))}
+        </ul>
       </div>
     </section>
   )
 }
 
-/* ————————————————— ABOUT & SKILLS ————————————————— */
-const GROUP_ACCENTS = ['bg-cobalt', 'bg-coral', 'bg-limedeep']
-
-function About() {
+function ContactCard({ label, children, placeholder }) {
   return (
-    <section id="about" className="scroll-mt-24 border-b-2 border-ink">
-      <div className="mx-auto max-w-shell px-5 py-20 sm:px-10 sm:py-24">
-        <SectionHeading accent="bg-coral" index="04" eyebrow="About & Skills" title={<>A developer who verifies<br />before he claims.</>} />
-        <div className="grid gap-14 lg:grid-cols-12">
-          <div className="lg:col-span-7">
-            <div className="reveal max-w-[280px]">
-              <Portrait />
-            </div>
-            <p className="dropcap reveal lede mt-10 text-soft">
-              I'm {site.name}, a software developer working with React, JavaScript, Node.js and MongoDB. My recent work is PRINTORA — a complete print-on-demand platform with a customer design studio, a multi-currency storefront and a full operations admin, built phase by phase and verified end-to-end at every step. I work with clients in Pakistan and worldwide.
-            </p>
-            <p className="reveal mt-6 leading-relaxed text-soft">
-              That project shaped how I work: design first, then build in stages; keep changes targeted so working features stay working; and never call something “done” or “live” until it has actually been tested. I focus on practical business problems — stores that need to sell, schools and teams still running on spreadsheets, tools that should just work — and I'd rather show an honest placeholder than an invented result, which is exactly how this portfolio treats EduCore while its case study is completed.
-            </p>
-            <div className="reveal mt-10 border-2 border-dashed border-cobalt bg-ice p-6 sm:p-7">
-              <h3 className="folio text-cobalt">Education &amp; experience</h3>
-              {site.education.length === 0 && site.experience.length === 0 ? (
-                <p className="mt-3.5 text-sm leading-relaxed text-soft">
-                  Formal details to be added by the owner. No education history, employer or years-of-experience figure is claimed here until it is supplied and verified — the project work above is the evidence offered in the meantime.
-                </p>
-              ) : (
-                <ul className="mt-3.5 space-y-2 text-sm text-soft">{site.experience.map((e) => <li key={e}>{e}</li>)}{site.education.map((e) => <li key={e}>{e}</li>)}</ul>
-              )}
-            </div>
-          </div>
-          <div id="skills" className="scroll-mt-28 lg:col-span-5">
-            {skillGroups.map((g, gi) => (
-              <div key={g.title} className="reveal border-t-2 border-ink py-6 first:border-t-0 first:pt-0">
-                <div className="flex items-baseline justify-between gap-4">
-                  <h3 className="flex items-center gap-3 font-display text-2xl font-semibold">
-                    <span aria-hidden="true" className={`h-3.5 w-3.5 shrink-0 ${GROUP_ACCENTS[gi % 3]}`} />
-                    {g.title}
-                  </h3>
-                  <p className="text-right text-xs italic text-muted">{g.note}</p>
-                </div>
-                <ul className="mt-4 flex flex-wrap gap-2">
-                  {g.skills.map((s) => (
-                    <li key={s} className="border-2 border-ink bg-white px-3 py-1.5 font-mono text-[11px] uppercase tracking-wide transition-colors hover:bg-lime">{s}</li>
-                  ))}
-                </ul>
-              </div>
-            ))}
-            <p className="reveal mt-2 text-sm italic leading-relaxed text-muted">Listed from shipped project work — no percentage bars, no inflated levels.</p>
-          </div>
-        </div>
-      </div>
-    </section>
+    <div className={`rounded-2xl p-6 ${placeholder ? 'border border-dashed border-line bg-navy/60' : 'border border-line bg-card'}`}>
+      <p className="folio text-muted">{label}</p>
+      <div className="mt-2.5">{children}</div>
+    </div>
   )
 }
 
-/* ————————————————— CONTACT ————————————————— */
-export function ContactSection() {
-  const { email, whatsapp, whatsappDisplay } = site.contact
+function Contact() {
+  const emailReady = Boolean(site.contact.email)
   return (
-    <section id="contact" className="dotgrid scroll-mt-24 bg-cobalt text-white">
+    <section id="contact" className="scroll-mt-24 bg-navy">
       <div className="mx-auto max-w-shell px-5 py-20 sm:px-10 sm:py-24">
-        <div className="reveal flex items-center gap-4 border-t-2 border-white pt-5">
-          <span aria-hidden="true" className="h-3 w-3 bg-lime" />
-          <p className="folio text-lime">05 — Contact</p>
-          <span aria-hidden="true" className="h-px flex-1 bg-white/25" />
-          <p className="folio hidden text-white/60 sm:block">No pressure, no obligation</p>
-        </div>
-        <div className="mt-10 grid gap-12 lg:grid-cols-12">
-          <div className="lg:col-span-6">
-            <h2 className="reveal display-1">Have a project in mind? <span className="text-lime">Let's discuss it properly.</span></h2>
-            <p className="reveal lede mt-6 max-w-lg text-white/85">
-              Tell me what you're building. You'll get an honest reply — scope, approach, timeline and cost — before any commitment.
-            </p>
-            <div className="reveal mt-10 space-y-4">
-              {email ? (
-                <a href={`mailto:${email}`} className="group flex items-center justify-between border-2 border-ink bg-white px-6 py-5 text-ink transition-colors hover:bg-lime">
-                  <span><span className="folio block text-cobalt">Email</span><span className="mt-1.5 block font-display text-xl font-semibold">{email}</span></span>
-                  <span aria-hidden="true" className="transition-transform group-hover:translate-x-1">→</span>
-                </a>
-              ) : (
-                <div className="border-2 border-dashed border-white/50 px-6 py-5" role="note">
-                  <span className="folio block text-lime">Email — placeholder</span>
-                  <p className="mt-1.5 text-sm leading-relaxed text-white/85">The owner's verified email will appear here. It is intentionally not shown yet, rather than guessed.</p>
-                </div>
-              )}
-              {whatsapp ? (
-                <a href={`https://wa.me/${whatsapp}`} target="_blank" rel="noreferrer" className="group flex items-center justify-between border-2 border-ink bg-white px-6 py-5 text-ink transition-colors hover:bg-lime">
-                  <span><span className="folio block text-cobalt">WhatsApp</span><span className="mt-1.5 block font-display text-xl font-semibold">{whatsappDisplay || 'Chat on WhatsApp'}</span></span>
-                  <span aria-hidden="true" className="transition-transform group-hover:translate-x-1">↗</span>
-                </a>
-              ) : (
-                <div className="border-2 border-dashed border-white/50 px-6 py-5" role="note">
-                  <span className="folio block text-lime">WhatsApp — placeholder</span>
-                  <p className="mt-1.5 text-sm leading-relaxed text-white/85">The owner's verified WhatsApp number will appear here once supplied.</p>
-                </div>
-              )}
-              <Link href={site.socials.github} className="group flex items-center justify-between border-2 border-ink bg-white px-6 py-5 text-ink transition-colors hover:bg-lime">
-                <span><span className="folio block text-cobalt">GitHub — verified</span><span className="mt-1.5 block font-display text-xl font-semibold">{site.socials.githubHandle}</span></span>
-                <span aria-hidden="true" className="transition-transform group-hover:translate-x-1">↗</span>
-              </Link>
+        <SectionHeading index="07" eyebrow="Contact" title={<>Let&apos;s build something <span className="text-gradient">useful.</span></>} intro="Tell me about your project — what it should do, who it is for, and when you need it. You will get a clear, honest reply about scope, approach and next steps." />
+        <div className="grid gap-6 lg:grid-cols-[1fr_1.15fr]">
+          <div className="reveal space-y-5">
+            {emailReady ? (
+              <ContactCard label="Email — direct">
+                <a href={`mailto:${site.contact.email}`} className="link-line break-all font-display text-xl font-semibold text-ink">{site.contact.email}</a>
+              </ContactCard>
+            ) : (
+              <ContactCard label="Email" placeholder>
+                <p className="leading-relaxed text-soft">The owner&apos;s verified email will be published here — it is being added, and this form activates with it.</p>
+              </ContactCard>
+            )}
+            <ContactCard label="GitHub — verified">
+              <a href={site.socials.github} target="_blank" rel="noreferrer" className="link-line font-display text-xl font-semibold text-cyan">{site.socials.githubHandle} ↗</a>
+              <p className="mt-1.5 text-soft">Source code and project history, publicly verifiable.</p>
+            </ContactCard>
+            {site.contact.whatsapp ? (
+              <ContactCard label="WhatsApp">
+                <p className="font-display text-xl font-semibold text-ink">{site.contact.whatsapp}</p>
+              </ContactCard>
+            ) : (
+              <ContactCard label="WhatsApp" placeholder>
+                <p className="leading-relaxed text-soft">A WhatsApp number will be added here by the owner — only a verified number will ever be shown.</p>
+              </ContactCard>
+            )}
+            {site.socials.linkedin ? (
+              <ContactCard label="LinkedIn">
+                <a href={site.socials.linkedin} target="_blank" rel="noreferrer" className="link-line font-display text-xl font-semibold text-cyan">View profile ↗</a>
+              </ContactCard>
+            ) : (
+              <ContactCard label="LinkedIn" placeholder>
+                <p className="leading-relaxed text-soft">LinkedIn profile link to be added by the owner.</p>
+              </ContactCard>
+            )}
+            <div className="rounded-2xl border border-line bg-card p-6">
+              <p className="folio text-muted">What happens next</p>
+              <p className="mt-2.5 leading-relaxed text-soft">Your message opens in your own email app, addressed to me — nothing is sent silently. We discuss scope first; you approve the plan and cost before any work begins.</p>
+              <p className="folio mt-5 text-muted">Location & availability</p>
+              <p className="mt-2 text-soft">{site.location || 'To be added by the owner.'} {site.availability || ''}</p>
             </div>
           </div>
-          <div className="lg:col-span-6">
-            <form
-              className="reveal hard border-2 border-ink bg-paper p-6 text-ink sm:p-8"
-              onSubmit={(e) => {
-                e.preventDefault()
-                if (!email) return
-                const fd = new FormData(e.currentTarget)
-                const subject = encodeURIComponent(`Project enquiry (${fd.get('projectType') || 'General'}) — ${fd.get('name') || 'Website visitor'}`)
-                const body = encodeURIComponent(
-                  `Project type: ${fd.get('projectType') || '—'}\nBudget range: ${fd.get('budget') || 'Not specified'}\n\n${fd.get('message') || ''}\n\n— ${fd.get('name') || ''} (${fd.get('replyEmail') || ''})`,
-                )
-                window.location.href = `mailto:${email}?subject=${subject}&body=${body}`
-              }}
-            >
-              <p className="folio text-cobalt">Project enquiry</p>
-              <div className="mt-6 grid gap-5 sm:grid-cols-2">
-                <label className="block text-sm font-medium">Your name
-                  <input name="name" required autoComplete="name" className="mt-2 w-full border-2 border-ink bg-white px-3.5 py-3" placeholder="Your name" />
-                </label>
-                <label className="block text-sm font-medium">Your email
-                  <input name="replyEmail" type="email" required autoComplete="email" className="mt-2 w-full border-2 border-ink bg-white px-3.5 py-3" placeholder="you@example.com" />
-                </label>
+
+          <form
+            className="reveal h-fit rounded-3xl border border-line bg-card p-6 sm:p-8"
+            onSubmit={(e) => {
+              e.preventDefault()
+              if (!emailReady) return
+              const fd = new FormData(e.currentTarget)
+              const subject = encodeURIComponent(`Project enquiry — ${fd.get('type') || 'New project'}`)
+              const body = encodeURIComponent(
+                `Name: ${fd.get('name')}\nPreferred contact: ${fd.get('contact')}\nProject type: ${fd.get('type')}\nBudget (optional): ${fd.get('budget') || '—'}\n\nRequirements:\n${fd.get('message')}`,
+              )
+              window.location.href = `mailto:${site.contact.email}?subject=${subject}&body=${body}`
+            }}
+          >
+            <div className="grid gap-5 sm:grid-cols-2">
+              <div>
+                <label htmlFor="cf-name" className="folio block text-muted">Your name *</label>
+                <input id="cf-name" name="name" required autoComplete="name" placeholder="Your full name"
+                  className="mt-2.5 w-full rounded-lg border border-line bg-surface px-4 py-3 text-ink placeholder:text-muted focus:border-accent focus:outline-none" />
               </div>
-              <div className="mt-5 grid gap-5 sm:grid-cols-2">
-                <label className="block text-sm font-medium">Project type
-                  <select name="projectType" required defaultValue="Business website" className="mt-2 w-full border-2 border-ink bg-white px-3.5 py-3">
-                    {services.map((s) => <option key={s.title} value={s.title}>{s.title}</option>)}
-                    <option value="Something else">Something else</option>
-                  </select>
-                </label>
-                <label className="block text-sm font-medium">Budget range <span className="font-normal text-muted">(optional)</span>
-                  <select name="budget" defaultValue="" className="mt-2 w-full border-2 border-ink bg-white px-3.5 py-3">
-                    <option value="">Prefer not to say yet</option>
-                    <option>Under PKR 50,000</option>
-                    <option>PKR 50,000 – 150,000</option>
-                    <option>PKR 150,000 – 500,000</option>
-                    <option>Over PKR 500,000</option>
-                    <option>Not sure — need guidance</option>
-                  </select>
-                </label>
+              <div>
+                <label htmlFor="cf-contact" className="folio block text-muted">Email or preferred contact *</label>
+                <input id="cf-contact" name="contact" required autoComplete="email" placeholder="you@example.com"
+                  className="mt-2.5 w-full rounded-lg border border-line bg-surface px-4 py-3 text-ink placeholder:text-muted focus:border-accent focus:outline-none" />
               </div>
-              <label className="mt-5 block text-sm font-medium">About your project
-                <textarea name="message" required rows={5} className="mt-2 w-full border-2 border-ink bg-white px-3.5 py-3" placeholder="What are you building, who is it for, and by when?" />
-              </label>
-              <button type="submit" disabled={!email} className="mt-7 w-full bg-cobalt px-6 py-3.5 font-display text-sm font-semibold text-white transition-colors hover:bg-ink disabled:cursor-not-allowed disabled:opacity-40 sm:w-auto">
-                {email ? 'Send via email' : 'Form activates when owner adds email'}
-              </button>
-              {!email && <p className="mt-3.5 text-xs leading-relaxed text-muted">Honest note: no email service is configured yet, so this form cannot send anything today. It activates — with your project type and budget included — as soon as the owner's verified email is added. Until then, GitHub is the working contact route.</p>}
-            </form>
-          </div>
+            </div>
+            <div className="mt-5 grid gap-5 sm:grid-cols-2">
+              <div>
+                <label htmlFor="cf-type" className="folio block text-muted">Project type *</label>
+                <select id="cf-type" name="type" required defaultValue=""
+                  className="mt-2.5 w-full rounded-lg border border-line bg-surface px-4 py-3 text-ink focus:border-accent focus:outline-none">
+                  <option value="" disabled>Select a project type…</option>
+                  {projectTypes.map((t) => (<option key={t} value={t}>{t}</option>))}
+                </select>
+              </div>
+              <div>
+                <label htmlFor="cf-budget" className="folio block text-muted">Budget (optional, PKR)</label>
+                <select id="cf-budget" name="budget" defaultValue=""
+                  className="mt-2.5 w-full rounded-lg border border-line bg-surface px-4 py-3 text-ink focus:border-accent focus:outline-none">
+                  <option value="">Prefer to discuss</option>
+                  {budgetRanges.map((b) => (<option key={b} value={b}>{b}</option>))}
+                </select>
+              </div>
+            </div>
+            <div className="mt-5">
+              <label htmlFor="cf-message" className="folio block text-muted">Your requirements *</label>
+              <textarea id="cf-message" name="message" required rows="6" placeholder="What should the project do? Who is it for? Any deadline?"
+                className="mt-2.5 w-full rounded-lg border border-line bg-surface px-4 py-3 text-ink placeholder:text-muted focus:border-accent focus:outline-none" />
+            </div>
+            <button type="submit" disabled={!emailReady} className="btn-primary mt-7 w-full rounded-lg px-7 py-4 font-display font-semibold text-white disabled:cursor-not-allowed disabled:opacity-50 sm:w-auto">
+              {emailReady ? 'Send project enquiry →' : 'Form activates when the owner adds an email'}
+            </button>
+            <p className="mt-4 text-sm leading-relaxed text-muted">
+              {emailReady
+                ? 'Submitting opens your email app with everything pre-filled — you review and send it yourself.'
+                : 'This form never shows a fake success message: it will send through your own email app as soon as the owner publishes a verified email address.'}
+            </p>
+          </form>
         </div>
       </div>
     </section>
@@ -424,16 +429,18 @@ export function ContactSection() {
 }
 
 export default function Home() {
+  useReveal()
   return (
     <>
       <Hero />
       <Marquee />
       <Trust />
+      <About />
+      <Skills />
       <Work />
       <Services />
       <Process />
-      <About />
-      <ContactSection />
+      <Contact />
     </>
   )
 }

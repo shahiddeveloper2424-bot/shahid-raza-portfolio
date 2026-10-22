@@ -21,17 +21,30 @@ Verified project links (re-checked October 2026): PRINTORA storefront https://pr
 
 ## Design
 
-Colorful premium identity (v3). Palette — documented tokens (tailwind.config.js):
+**Midnight Navy system (v5, strict — one brand).** Palette, also defined
+as tokens in `tailwind.config.js`:
 
 | Token | Hex | Role |
 | --- | --- | --- |
-| cobalt | #635BFF | Primary brand · PRINTORA |
-| coral | #FF6B6B | Secondary accent · EduCore |
-| lime | #D9F75D | Highlight · PDF Toolkit Pro |
-| ink | #171717 | Text + dark sections |
-| paper | #F8F7F2 | Soft-white light base |
+| paper / navy | #0B1220 | Primary background (midnight navy) |
+| surface | #111C2E | Secondary surface |
+| card | #162238 | Elevated cards |
+| accent | #3478F6 | Primary accent (electric blue) |
+| cyan | #38BDF8 | Supporting accent, sparing |
+| ink | #F7FAFF | Main text |
+| soft | #AAB7CC | Secondary text |
+| line | #29374E | Borders & dividers |
 
-Display type is Space Grotesk; body Inter; labels IBM Plex Mono. Loud color sits on disciplined neutrals: a cobalt hero and contact bookend, one colour world per project (cobalt / coral / lime panels), an ink services section with rotating accent numerals, and a lime marquee strip. Signature devices are structural, not decorative noise: hard offset shadows, dot-grid textures on colour fields, fail-safe scroll reveal, and full `prefers-reduced-motion` support. No gradients-as-decoration, no glass cards, no fake screenshots — project visuals are labelled design compositions until the owner supplies real screenshots.
+A blue→violet gradient (`#3478F6` → `#7465F5`) is used for the primary
+CTA only. Design rule: roughly 70% dark neutral surfaces, 25% light
+text, 5% accents — one consistent system across every section and
+project; no per-project colour worlds and no extra hues. Display type
+is Space Grotesk; body Inter; labels IBM Plex Mono. Premium framed
+portrait (owner's real photo as a circle inside an elegant navy panel),
+rounded cards with thin borders, restrained blue highlights, subtle
+motion with full `prefers-reduced-motion` support, and a fail-safe
+scroll reveal. No fake screenshots — project visuals are labelled
+design compositions until the owner supplies real screenshots.
 
 ## What's inside
 

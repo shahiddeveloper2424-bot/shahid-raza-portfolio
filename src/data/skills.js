@@ -1,83 +1,66 @@
-/**
- * SKILLS & SERVICES — only technologies evidenced by the owner's shipped
- * project work (PRINTORA: MERN stack on Vercel/GitHub) and this portfolio.
- * No percentages, no invented years of experience, no unsupported promises.
- */
 export const skillGroups = [
   {
-    title: 'Frontend',
-    note: 'Interfaces that stay fast, readable and responsive.',
-    skills: ['React', 'JavaScript (ES6+)', 'Vite', 'Tailwind CSS', 'HTML5', 'CSS3', 'Responsive design'],
+    title: 'Frontend Development',
+    skills: ['React', 'JavaScript (ES6+)', 'HTML5', 'CSS3', 'Tailwind CSS', 'Responsive Design', 'Vite', 'Component Architecture'],
   },
   {
-    title: 'Backend',
-    note: 'Server logic that stays authoritative.',
-    skills: ['Node.js', 'Express', 'REST APIs', 'MongoDB', 'Mongoose', 'Authentication & RBAC'],
+    title: 'Backend Development',
+    skills: ['Node.js', 'Express.js', 'REST APIs', 'JWT Authentication', 'Server-side Validation', 'File Uploads', 'MongoDB', 'Mongoose'],
   },
   {
-    title: 'Product & Platform',
-    note: 'The work around the code.',
-    skills: ['E-commerce systems', 'Admin dashboards', 'Multi-currency pricing', 'Git & GitHub', 'Vercel deployment', 'Testing & verification'],
+    title: 'Business Application Features',
+    skills: ['Admin Dashboards', 'CRUD Systems', 'Role-Based Access Control', 'Order Management', 'Multi-Currency Pricing', 'Reports & CSV Export', 'Audit Logs'],
+  },
+  {
+    title: 'Tools & Practices',
+    skills: ['Git', 'GitHub', 'Vercel Deployment', 'Testing & Debugging', 'Client-Side PDF Processing', 'Browser Storage', 'Clean, Documented Code'],
   },
 ]
 
 export const services = [
   {
-    index: '01',
-    title: 'Business Websites & Landing Pages',
-    value: 'A website a client can trust in the first ten seconds.',
-    text: 'Professional business websites that present your work clearly, load fast on real phones, and turn visitors into enquiries.',
-    deliver: 'A complete responsive website — design, build, working contact routes and deployment, ready to share.',
-    forWho: 'Local businesses, professionals and startups that need to look credible online.',
+    title: 'Business Websites',
+    text: 'A professional website that explains what your business does and turns visitors into enquiries — fast, mobile-friendly, and easy to update.',
+    deliver: 'Multi-page website, contact/enquiry forms, Google-ready structure, deployment and handover.',
+    forWho: 'Local businesses, professionals and service providers who need a credible online presence.',
   },
   {
-    index: '02',
-    title: 'E-Commerce Development',
-    value: 'A store you can actually operate, not just launch.',
-    text: 'Storefronts with a complete admin for products, orders and fulfillment, honest payment states, and multi-currency display — built on the same foundation as PRINTORA.',
-    deliver: 'Storefront + operations admin, product/order management and a checkout that never pretends a payment method exists when it does not.',
-    forWho: 'Shops and brands selling physical or custom products online.',
+    title: 'E-Commerce Websites',
+    text: 'An online store with product catalogue, cart, checkout and order management — including multi-currency pricing for international customers.',
+    deliver: 'Storefront, product management, cart & checkout, order admin, customer accounts.',
+    forWho: 'Retailers and brands selling products online, in Pakistan or worldwide.',
   },
   {
-    index: '03',
-    title: 'Management Systems',
-    value: 'Software shaped around how your organisation actually runs.',
-    text: 'Database-driven management systems — like a school management system — that replace scattered spreadsheets and paper registers with one reliable place to work.',
-    deliver: 'A records and workflow system with user roles, designed around your real day-to-day process.',
-    forWho: 'Schools and organisations still running on spreadsheets and manual records.',
+    title: 'Custom Management Systems',
+    text: 'Software shaped around how your organisation actually runs — students, fees and attendance for schools; stock, orders and staff for businesses.',
+    deliver: 'Role-based dashboards, records management, reports, secure logins for your team.',
+    forWho: 'Schools, academies and businesses managing records in spreadsheets today.',
   },
   {
-    index: '04',
     title: 'Admin Dashboards & Internal Tools',
-    value: 'Your team’s work, in one place.',
-    text: 'Dashboards, CRUD panels, reporting and role-based access — the internal tools that keep operations visible and under control.',
-    deliver: 'A secure admin panel with the views, forms and reports your team actually uses.',
-    forWho: 'Businesses whose team wastes time juggling files, chats and registers.',
+    text: 'A control panel for your business: manage content, customers, orders and settings from one place, with the right access for each team member.',
+    deliver: 'Admin dashboard, REST API and database, staff roles & permissions, audit trail.',
+    forWho: 'Businesses that need their team to manage data safely without touching code.',
   },
   {
-    index: '05',
-    title: 'Web Applications & Tools',
-    value: 'Focused tools that do one job properly.',
-    text: 'Browser-based applications and utilities — like PDF Toolkit Pro — designed around a single clear job, deployable on a free hosting tier and simple to maintain.',
-    deliver: 'A working web application or tool, deployed, documented and handed over.',
-    forWho: 'Founders and teams with one clear job to automate.',
+    title: 'Web Applications & Online Tools',
+    text: 'Interactive browser-based tools your customers or team can use instantly — no installation, works on any device.',
+    deliver: 'Custom web application, responsive interface, tested core logic, deployed and documented.',
+    forWho: 'Founders and businesses with a specific tool or product idea to validate and launch.',
   },
   {
-    index: '06',
-    title: 'Redesign, Fixes & Maintenance',
-    value: 'Improve what exists — without breaking what works.',
-    text: 'Targeted improvements to an existing website: responsive fixes, new features, bug fixing and performance care, done in verified steps.',
-    deliver: 'The specific fixes or features agreed in scope, tested against your live site’s existing behaviour.',
-    forWho: 'Anyone with an existing website that needs care, not a rebuild.',
+    title: 'Website Redesign & Fixes',
+    text: 'An existing website made faster, clearer and more professional — or a stubborn bug hunted down and fixed properly.',
+    deliver: 'Redesigned pages, performance and mobile improvements, verified bug fixes.',
+    forWho: 'Businesses whose current website looks dated, loads slowly, or is losing enquiries.',
   },
 ]
 
 export const process = [
-  { step: 'Discovery & Requirements', text: 'We define the problem, the users and what “done” honestly means — before any code.' },
-  { step: 'Scope & Proposal', text: 'Scope, delivery dates and cost are confirmed with you in writing before work begins. No surprises later.' },
-  { step: 'UI/UX Planning', text: 'Design and structure are reviewed and agreed, so the build follows an approved plan.' },
-  { step: 'Development', text: 'Built phase by phase in JavaScript and React, with working features kept working throughout.' },
-  { step: 'Testing & Revisions', text: 'Builds, tests and real end-to-end checks — plus the agreed revision round. Nothing is called “live” until it is verified.' },
-  { step: 'Deployment & Handover', text: 'Deployed, documented and handed over with a clear record of what is done and what remains.' },
-  { step: 'Maintenance', text: 'Where agreed: fixes, small features and care after launch, scoped the same honest way.' },
+  { step: 'Discovery', text: 'We discuss your idea, goals and requirements first — what the software must do, who it is for, and what success looks like for your business.' },
+  { step: 'Planning', text: 'You receive a clear scope, feature list, timeline and cost — agreed in writing before development begins, so there are no surprises later.' },
+  { step: 'Design', text: 'The interface and user flows are planned around your customers: screens, structure and content are mapped before code is written.' },
+  { step: 'Development', text: 'Your product is built in stages with regular progress updates, so you can see it growing and share feedback while it is being made.' },
+  { step: 'Testing', text: 'Features are tested across devices and browsers, issues are fixed, and agreed revisions are completed before anything goes live.' },
+  { step: 'Deployment', text: 'The finished product is deployed, handed over with documentation, and I stay available for support and future improvements.' },
 ]
