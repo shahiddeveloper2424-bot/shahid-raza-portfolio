@@ -29,7 +29,7 @@ const BAR = 'rounded bg-line/70'
 
 export function PrintoraVisual() {
   return (
-    <Frame label="printora-crfs.vercel.app">
+    <Frame label="PRINTORA — storefront preview">
       <div className="bg-surface p-5 sm:p-6">
         <div className="flex items-center justify-between">
           <span className="font-display text-lg font-bold tracking-[0.18em] text-ink">PRINTORA</span>

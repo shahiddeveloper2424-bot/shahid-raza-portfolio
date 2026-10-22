@@ -28,7 +28,7 @@ const budgetRanges = [
 ]
 
 const TRUST = [
-  { title: 'Live, verifiable work', text: 'Two projects are deployed on Vercel right now — open them, use them, and judge the work yourself.', icon: 'M5 13l4 4L19 7' },
+  { title: 'Live, verifiable work', text: 'Real projects with live deployments and public source code are linked from this page wherever they are published — open them and judge the work yourself.', icon: 'M5 13l4 4L19 7' },
   { title: 'Honest scope & status', text: 'Every project page states what is finished, what is in development, and what is still planned. No inflated claims.', icon: 'M12 3l7 3v5c0 5-3.5 8.5-7 10-3.5-1.5-7-5-7-10V6l7-3z' },
   { title: 'Real engineering evidence', text: 'PDF Toolkit Pro ships with 53 passing engine tests; PRINTORA includes a full admin panel, design studio and multi-currency checkout.', icon: 'M8 6l-6 6 6 6M16 6l6 6-6 6' },
   { title: 'Built for your business', text: 'Software shaped around how your business actually runs — customers, orders, students, documents — not generic templates.', icon: 'M4 19V5a2 2 0 012-2h13v16H6a2 2 0 00-2 2zm0 0a2 2 0 002 2h13' },
@@ -45,11 +45,11 @@ function Hero() {
             <Portrait />
           </div>
           <div className="reveal mx-auto mt-5 max-w-[380px] rounded-2xl border border-line bg-card p-5 lg:mx-0">
-            <p className="folio text-cyan">Featured project — live preview</p>
+            <p className="folio text-cyan">Featured project</p>
             <p className="mt-2.5 font-display text-lg font-semibold leading-snug text-ink">PRINTORA — print-on-demand e-commerce platform.</p>
-            <div className="mt-3.5 flex flex-wrap gap-x-6 gap-y-2">
+            <div className="mt-3.5 flex flex-wrap items-center gap-x-6 gap-y-2.5">
               <Link href="/projects/printora" className="arrow-link font-display font-semibold text-accent hover:text-cyan">Case study <span className="arr" aria-hidden="true">→</span></Link>
-              <a href="https://printora-crfs.vercel.app" target="_blank" rel="noreferrer" className="arrow-link font-display font-semibold text-accent hover:text-cyan">View live project <span className="arr" aria-hidden="true">↗</span></a>
+              <span className="rounded-full border border-line px-3 py-1.5 font-mono text-[10px] uppercase tracking-widest2 text-soft">Live Demo Coming Soon</span>
             </div>
           </div>
         </div>
@@ -188,7 +188,7 @@ function Skills() {
 }
 
 function ProjectPanel({ project, flip }) {
-  const live = project.status.startsWith('Live')
+  const live = ['Live preview', 'Live', 'Live Project'].includes(project.status)
   return (
     <article className="reveal overflow-hidden rounded-3xl border border-line bg-card">
       <div className={`grid items-center gap-8 p-6 sm:p-9 lg:grid-cols-2 lg:gap-12 lg:p-11 ${flip ? '' : ''}`}>
@@ -234,7 +234,7 @@ function Work() {
   return (
     <section id="work" className="scroll-mt-24 bg-surface">
       <div className="mx-auto max-w-shell px-5 py-20 sm:px-10 sm:py-24">
-        <SectionHeading index="04" eyebrow="Featured projects" title="Real products, honestly presented." intro="Live links where a deployment exists, public source where the code is open, and a clear status on every project — including the one still being built." />
+        <SectionHeading index="04" eyebrow="Featured projects" title="Real products, honestly presented." intro="Live links where they are published, public source where the code is open, and a clear, honest status on every project." />
         <div className="space-y-8">
           {projects.map((p, i) => (<ProjectPanel key={p.slug} project={p} flip={i % 2 === 1} />))}
         </div>

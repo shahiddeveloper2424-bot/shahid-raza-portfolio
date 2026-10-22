@@ -43,7 +43,7 @@ export default function ProjectCase({ slug }) {
     sections.push({ id: 'outcomes', title: 'Outcomes' }, { id: 'technology', title: 'Technology' })
   }
   const num = (id) => sections.findIndex((s) => s.id === id) + 1
-  const live = project.status.startsWith('Live')
+  const live = ['Live preview', 'Live', 'Live Project'].includes(project.status)
 
   return (
     <article>
@@ -68,6 +68,9 @@ export default function ProjectCase({ slug }) {
                   {project.year && <>Year — <span className="text-soft">{project.year}</span></>}
                 </p>
               )}
+              {!project.links.live && project.status.includes('Coming Soon') && (
+                <p className="mt-7"><span className="rounded-full border border-accent/50 px-4 py-2 font-mono text-[11px] uppercase tracking-widest2 text-cyan">Live Demo Coming Soon</span></p>
+              )}
               <div className="mt-8 flex flex-wrap gap-4">
                 {project.links.live && (
                   <a href={project.links.live} target="_blank" rel="noreferrer" className="btn-primary rounded-lg px-6 py-3 font-display text-sm font-semibold text-white">{project.links.liveLabel || 'View live project'} ↗</a>
@@ -86,7 +89,7 @@ export default function ProjectCase({ slug }) {
               ['Status', project.status],
               ['Project type', project.subtitle],
               ['Technology', project.stack.length ? project.stack.slice(0, 4).join(' · ') : 'To be confirmed'],
-              ['Live demo', project.links.live ? 'Available — link above' : 'Not published yet'],
+              ['Live demo', project.links.live ? 'Available — link above' : (project.status.includes('Coming Soon') ? 'Coming soon' : 'Not published yet')],
             ].map(([k, v]) => (
               <div key={k} className="bg-card p-5">
                 <dt className="folio text-muted">{k}</dt>

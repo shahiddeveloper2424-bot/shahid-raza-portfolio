@@ -20,8 +20,8 @@ export const projects = [
     index: '01',
     title: 'PRINTORA',
     subtitle: 'Print-on-Demand E-Commerce Platform',
-    status: 'Live preview',
-    statusNote: 'The storefront is live on Vercel (link below). Payment-method work and final launch steps are intentionally deferred by the owner.',
+    status: 'Live Demo Coming Soon',
+    statusNote: 'The storefront is built and running as a private preview; its public link is intentionally not published yet. A live demo will be linked here as soon as the owner releases it. Payment-method work and final launch steps are intentionally deferred by the owner.',
     year: '2026',
     role: 'Design & full-stack development',
     stack: ['React', 'Vite', 'Tailwind CSS', 'Node.js', 'Express', 'MongoDB', 'Mongoose'],
@@ -53,12 +53,14 @@ export const projects = [
       'Currency pipeline verified in production — real rates with timestamps, PKR as base accounting currency',
     ],
     links: {
-      live: 'https://printora-crfs.vercel.app',
-      liveLabel: 'View live project',
+      live: null, // Owner instruction: do not publish the PRINTORA URL yet.
+      liveLabel: null,
       github: null,
       githubNote: 'Source code lives in a private repository.',
     },
-    screenshot: null, // No real screenshot supplied — labelled placeholder is rendered.
+    screenshot: '/images/printora-project-preview.webp', // Representative preview built from real PRINTORA branding & catalogue data (a genuine screenshot was not obtainable — the store's product photos currently unavailable upstream).
+    screenshotNote: 'Representative preview — real PRINTORA branding & product data',
+    screenshotSize: [1400, 1050],
     detailsPending: false,
   },
   {
