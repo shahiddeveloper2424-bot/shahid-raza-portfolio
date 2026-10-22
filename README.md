@@ -4,6 +4,10 @@ Personal portfolio of **Shahid Raza**, a software developer specializing in mode
 
 Live repository: https://github.com/shahiddeveloper2424-bot/shahid-raza-portfolio
 
+## Design
+
+Art-directed editorial studio design: fluid Fraunces display type with italic accents, folio (mono) labelling, asymmetric project-led hero, full-width featured project, ghost-numeral project rows, a dark ink services section, five-step process, drop-cap case studies and a giant-wordmark footer. Warm ivory / deep ink / clay palette. Fail-safe scroll reveal (content is visible even if IntersectionObserver fails) and full `prefers-reduced-motion` support.
+
 ## What's inside
 
 - **Home** — hero, selected work, about, skills, services, process and contact sections

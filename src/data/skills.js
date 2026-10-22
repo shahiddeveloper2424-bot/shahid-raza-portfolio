@@ -1,12 +1,12 @@
 /**
- * SKILLS — only technologies evidenced by the owner's shipped project work
- * (PRINTORA: MERN stack on Vercel/GitHub) and this portfolio itself.
- * No percentages, no invented years of experience.
+ * SKILLS & SERVICES — only technologies evidenced by the owner's shipped
+ * project work (PRINTORA: MERN stack on Vercel/GitHub) and this portfolio.
+ * No percentages, no invented years of experience, no unsupported promises.
  */
 export const skillGroups = [
   {
     title: 'Frontend',
-    note: 'Interfaces that stay fast and readable.',
+    note: 'Interfaces that stay fast, readable and responsive.',
     skills: ['React', 'JavaScript (ES6+)', 'Vite', 'Tailwind CSS', 'HTML5', 'CSS3', 'Responsive design'],
   },
   {
@@ -24,29 +24,34 @@ export const skillGroups = [
 export const services = [
   {
     index: '01',
-    title: 'Web Applications',
-    text: 'Modern, responsive web applications in React and JavaScript — from a focused landing experience to a full product with accounts, roles and workflows.',
+    title: 'Website Development',
+    value: 'A website a client can trust in the first ten seconds.',
+    text: 'Professional business websites that present your work clearly, load fast on real phones, and turn visitors into enquiries — designed first, then built to be easy to update.',
   },
   {
     index: '02',
     title: 'Custom Business Software',
-    text: 'Internal tools and management systems shaped around how a business actually runs — dashboards, records, reporting and day-to-day operations.',
+    value: 'Software shaped around how your business actually runs.',
+    text: 'Management systems, dashboards and internal tools — like a school management system — that replace scattered spreadsheets and manual records with one reliable place to work.',
   },
   {
     index: '03',
-    title: 'E-Commerce Solutions',
-    text: 'Storefronts and checkout flows with honest payment states, multi-currency display and a complete admin for products, orders and fulfillment.',
+    title: 'E-Commerce Development',
+    value: 'A store you can actually operate, not just launch.',
+    text: 'Storefronts with a complete admin for products, orders and fulfillment, honest payment states, and multi-currency display — built on the same foundation as PRINTORA.',
   },
   {
     index: '04',
-    title: 'Digital Products',
-    text: 'Standalone digital tools and products — designed, built and documented so they can be deployed on a free hosting tier and maintained easily.',
+    title: 'Web Applications & Tools',
+    value: 'Focused tools that do one job properly.',
+    text: 'Browser-based applications and utilities — like PDF Toolkit Pro — designed around a single clear job, deployable on a free hosting tier and simple to maintain.',
   },
 ]
 
 export const process = [
-  { step: 'Listen', text: 'Understand the problem, the users and what “done” honestly means before any code.' },
-  { step: 'Design', text: 'A reviewed design first — layout, typography and flows agreed before implementation.' },
-  { step: 'Build', text: 'Phase-by-phase implementation with working features preserved and changes kept targeted.' },
-  { step: 'Verify', text: 'Builds, tests and real end-to-end checks. Nothing is called “live” until it has actually been verified.' },
+  { step: 'Discovery', text: 'We define the problem, the users and what “done” honestly means — scope before code.' },
+  { step: 'Planning', text: 'Design and structure are reviewed and agreed, so there are no surprises mid-build.' },
+  { step: 'Development', text: 'Built phase by phase in JavaScript and React, with working features kept working.' },
+  { step: 'Testing', text: 'Builds, tests and real end-to-end checks. Nothing is called “live” until it is verified.' },
+  { step: 'Delivery', text: 'Deployed, documented and handed over with a clear record of what is done and what remains.' },
 ]
