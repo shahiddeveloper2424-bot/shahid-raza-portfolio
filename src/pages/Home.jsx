@@ -4,6 +4,8 @@ import SectionHeading from '../components/SectionHeading.jsx'
 import ProjectVisual from '../components/ProjectVisual.jsx'
 import Portrait from '../components/Portrait.jsx'
 import { site } from '../data/site.js'
+import { mailtoHref, whatsappHref, whatsappDisplay } from '../lib/contact.js'
+import { MailIcon, WhatsAppIcon } from '../components/ContactIcons.jsx'
 import { projects } from '../data/projects.js'
 import { skillGroups, services, process } from '../data/skills.js'
 import { useReveal } from '../hooks/useReveal.js'
@@ -69,6 +71,11 @@ function Hero() {
           <div className="reveal mt-9 flex flex-wrap gap-4">
             <Link href="/#contact" className="btn-primary rounded-lg px-7 py-3.5 font-display font-semibold text-white">Start a project →</Link>
             <Link href="/#work" className="rounded-lg border border-line px-7 py-3.5 font-display font-semibold text-ink transition-colors hover:border-accent hover:text-cyan">Explore my work</Link>
+            {whatsappHref() && (
+              <a href={whatsappHref()} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2.5 rounded-lg border border-line px-7 py-3.5 font-display font-semibold text-ink transition-colors hover:border-accent hover:text-cyan">
+                <WhatsAppIcon className="h-5 w-5 text-cyan" /> WhatsApp
+              </a>
+            )}
           </div>
           <ul className="reveal mt-9 flex flex-wrap gap-2" aria-label="Core technologies">
             {TECH_CHIPS.map((t) => (
@@ -355,6 +362,11 @@ function Contact() {
             {emailReady ? (
               <ContactCard label="Email — direct">
                 <a href={`mailto:${site.contact.email}`} className="link-line break-all font-display text-xl font-semibold text-ink">{site.contact.email}</a>
+                <div className="mt-4">
+                  <a href={mailtoHref()} className="btn-primary inline-flex items-center gap-2.5 rounded-lg px-5 py-3 font-display text-sm font-semibold text-white">
+                    <MailIcon className="h-[18px] w-[18px]" /> Email Me
+                  </a>
+                </div>
               </ContactCard>
             ) : (
               <ContactCard label="Email" placeholder>
@@ -366,8 +378,13 @@ function Contact() {
               <p className="mt-1.5 text-soft">Source code and project history, publicly verifiable.</p>
             </ContactCard>
             {site.contact.whatsapp ? (
-              <ContactCard label="WhatsApp">
-                <p className="font-display text-xl font-semibold text-ink">{site.contact.whatsapp}</p>
+              <ContactCard label="WhatsApp — direct">
+                <p className="font-display text-xl font-semibold text-ink">{whatsappDisplay()}</p>
+                <div className="mt-4">
+                  <a href={whatsappHref()} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2.5 rounded-lg border border-line px-5 py-3 font-display text-sm font-semibold text-ink transition-colors hover:border-accent hover:text-cyan">
+                    <WhatsAppIcon className="h-[18px] w-[18px] text-cyan" /> Contact on WhatsApp
+                  </a>
+                </div>
               </ContactCard>
             ) : (
               <ContactCard label="WhatsApp" placeholder>

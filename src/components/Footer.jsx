@@ -1,6 +1,8 @@
 import React from 'react'
 import { Link } from '../lib/router.jsx'
 import { site, navLinks } from '../data/site.js'
+import { mailtoHref, whatsappHref } from '../lib/contact.js'
+import { MailIcon, WhatsAppIcon, GitHubIcon } from './ContactIcons.jsx'
 import { projects } from '../data/projects.js'
 
 export default function Footer() {
@@ -16,6 +18,21 @@ export default function Footer() {
             <a href={site.socials.github} target="_blank" rel="noreferrer" className="link-line mt-1 inline-block font-medium text-cyan">
               {site.socials.githubHandle} ↗
             </a>
+            <div className="mt-6 flex gap-3">
+              <a href={site.socials.github} target="_blank" rel="noreferrer" aria-label="Shahid Raza on GitHub" className="flex h-10 w-10 items-center justify-center rounded-lg border border-line text-soft transition-colors hover:border-accent hover:text-cyan">
+                <GitHubIcon className="h-5 w-5" />
+              </a>
+              {mailtoHref() && (
+                <a href={mailtoHref()} aria-label="Email Shahid Raza" className="flex h-10 w-10 items-center justify-center rounded-lg border border-line text-soft transition-colors hover:border-accent hover:text-cyan">
+                  <MailIcon className="h-5 w-5" />
+                </a>
+              )}
+              {whatsappHref() && (
+                <a href={whatsappHref()} target="_blank" rel="noopener noreferrer" aria-label="Contact Shahid Raza on WhatsApp" className="flex h-10 w-10 items-center justify-center rounded-lg border border-line text-soft transition-colors hover:border-accent hover:text-cyan">
+                  <WhatsAppIcon className="h-5 w-5" />
+                </a>
+              )}
+            </div>
           </div>
           <nav aria-label="Footer">
             <p className="folio text-muted">Explore</p>
