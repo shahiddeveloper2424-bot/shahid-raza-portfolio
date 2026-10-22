@@ -58,9 +58,9 @@ export const projects = [
       github: null,
       githubNote: 'Source code lives in a private repository.',
     },
-    screenshot: '/images/printora-project-preview.webp', // Representative preview built from real PRINTORA branding & catalogue data (a genuine screenshot was not obtainable — the store's product photos currently unavailable upstream).
-    screenshotNote: 'Representative preview — real PRINTORA branding & product data',
-    screenshotSize: [1400, 1050],
+    screenshot: '/images/printora-product-showcase.webp', // Product showcase artwork composed for this portfolio from AI-generated product photography in PRINTORA's branding; product names/prices are the real catalogue's.
+    screenshotNote: 'Product showcase artwork — PRINTORA branding & real product range',
+    screenshotSize: [1600, 1440],
     detailsPending: false,
   },
   {
