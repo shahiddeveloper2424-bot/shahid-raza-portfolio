@@ -2,145 +2,159 @@
 @tailwind components;
 @tailwind utilities;
 
-/* ————— Design tokens ————— */
+/*
+ * SHAHID RAZA — COLORFUL PREMIUM SYSTEM
+ * Tokens: cobalt #635BFF (primary / PRINTORA) · coral #FF6B6B (EduCore) ·
+ * acid lime #D9F75D (PDF Toolkit / highlights) · deep ink #171717 ·
+ * soft white #F8F7F2. Loud color sits on disciplined neutrals; every
+ * decorative device (hard shadows, dot grids, marquee) is structural.
+ */
+
 :root {
-  --paper: #faf6ef;
-  --parchment: #f2ecdf;
-  --ink: #1b1611;
-  --ink-2: #241e17;
-  --clay: #a34a24;
-  --clay-dark: #843a1b;
-  --line: #ddd1bd;
-  --gold: #b98a2f;
+  --paper: #F8F7F2;
+  --ink: #171717;
+  --cobalt: #635BFF;
+  --coral: #FF6B6B;
+  --lime: #D9F75D;
 }
 
 html { scroll-behavior: smooth; }
-@media (prefers-reduced-motion: reduce) {
-  html { scroll-behavior: auto; }
-  *, *::before, *::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-  }
-}
 
 body {
-  background: var(--paper);
-  color: var(--ink);
-  font-family: Inter, system-ui, -apple-system, 'Segoe UI', sans-serif;
-  -webkit-font-smoothing: antialiased;
+  @apply bg-paper font-sans text-ink antialiased;
   text-rendering: optimizeLegibility;
-  overflow-x: hidden;
 }
 
-::selection { background: var(--clay); color: var(--paper) }
+::selection { background: var(--lime); color: var(--ink); }
 
 :focus-visible {
-  outline: 2px solid var(--clay);
+  outline: 3px solid var(--cobalt);
   outline-offset: 3px;
   border-radius: 2px;
 }
 
-/* ————— Type scale (editorial, fluid) ————— */
+/* ——— Type scale (Space Grotesk display) ——— */
 .display-hero {
-  font-family: Fraunces, Georgia, serif;
-  font-size: clamp(2.9rem, 7.2vw, 6.2rem);
-  line-height: 0.98;
-  letter-spacing: -0.015em;
-  font-weight: 500;
+  font-family: theme('fontFamily.display');
+  font-weight: 700;
+  letter-spacing: -0.025em;
+  line-height: 1.0;
+  font-size: clamp(2.75rem, 6.2vw, 5.1rem);
 }
 .display-1 {
-  font-family: Fraunces, Georgia, serif;
-  font-size: clamp(2.4rem, 5vw, 4.3rem);
-  line-height: 1.02;
-  letter-spacing: -0.012em;
-  font-weight: 500;
+  font-family: theme('fontFamily.display');
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.05;
+  font-size: clamp(2.1rem, 4.2vw, 3.4rem);
 }
 .display-2 {
-  font-family: Fraunces, Georgia, serif;
-  font-size: clamp(1.9rem, 3.4vw, 2.9rem);
-  line-height: 1.08;
-  font-weight: 500;
+  font-family: theme('fontFamily.display');
+  font-weight: 600;
+  letter-spacing: -0.015em;
+  line-height: 1.12;
+  font-size: clamp(1.55rem, 2.6vw, 2.15rem);
 }
-.lede { font-size: clamp(1.05rem, 1.4vw, 1.25rem); line-height: 1.65; }
+.lede { font-size: clamp(1.06rem, 1.5vw, 1.28rem); line-height: 1.65; }
 
-/* Folio / eyebrow label */
 .folio {
-  font-family: 'IBM Plex Mono', ui-monospace, monospace;
-  font-size: 0.6875rem;
+  font-family: theme('fontFamily.mono');
+  font-size: 0.68rem;
   letter-spacing: 0.22em;
   text-transform: uppercase;
+  font-weight: 500;
 }
 
-/* Ghost index numeral behind project rows */
+/* Big outline numerals behind project rows */
 .ghost-num {
-  font-family: Fraunces, Georgia, serif;
-  font-size: clamp(5rem, 12vw, 10rem);
+  font-family: theme('fontFamily.display');
+  font-weight: 700;
+  font-size: clamp(6rem, 14vw, 11rem);
   line-height: 0.8;
   color: transparent;
-  -webkit-text-stroke: 1px rgba(27, 22, 17, 0.22);
+  -webkit-text-stroke: 2px rgba(23, 23, 23, 0.14);
   user-select: none;
 }
-.ghost-num-light {
-  -webkit-text-stroke: 1px rgba(250, 246, 239, 0.25);
-}
 
-/* Drop cap for case-study / about introductions */
+/* Drop cap for case-study intros */
 .dropcap::first-letter {
-  font-family: Fraunces, Georgia, serif;
-  font-weight: 600;
-  font-size: 3.4em;
+  font-family: theme('fontFamily.display');
+  font-weight: 700;
+  color: var(--cobalt);
   float: left;
+  font-size: 3.1em;
   line-height: 0.82;
-  padding-right: 0.12em;
+  padding-right: 0.14em;
   padding-top: 0.05em;
-  color: var(--clay);
 }
 
-/* ————— Reveal (fail-safe: content visible by default) ————— */
-.reveal-init { opacity: 0; transform: translateY(16px); }
-.reveal-in {
-  opacity: 1; transform: none;
-  transition: opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1), transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+/* ——— Signature hard offset shadows (no blur, no glow) ——— */
+.hard { box-shadow: 10px 10px 0 var(--ink); }
+.hard-sm { box-shadow: 6px 6px 0 var(--ink); }
+.hard-cobalt { box-shadow: 10px 10px 0 var(--cobalt); }
+.hard-lime { box-shadow: 10px 10px 0 var(--lime); }
+.hard-coral { box-shadow: 10px 10px 0 var(--coral); }
+.hard-white { box-shadow: 10px 10px 0 rgba(248, 247, 242, 0.9); }
+
+/* Dot-grid texture for color fields */
+.dotgrid {
+  background-image: radial-gradient(rgba(255, 255, 255, 0.16) 1.5px, transparent 1.5px);
+  background-size: 22px 22px;
 }
-@media (prefers-reduced-motion: reduce) {
-  .reveal-init { opacity: 1; transform: none; }
-  .reveal-in { transition: none; }
+.dotgrid-ink {
+  background-image: radial-gradient(rgba(23, 23, 23, 0.10) 1.5px, transparent 1.5px);
+  background-size: 22px 22px;
 }
 
-/* ————— Links & interactions ————— */
+/* ——— Marquee service strip ——— */
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+.marquee-track {
+  display: flex;
+  width: max-content;
+  animation: marquee 36s linear infinite;
+}
+.marquee:hover .marquee-track { animation-play-state: paused; }
+
+/* ——— Interactions ——— */
 .link-line {
   background-image: linear-gradient(currentColor, currentColor);
-  background-size: 0% 1px;
+  background-size: 0% 2px;
   background-repeat: no-repeat;
   background-position: 0 100%;
-  transition: background-size 0.35s ease;
+  transition: background-size 0.35s ease, color 0.2s ease;
+  padding-bottom: 3px;
 }
-.link-line:hover, .link-line:focus-visible { background-size: 100% 1px; }
+.link-line:hover, .link-line:focus-visible { background-size: 100% 2px; }
 
-.arrow-link .arr { display: inline-block; transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1); }
-.arrow-link:hover .arr, .arrow-link:focus-visible .arr { transform: translateX(5px); }
+.arrow-link .arr { display: inline-block; transition: transform 0.25s ease; }
+.arrow-link:hover .arr { transform: translateX(4px); }
 
-/* Project visual: gentle inner zoom on hover (desktop pointers only) */
-@media (hover: hover) and (prefers-reduced-motion: no-preference) {
-  .visual-zoom .visual-inner { transition: transform 1.2s cubic-bezier(0.22, 1, 0.36, 1); }
-  .visual-zoom:hover .visual-inner { transform: scale(1.025); }
+.visual-zoom { overflow: hidden; }
+.visual-zoom .visual-inner { transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1); }
+.visual-zoom:hover .visual-inner { transform: scale(1.025); }
+
+.lift { transition: transform 0.3s ease, box-shadow 0.3s ease; }
+.lift:hover { transform: translate(-3px, -3px); }
+
+.service-row { transition: background-color 0.25s ease, padding-left 0.25s ease; }
+.service-row:hover { background-color: rgba(255, 255, 255, 0.045); }
+
+/* ——— Fail-safe reveal ——— */
+.reveal { opacity: 1; transform: none; }
+.js .reveal {
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity 0.65s ease, transform 0.65s cubic-bezier(0.22, 1, 0.36, 1);
 }
+.js .reveal.in { opacity: 1; transform: none; }
 
-/* Service rows on ink */
-.service-row { transition: background-color 0.35s ease, padding-left 0.35s ease; }
-@media (hover: hover) and (prefers-reduced-motion: no-preference) {
-  .service-row:hover { background-color: rgba(250, 246, 239, 0.04); padding-left: 0.75rem; }
-}
-
-/* Fine ruled texture for visual panels */
-.rule-lines {
-  background-image: repeating-linear-gradient(
-    to bottom, transparent 0, transparent 27px, rgba(27, 22, 17, 0.07) 27px, rgba(27, 22, 17, 0.07) 28px
-  );
-}
-.rule-lines-light {
-  background-image: repeating-linear-gradient(
-    to bottom, transparent 0, transparent 27px, rgba(250, 246, 239, 0.06) 27px, rgba(250, 246, 239, 0.06) 28px
-  );
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .js .reveal { opacity: 1; transform: none; transition: none; }
+  .visual-zoom .visual-inner, .lift, .service-row { transition: none; }
+  .marquee-track { animation: none; }
+  *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
 }

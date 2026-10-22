@@ -4,21 +4,26 @@ export default {
   theme: {
     extend: {
       colors: {
-        paper: '#FAF6EF',
-        parchment: '#F2ECDF',
-        sand: '#E7DCC8',
-        line: '#DDD1BD',
-        ink: '#1B1611',
-        ink2: '#241E17',
-        soft: '#4A4237',
-        muted: '#776C5B',
-        clay: '#A34A24',
-        claydark: '#843A1B',
-        moss: '#5C6650',
-        gold: '#B98A2F',
+        // ——— Colorful premium system (documented in README > Design) ———
+        paper: '#F8F7F2',      // soft white — light base
+        ink: '#171717',        // deep ink — text + dark sections
+        ink2: '#212121',
+        soft: '#45453F',       // body text on light
+        muted: '#6F6F66',      // secondary text on light
+        line: '#E2E0D5',       // borders on light
+        cobalt: '#635BFF',     // primary brand — PRINTORA
+        cobaltdeep: '#4A43D6', // cobalt hover/depth
+        cobaltlt: '#A5A1FF',   // cobalt tint for dark backgrounds
+        ice: '#ECEAFF',        // cobalt tint surface
+        coral: '#FF6B6B',      // secondary — EduCore
+        coraldeep: '#D94343',  // coral for text on light
+        blush: '#FFEDED',      // coral tint surface
+        lime: '#D9F75D',       // highlight — PDF Toolkit Pro
+        limedeep: '#7C9A16',   // lime for text on light
+        limetint: '#F6FCD9',   // lime tint surface
       },
       fontFamily: {
-        display: ['Fraunces', 'Georgia', 'serif'],
+        display: ['"Space Grotesk"', 'Inter', 'system-ui', 'sans-serif'],
         sans: ['Inter', 'system-ui', '-apple-system', 'Segoe UI', 'sans-serif'],
         mono: ['"IBM Plex Mono"', 'ui-monospace', 'SFMono-Regular', 'monospace'],
       },

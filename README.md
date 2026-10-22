@@ -6,7 +6,17 @@ Live repository: https://github.com/shahiddeveloper2424-bot/shahid-raza-portfoli
 
 ## Design
 
-Art-directed editorial studio design: fluid Fraunces display type with italic accents, folio (mono) labelling, asymmetric project-led hero, full-width featured project, ghost-numeral project rows, a dark ink services section, five-step process, drop-cap case studies and a giant-wordmark footer. Warm ivory / deep ink / clay palette. Fail-safe scroll reveal (content is visible even if IntersectionObserver fails) and full `prefers-reduced-motion` support.
+Colorful premium identity (v3). Palette — documented tokens (tailwind.config.js):
+
+| Token | Hex | Role |
+| --- | --- | --- |
+| cobalt | #635BFF | Primary brand · PRINTORA |
+| coral | #FF6B6B | Secondary accent · EduCore |
+| lime | #D9F75D | Highlight · PDF Toolkit Pro |
+| ink | #171717 | Text + dark sections |
+| paper | #F8F7F2 | Soft-white light base |
+
+Display type is Space Grotesk; body Inter; labels IBM Plex Mono. Loud color sits on disciplined neutrals: a cobalt hero and contact bookend, one colour world per project (cobalt / coral / lime panels), an ink services section with rotating accent numerals, and a lime marquee strip. Signature devices are structural, not decorative noise: hard offset shadows, dot-grid textures on colour fields, fail-safe scroll reveal, and full `prefers-reduced-motion` support. No gradients-as-decoration, no glass cards, no fake screenshots — project visuals are labelled design compositions until the owner supplies real screenshots.
 
 ## What's inside
 
