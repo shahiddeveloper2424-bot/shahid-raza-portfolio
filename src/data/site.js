@@ -10,6 +10,13 @@ export const site = {
   name: 'Shahid Raza',
   firstName: 'Shahid',
   role: 'Software Developer',
+  positioning: 'Software Developer · Web Application Developer · MERN Stack Developer',
+  // PORTRAIT PHOTO — the owner's real photo belongs at this exact path:
+  //   public/images/shahid-raza.jpg
+  // The file does NOT exist yet. Until the owner adds it, the Portrait
+  // component renders a clearly labelled designed placeholder instead.
+  // Never substitute a stock photo or a fabricated face.
+  photo: '/images/shahid-raza.jpg',
   tagline: 'I build considered software for the web.',
   // One honest sentence, taken from the owner's own project description.
   intro:
@@ -41,9 +48,11 @@ export const site = {
 }
 
 export const navLinks = [
-  { label: 'Work', href: '/#work' },
+  { label: 'Home', href: '/' },
   { label: 'About', href: '/#about' },
   { label: 'Skills', href: '/#skills' },
+  { label: 'Projects', href: '/#work' },
   { label: 'Services', href: '/#services' },
+  { label: 'Process', href: '/#process' },
   { label: 'Contact', href: '/#contact' },
 ]

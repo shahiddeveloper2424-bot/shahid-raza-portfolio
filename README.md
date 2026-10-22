@@ -4,6 +4,21 @@ Personal portfolio of **Shahid Raza**, a software developer specializing in mode
 
 Live repository: https://github.com/shahiddeveloper2424-bot/shahid-raza-portfolio
 
+## Owner content — what to supply
+
+Everything personal is configured in ONE place: `src/data/site.js`. Items still missing (the site shows honest placeholders for them):
+
+1. **Your real photo** → save it as `public/images/shahid-raza.jpg` (see `public/images/README.txt`). It appears in the hero and About automatically.
+2. **Verified email** → `site.contact.email` (activates the contact cards AND the enquiry form).
+3. **WhatsApp number** → `site.contact.whatsapp` (international format, digits only).
+4. **LinkedIn URL** → `site.socials.linkedin`.
+5. **Location** → `site.location` (hero "Based" field).
+6. **Education / experience** → `site.education`, `site.experience` (About section).
+7. **EduCore details** → scope, stack, links in `src/data/projects.js` (its case study is an honest placeholder until then).
+8. **Real project screenshots** → set `screenshot` per project in `src/data/projects.js`; labelled design compositions are shown until then.
+
+Verified project links (re-checked October 2026): PRINTORA storefront https://printora-crfs.vercel.app · PDF Toolkit Pro https://pdf-toolkit-pro.vercel.app (source: https://github.com/shahiddeveloper2424-bot/pdf-toolkit-pro). Note: `printora-alpha.vercel.app` is the PRINTORA backend API, not the storefront — do not link it as the live site.
+
 ## Design
 
 Colorful premium identity (v3). Palette — documented tokens (tailwind.config.js):

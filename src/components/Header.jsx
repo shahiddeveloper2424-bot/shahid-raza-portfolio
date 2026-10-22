@@ -2,9 +2,24 @@ import React, { useEffect, useState } from 'react'
 import { Link, usePath } from '../lib/router.jsx'
 import { site, navLinks } from '../data/site.js'
 
+const SECTION_IDS = ['about', 'skills', 'work', 'services', 'process', 'contact']
+
 export default function Header() {
   const [open, setOpen] = useState(false)
+  const [active, setActive] = useState('')
   const pathname = usePath()
+
+  /* Scrollspy: highlight the nav link for the section in view (home only). */
+  useEffect(() => {
+    if (pathname !== '/') { setActive(''); return undefined }
+    if (typeof IntersectionObserver === 'undefined') return undefined
+    const obs = new IntersectionObserver(
+      (entries) => { entries.forEach((e) => { if (e.isIntersecting) setActive(e.target.id) }) },
+      { rootMargin: '-35% 0px -55% 0px' },
+    )
+    SECTION_IDS.forEach((id) => { const el = document.getElementById(id); if (el) obs.observe(el) })
+    return () => obs.disconnect()
+  }, [pathname])
 
   useEffect(() => { setOpen(false) }, [pathname])
   useEffect(() => {
@@ -26,14 +41,17 @@ export default function Header() {
             </span>
           </Link>
 
-          <nav className="hidden items-center gap-8 lg:flex" aria-label="Primary">
-            {navLinks.map((l) => (
-              <Link key={l.href} href={l.href} className="link-line text-[0.95rem] font-semibold text-ink hover:text-cobalt">
-                {l.label}
-              </Link>
-            ))}
+          <nav className="hidden items-center gap-6 xl:gap-7 lg:flex" aria-label="Primary">
+            {navLinks.map((l) => {
+              const isActive = active && l.href === `/#${active}`
+              return (
+                <Link key={l.href} href={l.href} className={`link-line text-[0.92rem] font-semibold hover:text-cobalt ${isActive ? 'text-cobalt underline decoration-cobalt decoration-2 underline-offset-4' : 'text-ink'}`}>
+                  {l.label}
+                </Link>
+              )
+            })}
             <Link href="/#contact" className="hard-sm bg-lime px-5 py-2.5 font-display text-sm font-semibold text-ink transition-colors hover:bg-cobalt hover:text-white">
-              Start a project
+              Discuss your project
             </Link>
           </nav>
 

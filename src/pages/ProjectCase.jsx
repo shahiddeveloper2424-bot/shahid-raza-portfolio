@@ -26,6 +26,17 @@ function CaseSection({ index, title, accent, children, narrow = false }) {
 export default function ProjectCase({ slug }) {
   const project = getProject(slug)
   useDocumentTitle(project ? `${project.title} — ${project.subtitle} | Shahid Raza` : 'Project not found | Shahid Raza')
+
+  /* Per-page meta description (restored on unmount). */
+  React.useEffect(() => {
+    if (!project) return undefined
+    const tag = document.querySelector('meta[name="description"]')
+    if (!tag) return undefined
+    const original = tag.getAttribute('content')
+    tag.setAttribute('content', `${project.title} (${project.subtitle}) by Shahid Raza — ${project.summary}`)
+    return () => { tag.setAttribute('content', original) }
+  }, [project])
+
   if (!project) return null
 
   const w = WORLDS[slug] || WORLDS.printora
@@ -93,47 +104,74 @@ export default function ProjectCase({ slug }) {
             </div>
           ) : (
             <div className="mt-4">
-              <CaseSection index="01" title="The problem" accent={w.num} narrow>
-                <p className="lede text-soft">{project.challenge}</p>
-              </CaseSection>
+              {(() => {
+                let n = 0
+                const num = () => String(++n).padStart(2, '0')
+                return (
+                  <>
+                    <CaseSection index={num()} title="The problem" accent={w.num} narrow>
+                      <p className="lede text-soft">{project.challenge}</p>
+                    </CaseSection>
 
-              <CaseSection index="02" title="The approach" accent={w.num} narrow>
-                <p className="lede text-soft">{project.approach}</p>
-              </CaseSection>
+                    {project.users && (
+                      <CaseSection index={num()} title="Who it’s for" accent={w.num} narrow>
+                        <p className="lede text-soft">{project.users}</p>
+                      </CaseSection>
+                    )}
 
-              <CaseSection index="03" title="What was built" accent={w.num}>
-                <ul className="grid gap-x-10 gap-y-5 md:grid-cols-2">
-                  {project.features.map((f, i) => (
-                    <li key={f} className="flex gap-4 leading-relaxed text-soft">
-                      <span className={`font-display text-sm font-bold ${w.num}`} aria-hidden="true">{String(i + 1).padStart(2, '0')}</span>
-                      <span>{f}</span>
-                    </li>
-                  ))}
-                </ul>
-              </CaseSection>
+                    <CaseSection index={num()} title="The approach" accent={w.num} narrow>
+                      <p className="lede text-soft">{project.approach}</p>
+                    </CaseSection>
 
-              <CaseSection index="04" title="Verified outcomes" accent={w.num}>
-                <div className={`border-2 border-ink p-7 ${w.tint}`}>
-                  <ul className="space-y-3.5">
-                    {project.outcomes.map((o) => (
-                      <li key={o} className="flex gap-3.5 leading-relaxed text-soft">
-                        <span aria-hidden="true" className={`font-bold ${w.num}`}>✓</span><span>{o}</span>
-                      </li>
-                    ))}
-                  </ul>
-                  <p className="mt-6 border-t border-ink/15 pt-4 text-sm leading-relaxed text-muted">{project.statusNote}</p>
-                </div>
-              </CaseSection>
+                    <CaseSection index={num()} title="What was built" accent={w.num}>
+                      <ul className="grid gap-x-10 gap-y-5 md:grid-cols-2">
+                        {project.features.map((f, i) => (
+                          <li key={f} className="flex gap-4 leading-relaxed text-soft">
+                            <span className={`font-display text-sm font-bold ${w.num}`} aria-hidden="true">{String(i + 1).padStart(2, '0')}</span>
+                            <span>{f}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </CaseSection>
 
-              {project.stack.length > 0 && (
-                <CaseSection index="05" title="Technology" accent={w.num}>
-                  <ul className="flex flex-wrap gap-2.5">
-                    {project.stack.map((s) => (
-                      <li key={s} className="border-2 border-ink bg-white px-4 py-2 font-mono text-xs uppercase tracking-wide transition-colors hover:bg-lime">{s}</li>
-                    ))}
-                  </ul>
-                </CaseSection>
-              )}
+                    {project.challenges && project.challenges.length > 0 && (
+                      <CaseSection index={num()} title="Challenges & solutions" accent={w.num}>
+                        <div className="grid gap-6 md:grid-cols-3">
+                          {project.challenges.map((ch) => (
+                            <div key={ch.title} className={`border-2 border-ink p-6 ${w.tint}`}>
+                              <h3 className="font-display text-lg font-semibold leading-snug">{ch.title}</h3>
+                              <p className="mt-2.5 text-sm leading-relaxed text-soft">{ch.text}</p>
+                            </div>
+                          ))}
+                        </div>
+                      </CaseSection>
+                    )}
+
+                    <CaseSection index={num()} title="Verified outcomes" accent={w.num}>
+                      <div className={`border-2 border-ink p-7 ${w.tint}`}>
+                        <ul className="space-y-3.5">
+                          {project.outcomes.map((o) => (
+                            <li key={o} className="flex gap-3.5 leading-relaxed text-soft">
+                              <span aria-hidden="true" className={`font-bold ${w.num}`}>✓</span><span>{o}</span>
+                            </li>
+                          ))}
+                        </ul>
+                        <p className="mt-6 border-t border-ink/15 pt-4 text-sm leading-relaxed text-muted">{project.statusNote}</p>
+                      </div>
+                    </CaseSection>
+
+                    {project.stack.length > 0 && (
+                      <CaseSection index={num()} title="Technology" accent={w.num}>
+                        <ul className="flex flex-wrap gap-2.5">
+                          {project.stack.map((s) => (
+                            <li key={s} className="border-2 border-ink bg-white px-4 py-2 font-mono text-xs uppercase tracking-wide transition-colors hover:bg-lime">{s}</li>
+                          ))}
+                        </ul>
+                      </CaseSection>
+                    )}
+                  </>
+                )
+              })()}
             </div>
           )}
         </div>
