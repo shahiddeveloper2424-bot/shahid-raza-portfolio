@@ -60,10 +60,26 @@ export const site = {
   // in the AI Personal Agent case study and is not listed as a skill here.
   aiAssisted: {
     text:
-      'I use AI-assisted development tools to accelerate the process of building web applications, exploring implementation approaches, debugging issues, improving user interfaces, and understanding unfamiliar code. I combine AI-generated suggestions with manual review, testing, and verification to improve reliability and maintain control over the final implementation.',
+      'I use AI tools as a practical development assistant to write and improve code, troubleshoot technical issues, explore solutions, and accelerate software development. When project requirements are complex or deadlines are tight, I use AI assistance to work more efficiently, reduce repetitive tasks, and make progress on larger projects without compromising code quality.',
+    technologies:
+      'JavaScript, React, Vite, Tailwind CSS, Node.js, Express.js, MongoDB, REST APIs, HTML, and CSS. I also have basic Python knowledge.',
+    uses: [
+      { label: 'Code Development', text: 'Assist with writing React components, JavaScript functionality, API endpoints, and database operations.' },
+      { label: 'Debugging & Problem-Solving', text: 'Investigate errors, understand root causes, explore fixes, and test solutions.' },
+      { label: 'Full-Stack Development', text: 'Accelerate frontend and backend implementation, API integration, authentication workflows, and database connectivity.' },
+      { label: 'UI/UX Improvement', text: 'Refine responsive layouts, component styling, navigation, and user experience.' },
+      { label: 'Large Projects & Tight Deadlines', text: 'Break complex requirements into manageable tasks, speed up implementation, and make development more efficient.' },
+      { label: 'Testing & Code Quality', text: 'Help identify edge cases, improve code organization, and develop tests to verify functionality.' },
+    ],
+    examples: [
+      { name: 'EduCore — School Management System', text: 'AI-assisted implementation and debugging across React interfaces, backend APIs, database workflows, and school-management features.' },
+      { name: 'Shahid Fashion Store', text: 'Assistance with e-commerce interfaces, product-management workflows, backend functionality, and image integration where implemented.' },
+      { name: 'PDF Toolkit Pro', text: 'Assistance with implementing and troubleshooting browser-based PDF utilities.' },
+      { name: 'AI Personal Agent', text: 'A working project in development focused on exploring personal AI assistance and software-development workflows. Only verified, implemented capabilities are presented as working features.' },
+    ],
     tools: 'Muse (Meta AI agent platform) — used daily for coding assistance, debugging, project planning, UI improvement and deployments',
-    appliedTo:
-      'Across my projects, AI assistance has been part of: planning requirements and features, creating and refining responsive interfaces, implementing React components and JavaScript functionality, working with backend APIs and database integration, investigating and fixing bugs, writing and running tests, and improving code organisation and documentation.',
+    closing:
+      'I use AI as a productivity tool, not as a replacement for my own learning, reasoning, or technical judgment. I review generated code, make necessary adjustments, and test implementations before considering them complete. My goal is to solve problems faster, reduce development time, and build functional, maintainable software while remaining responsible for the final results.',
     note:
       'A distinction I keep clear: AI tools helped me build these projects — that does not make the projects themselves AI-powered. The exceptions are LearnFlow AI and the AI Personal Agent, where AI is part of the product itself.',
   },

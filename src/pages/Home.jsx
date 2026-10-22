@@ -191,8 +191,26 @@ function About() {
               <div className="mt-6 rounded-2xl border border-line bg-card p-6">
                 <p className="folio text-cyan">AI-assisted development</p>
                 <p className="mt-3 leading-relaxed text-soft">{site.aiAssisted.text}</p>
-                <p className="mt-3 leading-relaxed text-soft">{site.aiAssisted.appliedTo}</p>
-                <p className="mt-3 text-sm leading-relaxed text-soft"><span className="font-semibold text-ink">Tools I actually use:</span> {site.aiAssisted.tools}.</p>
+                <p className="mt-3 leading-relaxed text-soft"><span className="font-semibold text-ink">Technologies I work with:</span> {site.aiAssisted.technologies}</p>
+                <p className="mt-5 font-display font-semibold text-ink">How I use AI in development</p>
+                <ul className="mt-3 space-y-2.5">
+                  {site.aiAssisted.uses.map((u) => (
+                    <li key={u.label} className="flex gap-3 leading-relaxed text-soft">
+                      <span aria-hidden="true" className="mt-0.5 font-bold text-accent">✓</span>
+                      <span><span className="font-semibold text-ink">{u.label}:</span> {u.text}</span>
+                    </li>
+                  ))}
+                </ul>
+                <p className="mt-5 font-display font-semibold text-ink">Project examples</p>
+                <ul className="mt-3 space-y-2.5">
+                  {site.aiAssisted.examples.map((e) => (
+                    <li key={e.name} className="leading-relaxed text-soft">
+                      <span className="font-semibold text-ink">{e.name}:</span> {e.text}
+                    </li>
+                  ))}
+                </ul>
+                <p className="mt-4 text-sm leading-relaxed text-soft"><span className="font-semibold text-ink">Tools I actually use:</span> {site.aiAssisted.tools}.</p>
+                <p className="mt-3 leading-relaxed text-soft">{site.aiAssisted.closing}</p>
                 <p className="mt-3 text-sm leading-relaxed text-muted">{site.aiAssisted.note}</p>
               </div>
             )}
