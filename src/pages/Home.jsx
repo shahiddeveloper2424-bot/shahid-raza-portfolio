@@ -143,6 +143,10 @@ function Trust() {
 }
 
 function About() {
+  // Independent expand/collapse state for the two long About cards —
+  // opening one must never affect the other.
+  const [expOpen, setExpOpen] = useState(false)
+  const [aiOpen, setAiOpen] = useState(false)
   return (
     <section id="about" className="scroll-mt-24 bg-surface">
       <div className="mx-auto max-w-shell px-5 py-20 sm:px-10 sm:py-24">
@@ -173,7 +177,7 @@ function About() {
               <p className="folio text-cyan">Practical development experience</p>
               <p className="mt-3 leading-relaxed text-soft">{site.experienceIntro}</p>
               <ul className="mt-5 divide-y divide-line">
-                {site.experienceProjects.map((item) => {
+                {(expOpen ? site.experienceProjects : site.experienceProjects.slice(0, 4)).map((item) => {
                   const p = projects.find((x) => x.slug === item.slug)
                   if (!p) return null
                   return (
@@ -185,11 +189,22 @@ function About() {
                   )
                 })}
               </ul>
+              <button
+                type="button"
+                onClick={() => setExpOpen((v) => !v)}
+                aria-expanded={expOpen}
+                className="arrow-link mt-4 font-display text-sm font-semibold text-accent hover:text-cyan"
+              >
+                {expOpen ? 'Read Less' : 'Read More'} <span className="arr" aria-hidden="true">{expOpen ? '↑' : '↓'}</span>
+              </button>
               <p className="mt-4 text-sm leading-relaxed text-muted">Independent project work as a BSCS student — no formal employment is claimed. Each project links to its case study with an honest status.</p>
             </div>
             {site.aiAssisted && (
               <div className="mt-6 rounded-2xl border border-line bg-card p-6">
                 <p className="folio text-cyan">AI-assisted development</p>
+                <p className="mt-3 leading-relaxed text-soft">{site.aiAssisted.summary}</p>
+                {aiOpen && (
+                  <>
                 <p className="mt-3 leading-relaxed text-soft">{site.aiAssisted.text}</p>
                 <p className="mt-3 leading-relaxed text-soft"><span className="font-semibold text-ink">Technologies I work with:</span> {site.aiAssisted.technologies}</p>
                 <p className="mt-5 font-display font-semibold text-ink">How I use AI in development</p>
@@ -212,6 +227,16 @@ function About() {
                 <p className="mt-4 text-sm leading-relaxed text-soft"><span className="font-semibold text-ink">Tools I actually use:</span> {site.aiAssisted.tools}.</p>
                 <p className="mt-3 leading-relaxed text-soft">{site.aiAssisted.closing}</p>
                 <p className="mt-3 text-sm leading-relaxed text-muted">{site.aiAssisted.note}</p>
+                  </>
+                )}
+                <button
+                  type="button"
+                  onClick={() => setAiOpen((v) => !v)}
+                  aria-expanded={aiOpen}
+                  className="arrow-link mt-4 font-display text-sm font-semibold text-accent hover:text-cyan"
+                >
+                  {aiOpen ? 'Read Less' : 'Read More'} <span className="arr" aria-hidden="true">{aiOpen ? '↑' : '↓'}</span>
+                </button>
               </div>
             )}
           </div>

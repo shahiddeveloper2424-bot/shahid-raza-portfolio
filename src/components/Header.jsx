@@ -31,10 +31,14 @@ export default function Header() {
 
   return (
     <>
-      <header className="sticky top-0 z-40 border-b border-line bg-navy/95 pt-[env(safe-area-inset-top)] backdrop-blur">
-        <div className="mx-auto flex max-w-shell items-center justify-between gap-4 px-5 py-3 sm:px-10 sm:py-3.5">
+      <header className="sticky top-0 z-40 w-full border-b border-line bg-navy/95 pt-[env(safe-area-inset-top)] backdrop-blur">
+        {/* The row's height is derived from its tallest content — the 44px
+            menu button / logo — plus 14px padding top and bottom (72px).
+            min-h guarantees the bar can never render shorter than that,
+            even while the logo image is still loading. */}
+        <div className="mx-auto flex min-h-[4.5rem] max-w-shell items-center justify-between gap-4 px-5 py-3.5 sm:px-10">
           <Link href="/" className="flex min-w-0 items-center gap-3" ariaLabel={`${site.name} — home`}>
-            <img src="/images/shahid-raza-sr-logo.png" alt="" aria-hidden="true" className="h-10 w-auto shrink-0 sm:h-11" />
+            <img src="/images/shahid-raza-sr-logo.png" alt="" aria-hidden="true" className="h-11 w-auto shrink-0" />
             <span className="min-w-0 leading-none">
               <span className="block whitespace-nowrap font-display text-[1.12rem] font-bold tracking-tight text-ink sm:text-[1.3rem]">{site.name}</span>
               <span className="folio mt-1 hidden whitespace-nowrap text-[0.58rem] text-muted sm:block">{site.role} — Portfolio</span>
@@ -81,9 +85,9 @@ export default function Header() {
         aria-modal="true"
         aria-label="Menu"
       >
-        <div className="flex items-center justify-between px-5 pb-3 pt-[max(0.75rem,env(safe-area-inset-top))]">
+        <div className="flex items-center justify-between px-5 pb-3.5 pt-[max(0.875rem,env(safe-area-inset-top))]">
           <span className="flex min-w-0 items-center gap-3">
-            <img src="/images/shahid-raza-sr-logo.png" alt="" aria-hidden="true" className="h-10 w-auto shrink-0" />
+            <img src="/images/shahid-raza-sr-logo.png" alt="" aria-hidden="true" className="h-11 w-auto shrink-0" />
             <span className="whitespace-nowrap font-display text-lg font-bold">{site.name}</span>
           </span>
           <button

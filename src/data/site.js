@@ -59,6 +59,8 @@ export const site = {
   // Muse AI agent platform. Ollama has NOT been used — it stays 'Planned'
   // in the AI Personal Agent case study and is not listed as a skill here.
   aiAssisted: {
+    summary:
+      'I use AI tools as a development assistant — to help write and improve code, troubleshoot bugs and explore solutions faster, and keep larger projects moving when deadlines are tight. I treat AI as support, not as a substitute for my own judgment: every piece of AI-assisted code is reviewed, adjusted and tested before I consider it done.',
     text:
       'I use AI tools as a practical development assistant to write and improve code, troubleshoot technical issues, explore solutions, and accelerate software development. When project requirements are complex or deadlines are tight, I use AI assistance to work more efficiently, reduce repetitive tasks, and make progress on larger projects without compromising code quality.',
     technologies:
