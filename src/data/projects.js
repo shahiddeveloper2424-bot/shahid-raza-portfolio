@@ -62,6 +62,26 @@ export const projects = [
     screenshot: '/images/printora-product-showcase.webp', // Product showcase artwork composed for this portfolio from AI-generated product photography in PRINTORA's branding; product names/prices are the real catalogue's.
     screenshotNote: 'Product showcase artwork — PRINTORA branding & real product range',
     screenshotSize: [1600, 1440],
+    gallery: [
+      {
+        src: '/images/projects/printora-gallery-shop.webp',
+        alt: 'PRINTORA shop page artwork — the six-product catalogue in a storefront grid',
+        caption: 'The shop — representative artwork of the storefront grid with the real catalogue and PKR prices: tees, hoodie, mug, tote, phone case and poster, each with its own customisation entry point.',
+        size: [1600, 1150],
+      },
+      {
+        src: '/images/projects/printora-gallery-product.webp',
+        alt: 'PRINTORA product page artwork — Essential Custom T-Shirt with colour and size options',
+        caption: 'Product page — representative artwork: the Essential Custom T-Shirt (Rs 1,999) with colour and size selection, leading into the design studio or straight to the bag.',
+        size: [1600, 1150],
+      },
+      {
+        src: '/images/projects/printora-gallery-cart.webp',
+        alt: 'PRINTORA shopping bag artwork — two items with PKR totals and Cash on Delivery',
+        caption: 'The bag — representative artwork: items with their chosen options, PKR totals kept server-authoritative, and Cash on Delivery shown honestly as the available payment route.',
+        size: [1600, 1150],
+      },
+    ],
     detailsPending: false,
   },
   {
@@ -102,6 +122,26 @@ export const projects = [
     screenshot: '/images/educore-dashboard.jpg', // Real screenshot of the running app, supplied by the owner.
     screenshotNote: 'Real screenshot — EduCore admin dashboard, supplied by the owner',
     screenshotSize: [1400, 875],
+    gallery: [
+      {
+        src: '/images/projects/educore-gallery-students.webp',
+        alt: 'EduCore student records interface — representative mockup',
+        caption: 'Student records — representative mockup of the module visible in the real dashboard above: searchable student and guardian records organised by class and section.',
+        size: [1600, 1150],
+      },
+      {
+        src: '/images/projects/educore-gallery-fees.webp',
+        alt: 'EduCore fee management interface — representative mockup',
+        caption: 'Fee management — representative mockup: invoiced, collected, outstanding and overdue totals with per-student invoice status, matching the fee dashboard in the application.',
+        size: [1600, 1150],
+      },
+      {
+        src: '/images/projects/educore-gallery-attendance.webp',
+        alt: 'EduCore attendance interface — representative mockup',
+        caption: 'Attendance — representative mockup: the same-day present / absent / late / leave summary that the real dashboard surfaces for students and staff.',
+        size: [1600, 1150],
+      },
+    ],
     detailsPending: false,
   },
   {
@@ -153,6 +193,26 @@ export const projects = [
     screenshot: '/images/pdf-toolkit-pro-cover.jpg', // Owner-supplied promotional artwork (concept visual — NOT an app screenshot).
     screenshotNote: 'Promotional concept artwork — not an application screenshot',
     screenshotSize: [1400, 933],
+    gallery: [
+      {
+        src: '/images/projects/pdf-gallery-tools.webp',
+        alt: 'PDF Toolkit Pro tools home — representative artwork of the eight tools',
+        caption: 'The tools home — representative artwork: all eight verified tools (Merge, PDF Maker, Convert, Split, Extract, Rotate, Reorder, Watermark) in one grid. Try the real thing from the live link above.',
+        size: [1600, 1150],
+      },
+      {
+        src: '/images/projects/pdf-gallery-merge.webp',
+        alt: 'PDF Toolkit Pro merge workflow — representative artwork',
+        caption: 'Merging — representative artwork of the workflow: add files, drag them into order, and the merged PDF is built locally with pdf-lib and downloaded — nothing is uploaded.',
+        size: [1600, 1150],
+      },
+      {
+        src: '/images/projects/pdf-gallery-pages.webp',
+        alt: 'PDF Toolkit Pro page tools — representative artwork',
+        caption: 'Page tools — representative artwork: pages rendered with PDF.js so you can see the real document while rotating or reordering it.',
+        size: [1600, 1150],
+      },
+    ],
     detailsPending: false,
   },
   {
@@ -202,6 +262,26 @@ export const projects = [
     screenshot: '/images/projects/authentication-session-security.webp', // Original representative security artwork created for this case study (navy interface; conceptual panels are labelled inside the image).
     screenshotNote: 'Representative security interface artwork — conceptual panels labelled inside the image',
     screenshotSize: [1600, 1200],
+    gallery: [
+      {
+        src: '/images/projects/auth-gallery-settings.webp',
+        alt: 'Account security settings — representative artwork',
+        caption: 'Account security — representative artwork: changing a password or email always requires the current password first, so a hijacked session alone cannot take over the account.',
+        size: [1600, 1150],
+      },
+      {
+        src: '/images/projects/auth-gallery-reset.webp',
+        alt: 'Password reset flow — representative artwork',
+        caption: 'Password reset — representative artwork of the three steps: a response that never reveals whether an account exists, a single-use link whose token is stored only as a SHA-256 hash, and a one-hour expiry.',
+        size: [1600, 1150],
+      },
+      {
+        src: '/images/projects/auth-gallery-admin.webp',
+        alt: 'Admin users, roles and audit log — representative artwork',
+        caption: 'Access control & audit — representative artwork: roles are enforced on the server, blocked accounts get a 403 on every request, and security events land in the audit log.',
+        size: [1600, 1150],
+      },
+    ],
     detailsPending: false,
   },
   {
@@ -242,6 +322,20 @@ export const projects = [
     screenshot: '/images/projects/taskflow-cover.webp', // Real screenshot of the working demo on this page.
     screenshotNote: 'Screenshot — the actual interactive demo on this page',
     screenshotSize: [1600, 948],
+    gallery: [
+      {
+        src: '/images/projects/taskflow-gallery-mobile.webp',
+        alt: 'TaskFlow demo on a mobile-width screen — real screenshot',
+        caption: 'The same demo on mobile — a real screenshot at phone width: the add form, filters and task list stack cleanly, and the data note stays visible.',
+        size: [708, 1580],
+      },
+      {
+        src: '/images/projects/taskflow-gallery-diagram.webp',
+        alt: 'Diagram — how the TaskFlow demo stores and filters tasks',
+        caption: 'How it works — a diagram of the demo above: actions update React state, tasks persist in localStorage, and the All / Active / Completed filters are views over one list.',
+        size: [1600, 1150],
+      },
+    ],
     demo: 'taskflow',
     detailsPending: false,
   },
@@ -310,6 +404,26 @@ export const projects = [
     screenshot: '/images/projects/learnflow-ai-cover.webp', // Representative interface artwork (the app is light-themed; the artwork follows the portfolio palette and the app's real layout).
     screenshotNote: 'Representative interface artwork — the app’s real workspace, redrawn in the portfolio palette',
     screenshotSize: [1600, 1200],
+    gallery: [
+      {
+        src: '/images/projects/learnflow-gallery-notes.webp',
+        alt: 'LearnFlow AI study notes workspace — representative artwork',
+        caption: 'Study notes — representative artwork: the engine turns a transcript into structured notes (key ideas, formulas, examples) that can be edited, copied or exported as Markdown, and are saved in the local workspace.',
+        size: [1600, 1150],
+      },
+      {
+        src: '/images/projects/learnflow-gallery-quiz.webp',
+        alt: 'LearnFlow AI quiz view — representative artwork',
+        caption: 'Quiz — representative artwork: questions are generated from the video content with explanations tied to the transcript, and attempts are kept in the quiz history.',
+        size: [1600, 1150],
+      },
+      {
+        src: '/images/projects/learnflow-gallery-ask.webp',
+        alt: 'LearnFlow AI Ask AI assistant — representative artwork',
+        caption: 'Ask AI — representative artwork: questions are answered from the transcript with its source position; when the video does not cover something, the assistant says so instead of inventing an answer.',
+        size: [1600, 1150],
+      },
+    ],
     detailsPending: false,
   },
 ]

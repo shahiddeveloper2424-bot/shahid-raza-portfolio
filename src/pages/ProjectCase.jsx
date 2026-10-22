@@ -2,6 +2,7 @@ import React, { useEffect } from 'react'
 import { Link } from '../lib/router.jsx'
 import ProjectVisual from '../components/ProjectVisual.jsx'
 import TaskFlowDemo from '../demos/TaskFlowDemo.jsx'
+import Gallery from '../components/Gallery.jsx'
 import { projects } from '../data/projects.js'
 import { useReveal } from '../hooks/useReveal.js'
 
@@ -45,6 +46,7 @@ export default function ProjectCase({ slug }) {
     if (project.users) sections.push({ id: 'audience', title: "Who it's for" })
     sections.push({ id: 'features', title: 'Key features' })
     if (project.challenges) sections.push({ id: 'challenges', title: 'Challenges & solutions' })
+    if (project.gallery?.length) sections.push({ id: 'gallery', title: 'Gallery' })
     sections.push({ id: 'outcomes', title: 'Outcomes' }, { id: 'technology', title: 'Technology' })
   }
   const num = (id) => sections.findIndex((s) => s.id === id) + 1
@@ -215,6 +217,19 @@ export default function ProjectCase({ slug }) {
                           <p className="mt-3 leading-relaxed text-soft">{c.text}</p>
                         </article>
                       ))}
+                    </div>
+                  </section>
+                )}
+
+                {project.gallery?.length > 0 && (
+                  <section id="gallery" className="reveal mt-16 scroll-mt-28">
+                    <div className="flex items-baseline gap-4">
+                      <SectionNum n={num('gallery')} />
+                      <h2 className="display-2 text-ink">Gallery</h2>
+                    </div>
+                    <p className="mt-4 max-w-2xl leading-relaxed text-soft">Select any image to view it larger.</p>
+                    <div className="mt-7">
+                      <Gallery items={project.gallery} projectTitle={project.title} />
                     </div>
                   </section>
                 )}
