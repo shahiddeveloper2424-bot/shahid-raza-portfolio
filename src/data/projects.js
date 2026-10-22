@@ -120,12 +120,12 @@ export const projects = [
       'Zero uploads by design — all processing happens on the user’s own device',
     ],
     links: {
-      live: 'https://pdf-toolkit-pro.vercel.app',
+      live: 'https://pdf-toolkit-pro-shahiddeveloper2424-1108.vercel.app',
       liveLabel: 'View live project',
       github: 'https://github.com/shahiddeveloper2424-bot/pdf-toolkit-pro',
       githubNote: null,
     },
-    screenshot: null, // No real screenshot supplied — labelled placeholder is rendered.
+    screenshot: '/images/pdf-toolkit-pro.jpg', // Official preview image from the live site (owner-supplied asset).
     detailsPending: false,
   },
 ]

@@ -17,7 +17,7 @@ Everything personal is configured in ONE place: `src/data/site.js`. Items still 
 7. **EduCore details** → scope, stack, links in `src/data/projects.js` (its case study is an honest placeholder until then).
 8. **Real project screenshots** → set `screenshot` per project in `src/data/projects.js`; labelled design compositions are shown until then.
 
-Verified project links (re-checked October 2026): PRINTORA storefront https://printora-crfs.vercel.app · PDF Toolkit Pro https://pdf-toolkit-pro.vercel.app (source: https://github.com/shahiddeveloper2424-bot/pdf-toolkit-pro). Note: `printora-alpha.vercel.app` is the PRINTORA backend API, not the storefront — do not link it as the live site.
+Verified project links (re-checked October 2026): PRINTORA storefront https://printora-crfs.vercel.app · PDF Toolkit Pro https://pdf-toolkit-pro-shahiddeveloper2424-1108.vercel.app (source: https://github.com/shahiddeveloper2424-bot/pdf-toolkit-pro). Note: `printora-alpha.vercel.app` is the PRINTORA backend API, not the storefront — do not link it as the live site. Likewise, `pdf-toolkit-pro.vercel.app` (no team suffix) now serves a DIFFERENT, unrelated site — always use the team domain above for PDF Toolkit Pro.
 
 ## Design
 

@@ -1,4 +1,5 @@
-import React from 'react'
+import React, { useState } from 'react'
+import { projects } from '../data/projects.js'
 
 /*
  * Honest design compositions in the monochrome navy/blue system — NOT
@@ -83,7 +84,7 @@ export function EduCoreVisual() {
 
 export function PdfVisual() {
   return (
-    <Frame label="pdf-toolkit-pro.vercel.app">
+    <Frame label="pdf-toolkit-pro — live site">
       <div className="bg-surface p-5 sm:p-6">
         <p className="font-display text-xl font-bold text-ink">PDF Toolkit <span className="text-cyan">Pro</span></p>
         <div className="mt-4 grid grid-cols-2 gap-3">
@@ -109,9 +110,44 @@ export function PdfVisual() {
   )
 }
 
+
+/*
+ * Real project image — used when the project supplies one via its
+ * `screenshot` data field (here: PDF Toolkit Pro's official preview
+ * image, taken from its live website). If the file is missing, the
+ * labelled design composition renders instead — never a broken image.
+ */
+function RealImage({ project, fallback }) {
+  const [failed, setFailed] = useState(false)
+  if (failed) return fallback
+  return (
+    <figure>
+      <div className="overflow-hidden rounded-2xl border border-line bg-card">
+        <img
+          src={project.screenshot}
+          alt={`${project.title} — official preview image from the live website`}
+          width="1200"
+          height="630"
+          loading="lazy"
+          decoding="async"
+          onError={() => setFailed(true)}
+          className="block aspect-[1200/630] w-full object-cover"
+        />
+      </div>
+      <figcaption className="mt-3 font-mono text-[10px] uppercase tracking-widest2 text-muted">
+        Official preview image — from the live {project.title} website
+      </figcaption>
+    </figure>
+  )
+}
+
 const VISUALS = { printora: PrintoraVisual, educore: EduCoreVisual, 'pdf-toolkit-pro': PdfVisual }
 
 export default function ProjectVisual({ slug }) {
   const Visual = VISUALS[slug] || PrintoraVisual
+  const project = projects.find((p) => p.slug === slug)
+  if (project && project.screenshot) {
+    return <RealImage project={project} fallback={<Visual />} />
+  }
   return <Visual />
 }
