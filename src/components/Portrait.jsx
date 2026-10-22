@@ -2,9 +2,9 @@ import React, { useState } from 'react'
 import { site } from '../data/site.js'
 
 /*
- * Premium framed portrait: the owner's real photo, shown COMPLETE as a
- * circle inside an elegant navy panel with a thin refined border and a
- * subtle blue highlight. The photo's own subject is a circular portrait;
+ * The owner's real photo as an editorial plate: shown COMPLETE as a
+ * circle inside a warm paper-toned frame with a hairline border. The
+ * photo's own subject is a circular portrait;
  * the circular mask (object-cover, aspect preserved — never stretched)
  * removes the photo's square white canvas, per the owner's instruction.
  * Until site.photo resolves, a labelled monogram placeholder renders —
