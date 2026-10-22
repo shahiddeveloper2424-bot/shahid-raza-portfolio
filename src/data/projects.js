@@ -67,19 +67,38 @@ export const projects = [
     title: 'EduCore',
     subtitle: 'School Management System',
     status: 'In development',
-    statusNote: 'Full project details have not been supplied yet. This page is an honest placeholder case study — no features, stack or results are claimed until the owner confirms them.',
-    year: null, // PLACEHOLDER
-    role: null, // PLACEHOLDER — owner to confirm role
-    stack: [], // PLACEHOLDER — owner to confirm stack
+    statusNote: 'A working build exists and is in active development — the dashboard screenshot on this page is from the running application, supplied by the owner (the figures shown are the app\'s working data). It is not yet publicly deployed, so no live-demo link is published.',
+    year: '2026',
+    role: 'Design & development',
+    stack: [], // To be confirmed by the owner — not claimed from a screenshot alone.
     summary:
-      'A school management system project by Shahid Raza. The detailed scope of this system is being documented by the owner.',
-    challenge: null, // PLACEHOLDER
-    approach: null, // PLACEHOLDER
-    features: [], // PLACEHOLDER — no features claimed until verified
-    outcomes: [],
-    links: { live: null, liveLabel: null, github: null, githubNote: 'Demo and source links will be added here when available.' },
-    screenshot: null,
-    detailsPending: true,
+      'A school management system that brings a school\'s daily operations into one admin dashboard — student and staff records, attendance, classes, and complete fee management, from fee structures and invoices to collection reports.',
+    challenge:
+      'Running a school on registers and spreadsheets means student records, attendance and fee collection live in different places: fee status is hard to track, attendance takes time to compile, and the administration never gets one current overview of the whole school.',
+    approach:
+      'EduCore is built as one modular admin system around how a school actually runs — academics (students, guardians, classes, sections, subjects, teacher assignments) and finance (fee structures, invoices, collections, reports) in a single dashboard, with today\'s attendance and the current billing period\'s fee position visible the moment an administrator signs in.',
+    features: [
+      'Admin dashboard with a live school overview — active students, staff, teacher logins, classes and sections at a glance',
+      'Student & guardian records, with classes, sections and subjects management and teacher assignments',
+      'Attendance for students and staff, with a same-day summary (present / absent / late / leave) on the dashboard',
+      'Complete fee management — fee structures, class fee setup, invoice generation, and a fee dashboard tracking invoiced, collected, outstanding and overdue amounts',
+      'Examinations & results, assignments, homework and timetable management',
+      'Notices for school-wide communication',
+      'Role-based access (administrator and teacher logins), light/dark themes and a language selector',
+    ],
+    users:
+      'School administrators who need one current view of their school, teaching staff whose classes and attendance are managed in the system, and the office staff handling student records and fee collection.',
+    outcomes: [
+      'A working application build exists today — the dashboard screenshot on this page is from the running system, not a mockup',
+      'The core school modules are implemented in one system: students, staff, attendance, classes, exams, homework, timetable and notices',
+      'Fee operations are covered end to end in the admin: structures, invoices, collection tracking and reports',
+      'Still in development: not yet publicly deployed — demo and source links will be published as the owner releases them',
+    ],
+    links: { live: null, liveLabel: null, github: null, githubNote: 'Demo and source links will be added here when the owner publishes them.' },
+    screenshot: '/images/educore-dashboard.jpg', // Real screenshot of the running app, supplied by the owner.
+    screenshotNote: 'Real screenshot — EduCore admin dashboard, supplied by the owner',
+    screenshotSize: [1400, 875],
+    detailsPending: false,
   },
   {
     slug: 'pdf-toolkit-pro',
@@ -128,6 +147,7 @@ export const projects = [
     },
     screenshot: '/images/pdf-toolkit-pro-cover.jpg', // Owner-supplied promotional artwork (concept visual — NOT an app screenshot).
     screenshotNote: 'Promotional concept artwork — not an application screenshot',
+    screenshotSize: [1400, 933],
     detailsPending: false,
   },
 ]

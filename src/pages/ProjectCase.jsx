@@ -214,6 +214,9 @@ export default function ProjectCase({ slug }) {
                     <SectionNum n={num('technology')} />
                     <h2 className="display-2 text-ink">Technology</h2>
                   </div>
+                  {project.stack.length === 0 && (
+                    <p className="mt-6 leading-relaxed text-soft">The technology stack for this project is being confirmed by the owner and will be listed here exactly — it is not guessed from a screenshot.</p>
+                  )}
                   <ul className="mt-7 flex flex-wrap gap-2">
                     {project.stack.map((t) => (
                       <li key={t} className="rounded-full border border-line bg-surface px-4 py-2 text-sm font-medium text-soft">{t}</li>

@@ -126,8 +126,8 @@ function RealImage({ project, fallback }) {
         <img
           src={project.screenshot}
           alt={`${project.title} project preview`}
-          width="1400"
-          height="933"
+          width={project.screenshotSize ? project.screenshotSize[0] : 1400}
+          height={project.screenshotSize ? project.screenshotSize[1] : 933}
           loading="lazy"
           decoding="async"
           onError={() => setFailed(true)}

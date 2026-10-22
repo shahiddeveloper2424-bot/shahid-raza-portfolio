@@ -17,7 +17,7 @@ This portfolio follows a strict rule: **only verified information is presented a
 | Location / availability | `src/data/site.js` | Plain text |
 | LinkedIn | `src/data/site.js` → `socials.linkedin` | Verified profile URL |
 | Education & experience | `src/data/site.js` | Owner-supplied entries only |
-| EduCore details (scope, stack, role, links) | `src/data/projects.js` | Set fields + `detailsPending: false` when confirmed |
+| EduCore stack & links (features + screenshot supplied Oct 2026; case study live) | `src/data/projects.js` | Add stack entries + links when the owner confirms them |
 | PDF Toolkit Pro details | `src/data/projects.js` | Same as above |
 | Real screenshots (all projects) | `src/data/projects.js` → `screenshot` | Add image to `public/` and set the path |
 | Production domain | `public/sitemap.xml`, `public/robots.txt`, `index.html` canonical/OG | Replace `your-domain.example` |

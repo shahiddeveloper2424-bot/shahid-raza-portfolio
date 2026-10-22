@@ -214,7 +214,7 @@ function ProjectPanel({ project, flip }) {
               </li>
             ))}
           </ul>
-          <p className="mt-6 font-mono text-[11px] uppercase tracking-widest2 text-muted">{project.stack.join(' · ')}</p>
+          <p className="mt-6 font-mono text-[11px] uppercase tracking-widest2 text-muted">{project.stack.length ? project.stack.join(' · ') : 'Technology stack — to be confirmed by the owner'}</p>
           <div className="mt-7 flex flex-wrap gap-x-7 gap-y-3">
             <Link href={`/projects/${project.slug}`} className="arrow-link font-display font-semibold text-accent hover:text-cyan">View case study <span className="arr" aria-hidden="true">→</span></Link>
             {project.links.live && (
