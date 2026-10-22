@@ -25,13 +25,11 @@ export const site = {
   availability: null, // PLACEHOLDER — owner to supply (e.g. "Available for new projects")
 
   contact: {
-    // PLACEHOLDER — add the verified email address here, e.g. 'hello@example.com'.
-    // Until then the Contact section shows a placeholder, not a fake address.
-    email: null,
-    // PLACEHOLDER — add the verified WhatsApp number in international format,
-    // digits only, e.g. '923001234567'. Until then no WhatsApp number is shown.
-    whatsapp: null,
-    whatsappDisplay: null,
+    // Verified — supplied by the owner 2026-10-22.
+    email: 'shahiddeveloper2424@gmail.com',
+    // Verified — supplied by the owner 2026-10-22 (international format, digits only for wa.me).
+    whatsapp: '923288985191',
+    whatsappDisplay: '+92 328 8985191',
   },
 
   socials: {
