@@ -12,11 +12,11 @@ export const site = {
   role: 'Software Developer',
   positioning: 'Software Developer · Web Application Developer · MERN Stack Developer',
   // PORTRAIT PHOTO — the owner's real photo belongs at this exact path:
-  //   public/images/shahid-raza.jpg
+  //   public/images/profilephoto.jpeg
   // The file does NOT exist yet. Until the owner adds it, the Portrait
   // component renders a clearly labelled designed placeholder instead.
   // Never substitute a stock photo or a fabricated face.
-  photo: '/images/shahid-raza.jpg',
+  photo: '/images/profilephoto.jpeg',
   tagline: 'I build considered software for the web.',
   // One honest sentence, taken from the owner's own project description.
   intro:

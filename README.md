@@ -8,7 +8,7 @@ Live repository: https://github.com/shahiddeveloper2424-bot/shahid-raza-portfoli
 
 Everything personal is configured in ONE place: `src/data/site.js`. Items still missing (the site shows honest placeholders for them):
 
-1. **Your real photo** → save it as `public/images/shahid-raza.jpg` (see `public/images/README.txt`). It appears in the hero and About automatically.
+1. **Your real photo** → save it as `public/images/profilephoto.jpeg` (see `public/images/README.txt`). It appears in the hero and About automatically.
 2. **Verified email** → `site.contact.email` (activates the contact cards AND the enquiry form).
 3. **WhatsApp number** → `site.contact.whatsapp` (international format, digits only).
 4. **LinkedIn URL** → `site.socials.linkedin`.

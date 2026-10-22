@@ -2,7 +2,7 @@ PORTRAIT PHOTO — OWNER ACTION
 ==============================
 Put the owner's real professional photo at exactly this path:
 
-    public/images/shahid-raza.jpg
+    public/images/profilephoto.jpeg
 
 Recommended: JPG, at least 1200px on the long edge, professional dress,
 clean background. The site references this path from src/data/site.js

@@ -3,7 +3,7 @@ import { site } from '../data/site.js'
 
 /**
  * The owner's real portrait.
- * Source path lives in site.photo (public/images/shahid-raza.jpg).
+ * Source path lives in site.photo (public/images/profilephoto.jpeg).
  * HONESTY RULE: until that real file exists, this renders a designed,
  * clearly labelled placeholder — never a stock photo or a fake face.
  * The moment the owner drops the real JPG in, it appears automatically.
@@ -33,7 +33,7 @@ export default function Portrait({ caption = true }) {
             <span className="folio mt-4 text-lime">{site.name}</span>
             <span className="folio mt-1.5 text-white/60">{site.role}</span>
             <span className="absolute bottom-3 left-3 bg-ink px-2.5 py-1.5 font-mono text-[9px] uppercase tracking-widest2 text-white">
-              Real photo here soon — public/images/shahid-raza.jpg
+              Real photo here soon — public/images/profilephoto.jpeg
             </span>
           </div>
         )}
