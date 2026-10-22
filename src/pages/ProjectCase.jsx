@@ -8,7 +8,7 @@ import { useReveal } from '../hooks/useReveal.js'
 const META_DESC = {
   printora: 'PRINTORA case study — a print-on-demand e-commerce platform with a customer design studio, multi-currency storefront and full admin panel, built with the MERN stack by Shahid Raza.',
   educore: 'EduCore case study — a school management system in development by Shahid Raza. Honest project status; full details are published as they are verified.',
-  'secure-auth': 'Secure authentication case study — bcrypt hashing, login throttling, JWT sessions, server-side role-based access control and safe password recovery, implemented in PRINTORA by Shahid Raza.',
+  'authentication-session-security': 'Authentication & Session Security case study — bcrypt hashing, login throttling, JWT sessions, server-side role-based access control and safe password recovery, implemented in PRINTORA by Shahid Raza.',
   taskflow: 'TaskFlow case study — a working to-do list demo built into this portfolio with React and localStorage: add, edit, complete, delete and filter tasks, by Shahid Raza.',
   'pdf-toolkit-pro': 'PDF Toolkit Pro case study — eight client-side PDF tools (merge, convert, split, extract, rotate, reorder, watermark) built with React and pdf-lib by Shahid Raza. Files never leave the device.',
 }
@@ -40,6 +40,7 @@ export default function ProjectCase({ slug }) {
   // Build the section list dynamically so numbering always matches content.
   const sections = [{ id: 'problem', title: 'The problem' }]
   if (!project.detailsPending) {
+    if (project.approach) sections.push({ id: 'approach', title: 'How it works' })
     if (project.users) sections.push({ id: 'audience', title: "Who it's for" })
     sections.push({ id: 'features', title: 'Key features' })
     if (project.challenges) sections.push({ id: 'challenges', title: 'Challenges & solutions' })
@@ -166,6 +167,15 @@ export default function ProjectCase({ slug }) {
               </section>
             ) : (
               <>
+                {project.approach && (
+                  <section id="approach" className="reveal mt-16 scroll-mt-28">
+                    <div className="flex items-baseline gap-4">
+                      <SectionNum n={num('approach')} />
+                      <h2 className="display-2 text-ink">How it works</h2>
+                    </div>
+                    <p className="lede mt-6 text-soft">{project.approach}</p>
+                  </section>
+                )}
                 {project.users && (
                   <section id="audience" className="reveal mt-16 scroll-mt-28">
                     <div className="flex items-baseline gap-4">

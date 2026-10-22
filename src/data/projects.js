@@ -156,22 +156,22 @@ export const projects = [
     detailsPending: false,
   },
   {
-    slug: 'secure-auth',
+    slug: 'authentication-session-security',
     category: 'Security',
     index: '04',
-    title: 'Secure Authentication & Session Management',
-    subtitle: 'Authentication & Access Control — Technical Case Study',
-    status: 'Technical Case Study',
-    statusNote: 'This is not a standalone product: it is the authentication and session system designed and implemented inside PRINTORA (with role-based logins also in EduCore), documented here as a dedicated technical case study. Every protection listed was verified in the actual server code.',
+    title: 'Authentication & Session Security',
+    subtitle: 'Web Application Security / Backend Development',
+    status: 'Security Case Study',
+    statusNote: 'This is a dedicated case study, not a standalone product: the implementation lives inside PRINTORA\'s server (with role-based logins also implemented in EduCore). Every protection listed was verified in the actual source code and its automated tests. No PRINTORA link is published from this page.',
     year: '2026',
     role: 'Design & implementation',
     stack: ['Node.js', 'Express', 'MongoDB', 'JWT', 'bcrypt', 'Helmet', 'express-rate-limit'],
     summary:
-      'The complete sign-in and access-control layer of a production MERN application — password hashing, login throttling, signed session tokens, server-side role enforcement and safe account recovery — built and tested as part of PRINTORA.',
+      'A security-focused web application authentication implementation designed to protect user access, manage authenticated sessions, and enforce role-based permissions.',
     challenge:
       'A store that handles customer accounts, orders and an admin panel cannot treat login as a formality: weak password storage, unlimited login attempts, or permissions enforced only by hiding buttons would put customer data and the whole business at risk.',
     approach:
-      'Security was implemented on the server, where it cannot be bypassed from the browser: passwords are hashed with bcrypt, sessions are signed JWTs verified on every request, roles are enforced by middleware on each protected route, and abuse controls (throttling, rate limits, account blocking) sit in front of the sensitive endpoints. Account changes re-verify the current password, and recovery uses single-use, expiring tokens stored only as hashes.',
+      'The workflow, end to end: (1) Registration stores only a bcrypt hash of the password. (2) Login checks credentials against that hash — failures get one generic error and are throttled after repeated attempts. (3) A successful login issues a signed JWT (7-day expiry) carrying the user id and role. (4) Every protected request re-verifies the token on the server, loads the account, and rejects blocked users even with a valid token. (5) Role middleware then decides whether that user may perform the specific action. (6) Sensitive changes — password or email — require the current password again. (7) Recovery links are single-use, expire in one hour, and are stored only as SHA-256 hashes. (8) Logout discards the token; account blocking revokes access server-side.',
     features: [
       'bcrypt password hashing (cost factor 12) — passwords are never stored or logged in plain text',
       'Login responses that never reveal whether an email exists — the same generic error for unknown email and wrong password',
@@ -195,10 +195,12 @@ export const projects = [
       'Covered by the automated backend test chain (auth suites included in the 409-check run), not just manual clicking',
       'The same role-based login pattern (Administrator / Teacher) is implemented in EduCore',
       'Honest limits: tokens are Bearer JWTs (no cookie sessions), and there is no token blacklist — revocation works through account blocking and token expiry',
+      'Two-factor authentication is NOT implemented — the 2FA panel in the cover artwork is a labelled design concept only',
+      'CSRF tokens are not used: the API authenticates via Authorization headers rather than cookies, so classic cookie-based CSRF does not apply',
     ],
     links: { live: null, liveLabel: null, github: null, githubNote: 'Implemented inside PRINTORA (private repository) — code walkthrough available on request.' },
-    screenshot: '/images/projects/secure-auth-cover.webp', // Interface mockup created for this case study.
-    screenshotNote: 'Interface mockup — the implemented login, session & role controls',
+    screenshot: '/images/projects/authentication-session-security.webp', // Original representative security artwork created for this case study (navy interface; conceptual panels are labelled inside the image).
+    screenshotNote: 'Representative security interface artwork — conceptual panels labelled inside the image',
     screenshotSize: [1600, 1200],
     detailsPending: false,
   },
