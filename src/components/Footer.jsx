@@ -64,7 +64,7 @@ export default function Footer() {
 
         <div className="mt-4 flex flex-col items-start justify-between gap-3 border-t border-line pt-6 text-sm sm:flex-row sm:items-center">
           <p>© {year} {site.name}. All rights reserved.</p>
-          <p className="font-mono text-[0.68rem] uppercase tracking-widest2 text-muted">React · Vite · Tailwind — JavaScript</p>
+          <p className="font-mono text-[0.68rem] uppercase tracking-widest2 text-muted">Set in Fraunces & Inter · Built with React · Vite · Tailwind — JavaScript</p>
         </div>
       </div>
     </footer>

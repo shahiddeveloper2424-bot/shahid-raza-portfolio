@@ -4,21 +4,24 @@ export default {
   theme: {
     extend: {
       colors: {
-        // ——— Midnight navy system (strict — documented in README > Design) ———
-        paper: '#0B1220',    // primary background (midnight navy)
-        navy: '#0B1220',
-        surface: '#111C2E',  // secondary surface
-        card: '#162238',     // elevated cards
-        line: '#29374E',     // borders & dividers
-        ink: '#F7FAFF',      // main text (clean white)
-        soft: '#AAB7CC',     // secondary text (cool slate)
-        muted: '#8296B1',    // tertiary text / labels on navy
-        accent: '#3478F6',   // primary accent (electric blue)
-        cyan: '#38BDF8',     // supporting accent (soft cyan, sparing)
-        violet: '#7465F5',   // CTA gradient end only
+        // ——— Editorial Paper system (documented in README > Design) ———
+        // Warm paper, warm ink, ONE accent (brick). Token names are kept
+        // from the previous theme so components did not need renaming;
+        // the values below are the whole palette — no other hues.
+        paper: '#F4EEE1',    // primary background (warm paper)
+        navy: '#F4EEE1',     // legacy alias of paper (section backgrounds)
+        surface: '#EBE2CC',  // deeper paper (alternating sections)
+        card: '#FDFBF4',     // plates & cards (near-white warm)
+        line: '#D8CBAE',     // hairlines & borders
+        ink: '#1E1811',      // main text (warm near-black)
+        soft: '#514739',     // secondary text (warm brown-grey)
+        muted: '#8B7D64',    // tertiary text / labels
+        accent: '#9E2B1E',   // THE accent — editorial brick red
+        cyan: '#9E2B1E',     // legacy alias of accent (single-accent discipline)
+        violet: '#9E2B1E',   // legacy alias of accent (CTA is solid, no gradient)
       },
       fontFamily: {
-        display: ['"Space Grotesk"', 'Inter', 'system-ui', 'sans-serif'],
+        display: ['Fraunces', 'Georgia', '"Times New Roman"', 'serif'],
         sans: ['Inter', 'system-ui', '-apple-system', 'Segoe UI', 'sans-serif'],
         mono: ['"IBM Plex Mono"', 'ui-monospace', 'SFMono-Regular', 'monospace'],
       },

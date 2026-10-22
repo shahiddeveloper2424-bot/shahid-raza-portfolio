@@ -2,19 +2,18 @@ import React, { useState } from 'react'
 import { projects } from '../data/projects.js'
 
 /*
- * Honest design compositions in the monochrome navy/blue system — NOT
- * screenshots. No real screenshots exist yet; each visual is captioned
- * "Design visual — real screenshot to be added by owner".
+ * Fallback design compositions — used ONLY when a project has no image
+ * of its own, and always captioned as design visuals, never presented
+ * as screenshots. All current projects supply real images, so these are
+ * dormant safety nets. Rendered as simple editorial plates (no fake
+ * browser chrome).
  */
 function Frame({ label, children }) {
   return (
     <figure>
-      <div className="overflow-hidden rounded-2xl border border-line bg-card">
-        <div className="flex items-center gap-2 border-b border-line px-4 py-3" aria-hidden="true">
-          <span className="h-2.5 w-2.5 rounded-full bg-accent" />
-          <span className="h-2.5 w-2.5 rounded-full bg-cyan" />
-          <span className="h-2.5 w-2.5 rounded-full bg-line" />
-          <span className="ml-3 font-mono text-[10px] uppercase tracking-widest2 text-muted">{label}</span>
+      <div className="overflow-hidden rounded-[3px] border border-line bg-card">
+        <div className="border-b border-line px-4 py-2.5" aria-hidden="true">
+          <span className="font-mono text-[10px] uppercase tracking-widest2 text-muted">{label}</span>
         </div>
         <div aria-hidden="true">{children}</div>
       </div>
@@ -122,7 +121,7 @@ function RealImage({ project, fallback }) {
   if (failed) return fallback
   return (
     <figure>
-      <div className="overflow-hidden rounded-2xl border border-line bg-card">
+      <div className="overflow-hidden rounded-[3px] border border-line bg-card">
         <img
           src={project.cardImage || project.screenshot}
           alt={`${project.title} project preview`}

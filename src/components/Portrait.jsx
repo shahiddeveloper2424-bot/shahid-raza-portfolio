@@ -17,11 +17,10 @@ export default function Portrait() {
 
   return (
     <figure>
-      <div className="relative rounded-[1.75rem] border border-line bg-surface p-4 shadow-[0_24px_60px_rgba(0,0,0,0.45)] sm:p-5">
-        <span aria-hidden="true" className="pointer-events-none absolute inset-x-10 top-0 h-px bg-gradient-to-r from-transparent via-cyan/70 to-transparent" />
-        <div className="relative overflow-hidden rounded-full border border-line bg-card">
+      <div className="relative rounded-[3px] border border-line bg-card p-4 sm:p-5">
+        <div className="relative overflow-hidden rounded-full border border-line bg-surface">
           {/* Fallback art — labelled placeholder (never a fake face) */}
-          <div aria-hidden="true" className="dotgrid absolute inset-0 flex flex-col items-center justify-center gap-2 p-6 text-center">
+          <div aria-hidden="true" className="absolute inset-0 flex flex-col items-center justify-center gap-2 bg-surface p-6 text-center">
             <span className="font-display text-6xl font-bold text-accent">SR</span>
             <span className="font-mono text-[9px] uppercase tracking-widest2 text-muted">{site.name}</span>
           </div>

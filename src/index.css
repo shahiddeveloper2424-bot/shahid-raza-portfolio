@@ -3,20 +3,36 @@
 @tailwind utilities;
 
 /*
- * SHAHID RAZA — MIDNIGHT NAVY SYSTEM (strict palette, one brand)
- * navy #0B1220 · surface #111C2E · card #162238 · line #29374E ·
- * white #F7FAFF · slate #AAB7CC · electric blue #3478F6 (primary accent) ·
- * soft cyan #38BDF8 (sparing) · violet #7465F5 (CTA gradient end only).
- * ~70% dark neutrals, ~25% light text, ~5% accents. No other hues.
+ * SHAHID RAZA — EDITORIAL PAPER SYSTEM
+ * A publication-inspired design language: warm paper #F4EEE1, deeper
+ * paper #EBE2CC, plates #FDFBF4, hairlines #D8CBAE, warm ink #1E1811,
+ * and ONE accent — editorial brick #9E2B1E. Fraunces for display
+ * type, Inter for text, IBM Plex Mono for folios and labels.
+ * No gradients, no glows, no second hue.
  */
 
 :root {
-  --navy: #0B1220;
-  --accent: #3478F6;
-  --cyan: #38BDF8;
+  --paper: #F4EEE1;
+  --accent: #9E2B1E;
+  --cyan: #9E2B1E;
+  --ink: #1E1811;
 }
 
 html { scroll-behavior: smooth; scroll-padding-top: 6rem; }
+
+/* Masthead double rule — the newspaper device under the site header:
+   a 1px line, a 3px gap, a second 1px line. */
+.masthead { position: relative; }
+.masthead::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 100%;
+  height: 3px;
+  border-bottom: 1px solid var(--line, #D8CBAE);
+  pointer-events: none;
+}
 
 body {
   @apply bg-paper font-sans text-ink antialiased;
@@ -34,15 +50,15 @@ body {
 /* ——— Type scale (Space Grotesk display) ——— */
 .display-hero {
   font-family: theme('fontFamily.display');
-  font-weight: 700;
-  letter-spacing: -0.025em;
-  line-height: 1.04;
+  font-weight: 600;
+  letter-spacing: -0.015em;
+  line-height: 1.03;
   font-size: clamp(2.6rem, 5.6vw, 4.6rem);
 }
 .display-1 {
   font-family: theme('fontFamily.display');
-  font-weight: 700;
-  letter-spacing: -0.02em;
+  font-weight: 600;
+  letter-spacing: -0.012em;
   line-height: 1.08;
   font-size: clamp(2rem, 4vw, 3.2rem);
 }
@@ -63,32 +79,18 @@ body {
   font-weight: 500;
 }
 
-/* Gradient text — headline accent only */
+/* Accent text — a single word or phrase in brick. No gradients. */
 .text-gradient {
-  background: linear-gradient(92deg, #3478F6 0%, #38BDF8 100%);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
+  color: var(--accent);
 }
 
-/* Primary CTA — the one restrained blue→violet gradient */
+/* Primary CTA — solid brick, darkens slightly on hover */
 .btn-primary {
-  background-image: linear-gradient(135deg, #3478F6 0%, #7465F5 100%);
+  background-color: var(--accent);
   transition: filter 0.25s ease, transform 0.25s ease;
 }
-.btn-primary:hover { filter: brightness(1.12); }
+.btn-primary:hover { filter: brightness(0.9); }
 .btn-primary:active { transform: translateY(1px); }
-
-/* Subtle dot texture for hero fields */
-.dotgrid {
-  background-image: radial-gradient(rgba(247, 250, 255, 0.055) 1.5px, transparent 1.5px);
-  background-size: 22px 22px;
-}
-
-/* Restrained blue ambience behind the hero portrait */
-.glow {
-  background: radial-gradient(closest-side, rgba(52, 120, 246, 0.22), transparent 72%);
-}
 
 /* Drop cap for case-study intros */
 .dropcap::first-letter {
@@ -102,17 +104,6 @@ body {
   padding-top: 0.05em;
 }
 
-/* ——— Marquee strip ——— */
-@keyframes marquee {
-  from { transform: translateX(0); }
-  to { transform: translateX(-50%); }
-}
-.marquee-track {
-  display: flex;
-  width: max-content;
-  animation: marquee 40s linear infinite;
-}
-.marquee:hover .marquee-track { animation-play-state: paused; }
 
 /* ——— Interactions ——— */
 .link-line {
@@ -136,7 +127,7 @@ body {
 .lift:hover { transform: translateY(-3px); }
 
 .service-row { transition: background-color 0.25s ease; }
-.service-row:hover { background-color: rgba(247, 250, 255, 0.03); }
+.service-row:hover { background-color: rgba(30, 24, 17, 0.04); }
 
 /* ——— Project panel entrance (Work section: first paint, Load More,
    filter changes). Self-contained: it does not depend on the reveal
@@ -160,7 +151,6 @@ body {
   html { scroll-behavior: auto; }
   .js .reveal { opacity: 1; transform: none; transition: none; }
   .visual-zoom .visual-inner, .lift, .service-row, .btn-primary { transition: none; }
-  .marquee-track { animation: none; }
   *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
 }
 

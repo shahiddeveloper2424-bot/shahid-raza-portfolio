@@ -8,48 +8,52 @@ Live repository: https://github.com/shahiddeveloper2424-bot/shahid-raza-portfoli
 
 Everything personal is configured in ONE place: `src/data/site.js`. Items still missing (the site shows honest placeholders for them):
 
-1. **Your real photo** → save it as `public/images/profilephoto.jpeg` (see `public/images/README.txt`). It appears in the hero and About automatically.
+1. **Your real photo** → supplied and live as `public/images/profilephoto.jpeg`. It appears in the hero and About automatically.
 2. **Verified email** → `site.contact.email` (activates the contact cards AND the enquiry form).
 3. **WhatsApp number** → `site.contact.whatsapp` (international format, digits only).
 4. **LinkedIn URL** → `site.socials.linkedin`.
 5. **Location** → `site.location` (hero "Based" field).
 6. **Education / experience** → `site.education`, `site.experience` (About section).
-7. **EduCore stack & links** → its features and a real dashboard screenshot were supplied by the owner (Oct 2026) and are published; the technology stack confirmation and any demo/source links are still owner-pending in `src/data/projects.js`.
-8. **Real project screenshots** → set `screenshot` per project in `src/data/projects.js`; labelled design compositions are shown until then.
+7. **EduCore** → features, verified stack and real screenshots were supplied by the owner (Oct 2026) and are published; demo/source links remain owner-pending in `src/data/projects.js`.
+8. **Real project screenshots** → every project now supplies its own image via `screenshot`/`cardImage` in `src/data/projects.js`; the labelled design compositions in `ProjectVisual.jsx` remain only as fallbacks if an image ever fails to load.
 
-Verified project links (re-checked October 2026): PRINTORA storefront https://printora-crfs.vercel.app · PDF Toolkit Pro https://pdf-toolkit-pro-shahiddeveloper2424-1108.vercel.app (source: https://github.com/shahiddeveloper2424-bot/pdf-toolkit-pro). Note: `printora-alpha.vercel.app` is the PRINTORA backend API, not the storefront — do not link it as the live site. Likewise, `pdf-toolkit-pro.vercel.app` (no team suffix) now serves a DIFFERENT, unrelated site — always use the team domain above for PDF Toolkit Pro.
+Verified live links published on the site (re-checked October 2026): Shahid Fashion Store https://shahid-fashion-store.vercel.app · PDF Toolkit Pro https://pdf-toolkit-pro-shahiddeveloper2424-1108.vercel.app (source: https://github.com/shahiddeveloper2424-bot/pdf-toolkit-pro). PRINTORA's storefront is deliberately NOT linked from the portfolio (status: Live Demo Coming Soon, per the owner). Note: `pdf-toolkit-pro.vercel.app` (no team suffix) serves a DIFFERENT, unrelated site — always use the team domain above for PDF Toolkit Pro.
 
 ## Design
 
-**Midnight Navy system (v5, strict — one brand).** Palette, also defined
-as tokens in `tailwind.config.js`:
+**Editorial Paper system.** The portfolio is art-directed as a small
+digital publication: warm paper, warm ink, hairline rules, and ONE
+accent — brick red. Palette, also defined as tokens in
+`tailwind.config.js` (token names were kept from the earlier theme;
+their values are the whole palette — no other hues, no gradients):
 
 | Token | Hex | Role |
 | --- | --- | --- |
-| paper / navy | #0B1220 | Primary background (midnight navy) |
-| surface | #111C2E | Secondary surface |
-| card | #162238 | Elevated cards |
-| accent | #3478F6 | Primary accent (electric blue) |
-| cyan | #38BDF8 | Supporting accent, sparing |
-| ink | #F7FAFF | Main text |
-| soft | #AAB7CC | Secondary text |
-| line | #29374E | Borders & dividers |
+| paper / navy | #F4EEE1 | Primary background (warm paper) |
+| surface | #EBE2CC | Deeper paper (alternating sections) |
+| card | #FDFBF4 | Plates & cards |
+| line | #D8CBAE | Hairlines & borders |
+| ink | #1E1811 | Main text (warm near-black) |
+| soft | #514739 | Secondary text |
+| muted | #8B7D64 | Labels & captions |
+| accent / cyan / violet | #9E2B1E | The single accent — editorial brick |
 
-A blue→violet gradient (`#3478F6` → `#7465F5`) is used for the primary
-CTA only. Design rule: roughly 70% dark neutral surfaces, 25% light
-text, 5% accents — one consistent system across every section and
-project; no per-project colour worlds and no extra hues. Display type
-is Space Grotesk; body Inter; labels IBM Plex Mono. Premium framed
-portrait (owner's real photo as a circle inside an elegant navy panel),
-rounded cards with thin borders, restrained blue highlights, subtle
-motion with full `prefers-reduced-motion` support, and a fail-safe
-scroll reveal. No fake screenshots — project visuals are labelled
-design compositions until the owner supplies real screenshots.
+Composition: a masthead header with a newspaper double rule; an
+editorial hero with an edition line, a contents strip and a featured
+live project; case studies presented as magazine features with
+bylines, meta tables and captioned figures; skills set as ruled
+type, not pill badges. Display type is **Fraunces** (serif); body
+**Inter**; folios and labels **IBM Plex Mono**. The owner's own SR
+logo is used exactly as supplied, presented on an ink stamp in the
+masthead. Motion is restrained, with full `prefers-reduced-motion`
+support. No fake screenshots and no invented claims — project
+visuals are genuine images with honest captions, and anything not
+yet supplied by the owner renders as a clearly labelled placeholder.
 
 ## What's inside
 
-- **Home** — hero, selected work, about, skills, services, process and contact sections
-- **Case studies** — `/projects/printora`, `/projects/educore`, `/projects/pdf-toolkit-pro`
+- **Home** — editorial hero, selected work (with Load More), about, skills, services, process and contact sections
+- **Case studies** — eight routes: `/projects/shahid-fashion-store`, `/projects/pdf-toolkit-pro`, `/projects/educore`, `/projects/printora`, `/projects/learnflow-ai`, `/projects/authentication-session-security`, `/projects/taskflow` (with a working in-page demo), `/projects/ai-personal-agent`
 - **Honest content policy** — no fake testimonials, no invented statistics, no fake screenshots. Anything not yet supplied by the owner (email, WhatsApp, education, some project details) renders as a clearly labelled placeholder. See `docs/CONTENT.md`.
 
 ## Tech stack

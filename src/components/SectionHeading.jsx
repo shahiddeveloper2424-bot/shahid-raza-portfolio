@@ -4,7 +4,7 @@ export default function SectionHeading({ index, eyebrow, title, intro, accent = 
   return (
     <div className="mb-14 sm:mb-16">
       <div className="reveal flex items-center gap-4 border-t border-line pt-5">
-        <span aria-hidden="true" className={`h-2.5 w-2.5 shrink-0 rounded-[3px] ${accent}`} />
+        <span aria-hidden="true" className={`h-[3px] w-10 shrink-0 ${accent}`} />
         <p className="folio text-cyan">{index} — {eyebrow}</p>
         <span aria-hidden="true" className="h-px flex-1 bg-line" />
         <p className="folio hidden text-muted sm:block">Shahid Raza</p>

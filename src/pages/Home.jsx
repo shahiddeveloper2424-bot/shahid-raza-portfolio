@@ -10,7 +10,6 @@ import { projects } from '../data/projects.js'
 import { skillGroups, services, process } from '../data/skills.js'
 import { useReveal } from '../hooks/useReveal.js'
 
-const TECH_CHIPS = ['React', 'JavaScript', 'Node.js', 'Express', 'MongoDB', 'Tailwind CSS']
 
 const projectTypes = [
   'Business website',
@@ -38,86 +37,81 @@ const TRUST = [
 
 function Hero() {
   return (
-    <section className="dotgrid relative overflow-hidden bg-navy">
-      <div aria-hidden="true" className="glow pointer-events-none absolute -left-40 top-10 h-[560px] w-[560px]" />
-      <div className="relative mx-auto grid max-w-shell gap-12 px-5 pb-20 pt-12 sm:px-10 lg:grid-cols-12 lg:gap-10 lg:pb-28 lg:pt-16">
-        {/* Portrait — left (spec order); second on mobile after the intro */}
-        <div className="order-2 lg:order-1 lg:col-span-5">
-          <div className="reveal mx-auto max-w-[380px] lg:mx-0">
-            <Portrait />
+    <section className="relative bg-paper">
+      <div className="mx-auto max-w-shell px-5 pb-16 pt-10 sm:px-10 lg:pb-24 lg:pt-12">
+        {/* Edition line — the top of the front page */}
+        <div className="flex flex-wrap items-baseline justify-between gap-x-8 gap-y-2 border-b border-line pb-5">
+          <p className="folio text-accent">The portfolio of Shahid Raza</p>
+          <p className="folio text-muted">Independent software developer · 2026 edition</p>
+        </div>
+
+        <div className="grid gap-12 pt-10 lg:grid-cols-12 lg:gap-10 lg:pt-14">
+          {/* The introduction */}
+          <div className="lg:col-span-7">
+            <h1 className="display-hero text-ink">
+              I build the software small businesses <span className="text-gradient">run on.</span>
+            </h1>
+            <p className="lede mt-7 max-w-xl text-soft">
+              A live fashion store. A management system for small schools. A set of PDF tools that
+              never upload your files. I design, build and ship complete web applications — and
+              document each one on this page as a case study, with its real status and the
+              evidence to check it by.
+            </p>
+            <div className="mt-9 flex flex-wrap items-center gap-x-8 gap-y-4">
+              <Link href="/#contact" className="btn-primary rounded-[3px] px-7 py-3.5 font-display font-semibold text-white">Discuss a project</Link>
+              <Link href="/#work" className="arrow-link font-display font-semibold text-accent">Read the case studies <span className="arr" aria-hidden="true">↓</span></Link>
+              {whatsappHref() && (
+                <a href={whatsappHref()} target="_blank" rel="noopener noreferrer" className="arrow-link inline-flex items-center gap-2 font-display font-semibold text-ink">
+                  <WhatsAppIcon className="h-5 w-5 text-accent" /> WhatsApp <span className="arr" aria-hidden="true">↗</span>
+                </a>
+              )}
+            </div>
+            <dl className="mt-12 grid max-w-xl grid-cols-3 gap-6 border-t border-line pt-6">
+              <div>
+                <dt className="folio text-muted">Focus</dt>
+                <dd className="mt-2 font-display font-semibold leading-snug text-ink">Commerce · Education · Documents</dd>
+              </div>
+              <div>
+                <dt className="folio text-muted">Live work</dt>
+                <dd className="mt-2 font-display font-semibold leading-snug text-ink">2 projects live on Vercel</dd>
+              </div>
+              <div>
+                <dt className="folio text-muted">Education</dt>
+                <dd className="mt-2 font-display font-semibold leading-snug text-ink">BSCS — GCUF, 7th semester</dd>
+              </div>
+            </dl>
           </div>
-          <div className="reveal mx-auto mt-5 max-w-[380px] rounded-2xl border border-line bg-card p-5 lg:mx-0">
-            <p className="folio text-cyan">Featured project</p>
-            <p className="mt-2.5 font-display text-lg font-semibold leading-snug text-ink">PRINTORA — print-on-demand e-commerce platform.</p>
-            <div className="mt-3.5 flex flex-wrap items-center gap-x-6 gap-y-2.5">
-              <Link href="/projects/printora" className="arrow-link font-display font-semibold text-accent hover:text-cyan">Case study <span className="arr" aria-hidden="true">→</span></Link>
-              <span className="rounded-full border border-line px-3 py-1.5 font-mono text-[10px] uppercase tracking-widest2 text-soft">Live Demo Coming Soon</span>
+
+          {/* The author, and the featured work */}
+          <div className="lg:col-span-5">
+            <div className="mx-auto max-w-[380px] lg:ml-auto lg:mr-0">
+              <Portrait />
+            </div>
+            <div className="mx-auto mt-5 max-w-[380px] rounded-[3px] border border-line bg-card p-5 lg:ml-auto lg:mr-0">
+              <p className="folio text-accent">Featured — now live</p>
+              <p className="mt-2.5 font-display text-lg font-semibold leading-snug text-ink">Shahid Fashion Store — a fashion e-commerce store, live on the web.</p>
+              <div className="mt-3.5 flex flex-wrap items-center gap-x-6 gap-y-2.5">
+                <a href="https://shahid-fashion-store.vercel.app" target="_blank" rel="noreferrer" className="arrow-link font-display font-semibold text-accent">Visit Live Store <span className="arr" aria-hidden="true">↗</span></a>
+                <Link href="/projects/shahid-fashion-store" className="arrow-link font-display font-semibold text-ink">Case study <span className="arr" aria-hidden="true">→</span></Link>
+              </div>
             </div>
           </div>
         </div>
 
-        {/* Introduction — right */}
-        <div className="order-1 lg:order-2 lg:col-span-7 lg:pl-4">
-          <p className="reveal folio flex items-start gap-3 leading-relaxed text-cyan">
-            <span aria-hidden="true" className="mt-[3px] h-2.5 w-2.5 shrink-0 rounded-[3px] bg-accent" />
-            <span>{site.name} — Software Developer · Web Application Developer · MERN Stack Developer</span>
+        {/* Contents — the way into the rest of the page */}
+        <nav aria-label="Contents" className="mt-14 border-y border-line py-4 lg:mt-20">
+          <p className="flex flex-wrap items-baseline gap-x-3 gap-y-2 font-mono text-[11px] uppercase tracking-widest2 text-soft">
+            <span className="mr-2 text-muted">Contents</span>
+            <Link href="/#work" className="link-line">01 · Selected work</Link><span aria-hidden="true" className="text-line">/</span>
+            <Link href="/#about" className="link-line">02 · About</Link><span aria-hidden="true" className="text-line">/</span>
+            <Link href="/#skills" className="link-line">03 · Skills</Link><span aria-hidden="true" className="text-line">/</span>
+            <Link href="/#services" className="link-line">04 · Services</Link><span aria-hidden="true" className="text-line">/</span>
+            <Link href="/#process" className="link-line">05 · Process</Link><span aria-hidden="true" className="text-line">/</span>
+            <Link href="/#contact" className="link-line">06 · Contact</Link>
           </p>
-          <h1 className="reveal display-hero mt-7 text-ink">
-            Turning business ideas into <span className="text-gradient">powerful digital products.</span>
-          </h1>
-          <p className="reveal lede mt-7 max-w-xl text-soft">
-            I build responsive websites, e-commerce experiences, custom business applications, and database-driven web solutions focused on practical business needs.
-          </p>
-          <div className="reveal mt-9 flex flex-wrap gap-4">
-            <Link href="/#contact" className="btn-primary rounded-lg px-7 py-3.5 font-display font-semibold text-white">Start a project →</Link>
-            <Link href="/#work" className="rounded-lg border border-line px-7 py-3.5 font-display font-semibold text-ink transition-colors hover:border-accent hover:text-cyan">Explore my work</Link>
-            {whatsappHref() && (
-              <a href={whatsappHref()} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2.5 rounded-lg border border-line px-7 py-3.5 font-display font-semibold text-ink transition-colors hover:border-accent hover:text-cyan">
-                <WhatsAppIcon className="h-5 w-5 text-cyan" /> WhatsApp
-              </a>
-            )}
-          </div>
-          <ul className="reveal mt-9 flex flex-wrap gap-2" aria-label="Core technologies">
-            {TECH_CHIPS.map((t) => (
-              <li key={t} className="rounded-full border border-line bg-surface px-3.5 py-1.5 font-mono text-[11px] uppercase tracking-widest2 text-soft">{t}</li>
-            ))}
-          </ul>
-          <dl className="reveal mt-12 grid max-w-xl grid-cols-3 gap-6 border-t border-line pt-6">
-            <div>
-              <dt className="folio text-muted">Focus</dt>
-              <dd className="mt-2 font-display font-semibold leading-snug text-ink">Business · Commerce · Education</dd>
-            </div>
-            <div>
-              <dt className="folio text-muted">Live work</dt>
-              <dd className="mt-2 font-display font-semibold leading-snug text-ink">2 projects live on Vercel</dd>
-            </div>
-            <div>
-              <dt className="folio text-muted">Based</dt>
-              <dd className="mt-2 font-display font-semibold leading-snug text-muted">To be added</dd>
-            </div>
-          </dl>
-        </div>
+        </nav>
       </div>
     </section>
-  )
-}
-
-function Marquee() {
-  const items = ['Website Development', 'E-Commerce', 'Custom Business Software', 'Web Applications', 'Admin Dashboards', 'Database-Driven Apps', 'Design Studio Tools', 'Multi-Currency Stores']
-  const row = (ariaHidden) => (
-    <div aria-hidden={ariaHidden || undefined} className="flex shrink-0 items-center">
-      {items.map((t) => (
-        <span key={t} className="flex items-center font-display text-sm font-semibold uppercase tracking-[0.14em] text-soft">
-          <span className="px-6">{t}</span>
-          <span aria-hidden="true" className="text-cyan">✦</span>
-        </span>
-      ))}
-    </div>
-  )
-  return (
-    <div className="marquee overflow-hidden border-y border-line bg-surface py-4" role="presentation">
-      <div className="marquee-track">{row(false)}{row(true)}</div>
-    </div>
   )
 }
 
@@ -126,14 +120,12 @@ function Trust() {
     <section className="bg-navy" aria-label="Why work with me">
       <div className="mx-auto max-w-shell px-5 py-20 sm:px-10 sm:py-24">
         <SectionHeading index="01" eyebrow="Why work with me" title={<>Proof, <span className="text-gradient">not promises.</span></>} intro="Everything on this page can be checked — live deployments, public source code, and honest project statuses." />
-        <div className="grid gap-5 sm:grid-cols-2 xl:grid-cols-4">
-          {TRUST.map((c) => (
-            <article key={c.title} className="reveal lift rounded-2xl border border-line bg-card p-6 hover:border-accent/60">
-              <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-accent/15 text-accent">
-                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d={c.icon} /></svg>
-              </span>
-              <h3 className="mt-5 font-display text-lg font-semibold text-ink">{c.title}</h3>
-              <p className="mt-2.5 leading-relaxed text-soft">{c.text}</p>
+        <div className="grid gap-x-8 gap-y-10 sm:grid-cols-2 xl:grid-cols-4">
+          {TRUST.map((c, i) => (
+            <article key={c.title} className="border-t-2 border-ink/60 pt-5">
+              <p className="folio text-accent">{String(i + 1).padStart(2, '0')}</p>
+              <h3 className="mt-3 font-display text-xl font-semibold text-ink">{c.title}</h3>
+              <p className="mt-2 leading-relaxed text-soft">{c.text}</p>
             </article>
           ))}
         </div>
@@ -163,7 +155,7 @@ function About() {
               I work in verified stages — scope first, then build, test and deploy — and I present my work honestly: live projects are linked so you can try them, and anything still in development is labelled as such.
             </p>
             {site.education?.[0] && (
-              <div className="mt-8 rounded-2xl border border-line bg-card p-6">
+              <div className="mt-8 rounded-[3px] border border-line bg-card p-6">
                 <p className="folio text-cyan">Education</p>
                 <h3 className="mt-3 font-display text-xl font-semibold leading-snug text-ink">{site.education[0].degree}</h3>
                 <p className="mt-1.5 leading-relaxed text-soft">{site.education[0].institution}</p>
@@ -173,7 +165,7 @@ function About() {
                 </div>
               </div>
             )}
-            <div className="mt-6 rounded-2xl border border-line bg-card p-6">
+            <div className="mt-6 rounded-[3px] border border-line bg-card p-6">
               <p className="folio text-cyan">Practical development experience</p>
               <p className="mt-3 leading-relaxed text-soft">{site.experienceIntro}</p>
               <ul className="mt-5 divide-y divide-line">
@@ -200,7 +192,7 @@ function About() {
               <p className="mt-4 text-sm leading-relaxed text-muted">Independent project work as a BSCS student — no formal employment is claimed. Each project links to its case study with an honest status.</p>
             </div>
             {site.aiAssisted && (
-              <div className="mt-6 rounded-2xl border border-line bg-card p-6">
+              <div className="mt-6 rounded-[3px] border border-line bg-card p-6">
                 <p className="folio text-cyan">AI-assisted development</p>
                 <p className="mt-3 leading-relaxed text-soft">{site.aiAssisted.summary}</p>
                 {aiOpen && (
@@ -253,16 +245,16 @@ function Skills() {
         <SectionHeading index="03" eyebrow="Technical skills" title="The stack behind the work." intro="Grounded in the projects on this page and my degree coursework — grouped the way the work actually divides. No percentages, no inflated ratings." />
         <div className="grid gap-5 md:grid-cols-2">
           {skillGroups.map((g, i) => (
-            <article key={g.title} className="reveal lift rounded-2xl border border-line bg-card p-7 hover:border-accent/50">
+            <article key={g.title} className="rounded-[3px] border border-line bg-card p-7">
               <div className="flex items-baseline gap-4">
                 <span className="folio text-cyan">{String(i + 1).padStart(2, '0')}</span>
                 <h3 className="font-display text-xl font-semibold text-ink">{g.title}</h3>
               </div>
-              <ul className="mt-6 flex flex-wrap gap-2">
-                {g.skills.map((s) => (
-                  <li key={s} className="rounded-full border border-line bg-surface px-3.5 py-1.5 text-sm font-medium text-soft transition-colors hover:border-cyan/60 hover:text-ink">{s}</li>
+              <p className="mt-5 leading-[2.05] text-soft">
+                {g.skills.map((s, j) => (
+                  <span key={s}>{j > 0 && <>{' '}<span aria-hidden="true" className="mx-1 text-accent">·</span>{' '}</>}<span className="font-medium text-ink/85">{s}</span></span>
                 ))}
-              </ul>
+              </p>
             </article>
           ))}
         </div>
@@ -274,19 +266,19 @@ function Skills() {
 function ProjectPanel({ project, flip }) {
   const live = ['Live preview', 'Live', 'Live Project'].includes(project.status)
   return (
-    <article className="panel-in overflow-hidden rounded-3xl border border-line bg-card">
+    <article className="panel-in overflow-hidden rounded-[3px] border border-line bg-card">
       <div className={`grid items-center gap-8 p-6 sm:p-9 lg:grid-cols-2 lg:gap-12 lg:p-11 ${flip ? '' : ''}`}>
         <div className={`visual-zoom ${flip ? 'lg:order-2' : ''}`}>
           <div className="visual-inner"><ProjectVisual slug={project.slug} /></div>
         </div>
         <div>
           <div className="flex flex-wrap items-center gap-3">
-            <span className={`inline-flex items-center gap-2 rounded-full border px-3 py-1.5 font-mono text-[10px] uppercase tracking-widest2 ${live ? 'border-accent/50 text-cyan' : 'border-line text-soft'}`}>
+            <span className={`inline-flex items-center gap-2 rounded-[2px] border px-3 py-1.5 font-mono text-[10px] uppercase tracking-widest2 ${live ? 'border-accent/50 text-cyan' : 'border-line text-soft'}`}>
               <span aria-hidden="true" className={`h-1.5 w-1.5 rounded-full ${live ? 'bg-cyan' : 'bg-muted'}`} />
               {project.status}
             </span>
             {project.edition && (
-              <span className="inline-flex items-center rounded-full border border-cyan/40 px-3 py-1.5 font-mono text-[10px] uppercase tracking-widest2 text-cyan">{project.edition}</span>
+              <span className="inline-flex items-center rounded-[2px] border border-accent/50 px-3 py-1.5 font-mono text-[10px] uppercase tracking-widest2 text-cyan">{project.edition}</span>
             )}
             <span className="folio text-muted">{project.role || project.subtitle}</span>
           </div>
@@ -329,7 +321,7 @@ function ProjectFilters({ active, onChange }) {
           type="button"
           onClick={() => onChange(f)}
           aria-pressed={active === f}
-          className={`rounded-full border px-4 py-2 font-mono text-[11px] uppercase tracking-widest2 transition-colors ${active === f ? 'border-accent bg-accent/15 text-ink' : 'border-line text-soft hover:border-accent/60 hover:text-ink'}`}
+          className={`border-b-2 px-1.5 pb-2 pt-1 font-mono text-[11px] uppercase tracking-widest2 transition-colors ${active === f ? 'border-accent text-ink' : 'border-transparent text-soft hover:border-line hover:text-ink'}`}
         >
           {f}
         </button>
@@ -380,7 +372,7 @@ function Work() {
               type="button"
               onClick={toggleMore}
               aria-expanded={allShown}
-              className="rounded-full border border-line bg-card px-8 py-3.5 font-display text-sm font-semibold text-ink transition hover:border-accent hover:text-cyan focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
+              className="rounded-[3px] border border-line bg-card px-8 py-3.5 font-display text-sm font-semibold text-ink transition hover:border-accent hover:text-accent focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
             >
               {allShown ? 'Show Less' : 'Load More Projects'} <span aria-hidden="true">{allShown ? '↑' : '↓'}</span>
             </button>
@@ -425,7 +417,7 @@ function Services() {
             </article>
           ))}
         </div>
-        <div className="reveal mt-4 flex flex-col items-start justify-between gap-5 rounded-2xl border border-line bg-card p-7 sm:flex-row sm:items-center">
+        <div className="reveal mt-4 flex flex-col items-start justify-between gap-5 rounded-[3px] border border-line bg-card p-7 sm:flex-row sm:items-center">
           <p className="max-w-xl leading-relaxed text-soft"><strong className="font-semibold text-ink">Not sure which fits?</strong> Describe your project in the contact form — I will recommend the right approach and a clear scope before any commitment.</p>
           <Link href="/#contact" className="btn-primary shrink-0 rounded-lg px-6 py-3 font-display text-sm font-semibold text-white">Discuss your project</Link>
         </div>
@@ -441,7 +433,7 @@ function Process() {
         <SectionHeading index="06" eyebrow="Working process" title="How your project gets built." intro="A clear sequence from first conversation to handover — scope, cost and delivery expectations are discussed and agreed before work begins." />
         <ol className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
           {process.map((p, i) => (
-            <li key={p.step} className="reveal lift rounded-2xl border border-line bg-card p-7 hover:border-accent/50">
+            <li key={p.step} className="reveal lift rounded-[3px] border border-line bg-card p-7 hover:border-accent/50">
               <p className="font-display text-4xl font-bold text-accent">{String(i + 1).padStart(2, '0')}</p>
               <h3 className="mt-4 font-display text-xl font-semibold text-ink">{p.step}</h3>
               <p className="mt-2.5 leading-relaxed text-soft">{p.text}</p>
@@ -474,7 +466,7 @@ function Contact() {
   return (
     <section id="contact" className="scroll-mt-24 bg-navy">
       <div className="mx-auto max-w-shell px-5 py-20 sm:px-10 sm:py-24">
-        <SectionHeading index="07" eyebrow="Contact" title={<>Let&apos;s build something <span className="text-gradient">useful.</span></>} intro="Tell me about your project — what it should do, who it is for, and when you need it. You will get a clear, honest reply about scope, approach and next steps." />
+        <SectionHeading index="07" eyebrow="Contact" title={<>Tell me about <span className="text-gradient">your project.</span></>} intro="Tell me about your project — what it should do, who it is for, and when you need it. You will get a clear, honest reply about scope, approach and next steps." />
         <div className="grid gap-6 lg:grid-cols-[1fr_1.15fr]">
           <div className="reveal space-y-5">
             {emailReady ? (
@@ -518,7 +510,7 @@ function Contact() {
                 <p className="leading-relaxed text-soft">LinkedIn profile link to be added by the owner.</p>
               </ContactCard>
             )}
-            <div className="rounded-2xl border border-line bg-card p-6">
+            <div className="rounded-[3px] border border-line bg-card p-6">
               <p className="folio text-muted">What happens next</p>
               <p className="mt-2.5 leading-relaxed text-soft">Your message opens in your own email app, addressed to me — nothing is sent silently. We discuss scope first; you approve the plan and cost before any work begins.</p>
               <p className="folio mt-5 text-muted">Location & availability</p>
@@ -527,7 +519,7 @@ function Contact() {
           </div>
 
           <form
-            className="reveal h-fit rounded-3xl border border-line bg-card p-6 sm:p-8"
+            className="reveal h-fit rounded-[3px] border border-line bg-card p-6 sm:p-8"
             onSubmit={(e) => {
               e.preventDefault()
               if (!emailReady) return
@@ -594,7 +586,6 @@ export default function Home() {
   return (
     <>
       <Hero />
-      <Marquee />
       <Trust />
       <About />
       <Skills />

@@ -64,10 +64,10 @@ export default function ProjectCase({ slug }) {
           <Link href="/#work" className="arrow-link font-display text-sm font-semibold text-soft hover:text-cyan"><span aria-hidden="true">←</span> All projects</Link>
           <div className="mt-10 grid items-center gap-10 lg:grid-cols-2 lg:gap-14">
             <div>
-              <p className="folio flex flex-wrap items-center gap-3 text-cyan">
+              <p className="folio flex flex-wrap items-center gap-3 text-accent">
                 <span>Case study</span>
-                <span aria-hidden="true" className="h-1.5 w-1.5 rounded-full bg-accent" />
-                <span className="text-soft">{project.subtitle}</span>
+                <span aria-hidden="true" className="h-px w-8 bg-accent" />
+                <span className="text-soft">{project.category}</span>
               </p>
               <h1 className="display-1 mt-5 text-ink">{project.title}</h1>
               <p className="mt-3 font-display text-2xl font-medium text-gradient">{project.subtitle}</p>
@@ -80,17 +80,17 @@ export default function ProjectCase({ slug }) {
                 </p>
               )}
               {project.edition && (
-                <p className="mt-7"><span className="rounded-full border border-cyan/40 px-4 py-2 font-mono text-[11px] uppercase tracking-widest2 text-cyan">{project.edition}</span></p>
+                <p className="mt-7"><span className="rounded-[2px] border border-accent/50 px-4 py-2 font-mono text-[11px] uppercase tracking-widest2 text-accent">{project.edition}</span></p>
               )}
               {!project.links.live && project.status.includes('Coming Soon') && (
-                <p className="mt-7"><span className="rounded-full border border-accent/50 px-4 py-2 font-mono text-[11px] uppercase tracking-widest2 text-cyan">Live Demo Coming Soon</span></p>
+                <p className="mt-7"><span className="rounded-[2px] border border-accent/50 px-4 py-2 font-mono text-[11px] uppercase tracking-widest2 text-accent">Live Demo Coming Soon</span></p>
               )}
               <div className="mt-8 flex flex-wrap gap-4">
                 {project.links.live && (
-                  <a href={project.links.live} target="_blank" rel="noreferrer" className="btn-primary rounded-lg px-6 py-3 font-display text-sm font-semibold text-white">{project.links.liveLabel || 'View live project'} ↗</a>
+                  <a href={project.links.live} target="_blank" rel="noreferrer" className="btn-primary rounded-[3px] px-6 py-3 font-display text-sm font-semibold text-white">{project.links.liveLabel || 'View live project'} ↗</a>
                 )}
                 {project.links.github && (
-                  <a href={project.links.github} target="_blank" rel="noreferrer" className="rounded-lg border border-line px-6 py-3 font-display text-sm font-semibold text-ink transition-colors hover:border-accent hover:text-cyan">View source code ↗</a>
+                  <a href={project.links.github} target="_blank" rel="noreferrer" className="rounded-[3px] border border-line px-6 py-3 font-display text-sm font-semibold text-ink transition-colors hover:border-accent hover:text-accent">View source code ↗</a>
                 )}
               </div>
             </div>
@@ -98,7 +98,7 @@ export default function ProjectCase({ slug }) {
               <div className="visual-inner"><ProjectVisual slug={project.slug} /></div>
             </div>
           </div>
-          <dl className="mt-12 grid grid-cols-2 gap-px overflow-hidden rounded-2xl border border-line bg-line lg:grid-cols-4">
+          <dl className="mt-12 grid grid-cols-2 gap-px overflow-hidden rounded-[3px] border border-line bg-line lg:grid-cols-4">
             {[
               ['Status', project.status],
               ['Project type', project.subtitle],
