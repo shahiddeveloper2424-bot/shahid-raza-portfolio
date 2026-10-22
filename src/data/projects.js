@@ -245,6 +245,73 @@ export const projects = [
     demo: 'taskflow',
     detailsPending: false,
   },
+  {
+    slug: 'learnflow-ai',
+    category: 'AI & Learning',
+    index: '06',
+    title: 'LearnFlow AI',
+    subtitle: 'AI-Powered Learning from YouTube Videos',
+    status: 'In Development',
+    statusNote:
+      'A complete working application that runs locally (React frontend + Express API). It is deliberately not deployed and has no public URL — this page is its showcase. AI features need the user\'s own provider API key; the study workspace is stored in the browser (localStorage), with no accounts or database in this version.',
+    year: '2026',
+    role: 'Designer & Developer — frontend, backend API and AI integration',
+    stack: [
+      'React 19',
+      'Vite',
+      'Tailwind CSS v4',
+      'React Router',
+      'Node.js',
+      'Express 5',
+      'Multi-provider AI (Groq · Gemini · OpenRouter · Cerebras · Cloudflare)',
+      'Google Translate API',
+      'YouTube Innertube API',
+      'localStorage',
+    ],
+    summary:
+      'LearnFlow AI is a learning-focused web application that turns YouTube videos into study material: paste a video link and it extracts the real captions, then generates a summary, organized study notes and a quiz — and answers your questions from the transcript itself. A translation-first workflow lets you study in 13 languages, including Urdu, Roman Urdu (Urdulish), Hindi and Hinglish.',
+    challenge:
+      'Learning from video is passive and slow to revise: an hour-long lecture must be rewatched to find one idea, and for many students the language itself is a barrier — lectures are in English while they think and revise in Urdu or Hindi. Existing tools either fabricate content, lock everything behind accounts, or ignore the language problem entirely.',
+    approach:
+      'The workflow: (1) paste a YouTube URL — real caption segments are extracted through YouTube\'s Innertube API, never scraped or invented; if a video has no captions, the app says so clearly. (2) Pick a study language — the transcript is translated once and cached separately, so the original is never modified. (3) Summary, Notes, Quiz and Ask AI all work on the selected transcript and answer in its language, with a source badge always showing which transcript is active. (4) Everything — videos, notes with autosave, quiz scores — is kept in a versioned browser-local workspace, no sign-up needed.',
+    features: [
+      'Real YouTube transcript extraction — video metadata + timed caption segments via the Innertube API (no HTML scraping, nothing fabricated)',
+      'AI summaries in three lengths (short / medium / detailed), generated from the actual transcript',
+      'Structured study notes generated per video, editable in the workspace with autosave and Markdown export',
+      'Validated quiz generation — chosen question count and difficulty, with real scored history',
+      'Ask AI — questions answered from the transcript itself, not from general knowledge',
+      'Translation-first workflow: 13 study languages (Urdu, Urdulish, Hindi, Hinglish, English, Arabic and more); translate once, cache, and every feature answers in that language',
+      'Five AI providers behind one adapter (Groq, Gemini, OpenRouter, Cerebras, Cloudflare Workers AI) with automatic fallback on transient failures',
+      'Browser-local study workspace: dashboard with real stats, per-video pages, recent activity — no database, no accounts',
+    ],
+    users:
+      'Students and self-learners who study from YouTube lectures — especially those who understand better in Urdu, Roman Urdu, Hindi or Hinglish than in the lecture\'s original English.',
+    challenges: [
+      {
+        title: 'Long transcripts vs free-tier AI limits',
+        text: 'Full lectures far exceed free-tier tokens-per-minute limits, so transcripts are split into provider-aware chunks, requests are spaced, and a rate-limit response tells the user how long to wait instead of failing silently.',
+      },
+      {
+        title: 'Honest transcripts, honest errors',
+        text: 'The extractor never fabricates captions: unavailable, disabled or blocked captions produce a clear, coded error. The same honesty applies to translation — the response states which engine produced it.',
+      },
+      {
+        title: 'Roman Urdu & Hindi have no Google Translate target',
+        text: 'Google cannot output Roman Urdu or Roman Hindi, so Urdulish and Hinglish are routed through the LLM translation path while the other languages use Google Translate (official Cloud API with a key, free endpoint without).',
+      },
+    ],
+    outcomes: [
+      'Complete, working application: dashboard, YouTube learning workspace, notes, quiz & flashcards, study assistant and settings — verified in the supplied source code',
+      'Runs locally with a free-tier AI key (e.g. Groq); transcript extraction itself needs no key',
+      'Not deployed and no public URL — showcased here only, by the owner\'s decision',
+      'Honest limits: no accounts or cross-device sync (the workspace is per-browser by design in this version), and AI quality depends on the provider and model the user configures',
+    ],
+    links: { live: null, liveLabel: null, github: null, githubNote: 'Source code supplied directly by the owner — not published on GitHub yet.' },
+    screenshot: '/images/projects/learnflow-ai-cover.webp', // Representative interface artwork (the app is light-themed; the artwork follows the portfolio palette and the app's real layout).
+    screenshotNote: 'Representative interface artwork — the app’s real workspace, redrawn in the portfolio palette',
+    screenshotSize: [1600, 1200],
+    detailsPending: false,
+  },
 ]
 
 export const getProject = (slug) => projects.find((p) => p.slug === slug) || null

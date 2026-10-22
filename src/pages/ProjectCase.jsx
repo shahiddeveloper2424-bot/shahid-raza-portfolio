@@ -10,6 +10,7 @@ const META_DESC = {
   educore: 'EduCore case study — a school management system in development by Shahid Raza. Honest project status; full details are published as they are verified.',
   'authentication-session-security': 'Authentication & Session Security case study — bcrypt hashing, login throttling, JWT sessions, server-side role-based access control and safe password recovery, implemented in PRINTORA by Shahid Raza.',
   taskflow: 'TaskFlow case study — a working to-do list demo built into this portfolio with React and localStorage: add, edit, complete, delete and filter tasks, by Shahid Raza.',
+  'learnflow-ai': 'LearnFlow AI case study — an AI learning app that turns YouTube videos into summaries, study notes and quizzes in 13 languages. In development, not deployed.',
   'pdf-toolkit-pro': 'PDF Toolkit Pro case study — eight client-side PDF tools (merge, convert, split, extract, rotate, reorder, watermark) built with React and pdf-lib by Shahid Raza. Files never leave the device.',
 }
 
