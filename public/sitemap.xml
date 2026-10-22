@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- PLACEHOLDER: replace the example domain with the production domain before launch. -->
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url><loc>https://your-domain.example/</loc></url>
+  <url><loc>https://your-domain.example/projects/printora</loc></url>
+  <url><loc>https://your-domain.example/projects/educore</loc></url>
+  <url><loc>https://your-domain.example/projects/pdf-toolkit-pro</loc></url>
+</urlset>
