@@ -16,6 +16,10 @@ export const skillGroups = [
     skills: ['JavaScript', 'Python — Basic Knowledge'],
   },
   {
+    title: 'AI & AI-Assisted Development',
+    skills: ['AI-Assisted Coding', 'AI-Assisted Debugging', 'AI-Powered Project Development', 'Prompt Engineering Fundamentals', 'AI Code Review & Verification', 'AI Workflow Productivity', 'AI Application Concepts'],
+  },
+  {
     title: 'Tools & Deployment',
     skills: ['Git', 'GitHub', 'Vite', 'Vercel', 'Cloudinary'],
   },

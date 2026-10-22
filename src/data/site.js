@@ -54,6 +54,19 @@ export const site = {
   // is claimed). Focus lines are verified against each project's case study.
   experienceIntro:
     'I build web applications and software projects to develop practical skills in frontend and backend development, database integration, authentication, responsive interfaces, and application problem-solving. I focus on turning ideas into usable software while continuously improving functionality, code quality, and user experience.',
+  // AI-assisted development — verified against the owner's actual workflow:
+  // this portfolio, EduCore testing and PRINTORA work were built with the
+  // Muse AI agent platform. Ollama has NOT been used — it stays 'Planned'
+  // in the AI Personal Agent case study and is not listed as a skill here.
+  aiAssisted: {
+    text:
+      'I use AI-assisted development tools to accelerate the process of building web applications, exploring implementation approaches, debugging issues, improving user interfaces, and understanding unfamiliar code. I combine AI-generated suggestions with manual review, testing, and verification to improve reliability and maintain control over the final implementation.',
+    tools: 'Muse (Meta AI agent platform) — used daily for coding assistance, debugging, project planning, UI improvement and deployments',
+    appliedTo:
+      'Across my projects, AI assistance has been part of: planning requirements and features, creating and refining responsive interfaces, implementing React components and JavaScript functionality, working with backend APIs and database integration, investigating and fixing bugs, writing and running tests, and improving code organisation and documentation.',
+    note:
+      'A distinction I keep clear: AI tools helped me build these projects — that does not make the projects themselves AI-powered. The exceptions are LearnFlow AI and the AI Personal Agent, where AI is part of the product itself.',
+  },
   experienceProjects: [
     { slug: 'educore', focus: 'Small-school management system — student records, fees, attendance, exams and staff, with a working admin build' },
     { slug: 'printora', focus: 'Print-on-demand e-commerce — storefront, product customisation studio and a full admin panel' },
