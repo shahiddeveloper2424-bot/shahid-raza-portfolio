@@ -549,6 +549,75 @@ export const projects = [
     ],
     detailsPending: false,
   },
+  {
+    slug: 'shahid-fashion-store',
+    category: 'E-commerce',
+    index: '08',
+    title: 'Shahid Fashion Store',
+    subtitle: 'Full-Stack Fashion E-Commerce Platform',
+    status: 'Completed Project',
+    statusNote:
+      "A complete, tested build that is not publicly deployed. The source code lives in a private GitHub repository; the screenshots on this page are from the real application running locally against its own API with the seeded catalogue.",
+    year: '2026',
+    role: 'Design & full-stack development',
+    stack: ['React', 'Vite', 'Tailwind CSS', 'React Router', 'Node.js', 'Express', 'MongoDB', 'Mongoose', 'JWT', 'Cloudinary'],
+    summary:
+      "A premium Pakistani fashion e-commerce platform — embroidered lawns, kurtas and festive collections — built as a monorepo: a React storefront with customer accounts and a full admin panel, an Express + MongoDB API with a server-side orders engine, and one canonical catalogue shared by both. It runs in two modes from the same codebase: a self-contained demo mode and a live-API mode.",
+    challenge:
+      "A real store cannot trust the browser: prices, discounts, stock and order totals must be recomputed on the server, sessions must survive refresh without becoming stealable, and checkout must never double-charge or oversell. At the same time the project had to stay easy to run and evaluate — a full store that only works on one machine, with one database, is hard for anyone to verify.",
+    approach:
+      "The monorepo keeps one source of truth: shared/ holds the canonical catalogue (24 products with PKR prices, variants and SEO data) consumed by the seed scripts, the demo adapter and the API alike. The storefront talks to services that switch between a local demo-data adapter and the live API, so demo mode and real mode exercise the same UI. On the server, pricing is always recomputed, orders are idempotent, inventory adjustments are oversell-safe, and sessions use httpOnly cookies with refresh rotation, double-submit CSRF and per-request role re-checks (documented in the project's own docs/SECURITY.md).",
+    features: [
+      'Storefront catalogue: 24 products with size/colour variants, categories (Men, Women, Unstitched, Stitched), collections, search, filters and a sale section',
+      'Server-side cart and wishlist tied to the customer session, with quantities, shipping thresholds and totals computed by the API',
+      'Checkout and orders engine: server-recomputed pricing, idempotent order placement, oversell-safe inventory, Cash on Delivery',
+      'Customer accounts: registration, login, addresses, order history and account notifications',
+      'Admin panel with 14 sections: dashboard analytics, orders, products, categories, collections, inventory, coupons, payments, banners, reviews, customers, reports and settings',
+      'Product image management with Cloudinary uploads (Multer pipeline) on the backend',
+      'Session security: httpOnly cookie auth with refresh rotation, double-submit CSRF, bcrypt password hashing, rate limiting and RBAC',
+      'Two run modes from one codebase: demo mode with a local data adapter (no database needed) and live-API mode',
+    ],
+    users:
+      'Online fashion shoppers in Pakistan buying stitched and unstitched clothing with Cash on Delivery — and the store administrator who runs the catalogue, orders, inventory and promotions from the admin panel.',
+    challenges: [
+      {
+        title: 'One codebase, two modes',
+        text: 'Demo mode and live-API mode had to behave identically in the UI while one runs entirely in the browser. A service layer over a demo-data adapter — with demo content clearly labelled and demo checkout storing orders only in the browser — keeps the modes from drifting apart.',
+      },
+      {
+        title: 'Order integrity',
+        text: 'Checkout recomputes every total on the server rather than trusting the client, order placement is idempotent so a double submit cannot create two orders, and inventory is adjusted in an oversell-safe way when orders are placed and cancelled.',
+      },
+      {
+        title: 'Sessions that can be revoked',
+        text: 'Access uses httpOnly cookies with refresh-token rotation and server-side sessions that can be revoked, CSRF is handled with a double-submit token, and admin routes re-check the role on every request instead of trusting the login once.',
+      },
+    ],
+    outcomes: [
+      'Complete storefront and 14-section admin panel running against the real API with the seeded 24-product catalogue',
+      'Backend test suite passes 140/140 (node:test + Supertest against an in-memory MongoDB) and the frontend production build passes — both re-verified in October 2026',
+      'Source code published to a private GitHub repository with a hardened .gitignore — only .env.example files, never real credentials',
+      'Stated honestly in the project itself: Cash on Delivery only (no online payments yet), password-reset email returns 503 until SMTP is configured, and the product photography is AI-generated placeholder imagery, not studio photography',
+    ],
+    links: {
+      live: null,
+      liveLabel: null,
+      github: null,
+      githubNote: 'Source code is kept in a private repository.',
+    },
+    screenshot: '/images/projects/shahid-fashion-store-cover.webp',
+    screenshotNote:
+      'Real screenshot — the actual storefront home page running locally in live-API mode with its seeded catalogue. The product photography is AI-generated placeholder imagery, as the project itself documents.',
+    screenshotSize: [1440, 900],
+    gallery: [
+      { src: '/images/projects/fashion-gallery-shop.webp', alt: 'Shahid Fashion Store shop page with the product grid', caption: 'Real screenshot — the shop grid with the seeded 24-product catalogue, prices in PKR.', size: [1440, 900] },
+      { src: '/images/projects/fashion-gallery-product.webp', alt: 'Product detail page with variants and add to cart', caption: 'Real screenshot — a product page with variant selection and add to cart.', size: [1440, 900] },
+      { src: '/images/projects/fashion-gallery-cart.webp', alt: 'Shopping cart with an added product and order summary', caption: 'Real screenshot — the cart after adding a product; subtotal, Rs 250 shipping and the free-shipping threshold are computed by the app.', size: [1440, 900] },
+      { src: '/images/projects/fashion-gallery-admin.webp', alt: 'Admin dashboard of Shahid Fashion Store', caption: 'Real screenshot — the admin dashboard on the live API with a freshly seeded local database (no sales yet, so the figures are honestly zero).', size: [1440, 900] },
+      { src: '/images/projects/fashion-gallery-mobile.webp', alt: 'Shahid Fashion Store home page on a mobile viewport', caption: 'Real screenshot — the storefront home page at a 390px mobile viewport.', size: [390, 844] },
+    ],
+    detailsPending: false,
+  }
 ]
 
 export function getProject(slug) {

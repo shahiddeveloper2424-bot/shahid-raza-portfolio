@@ -84,6 +84,7 @@ export const site = {
       'A distinction I keep clear: AI tools helped me build these projects — that does not make the projects themselves AI-powered. The exceptions are LearnFlow AI and the AI Personal Agent, where AI is part of the product itself.',
   },
   experienceProjects: [
+    { slug: 'shahid-fashion-store', focus: 'Full-stack fashion e-commerce — storefront, customer accounts, a 14-section admin panel, a server-side orders engine and Cloudinary product imagery' },
     { slug: 'educore', focus: 'Small-school management system — student records, fees, attendance, exams and staff, with a working admin build' },
     { slug: 'printora', focus: 'Print-on-demand e-commerce — storefront, product customisation studio and a full admin panel' },
     { slug: 'pdf-toolkit-pro', focus: 'Browser-based PDF tools — eight utilities that process files entirely on the user’s device' },
