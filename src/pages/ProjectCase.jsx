@@ -1,12 +1,15 @@
 import React, { useEffect } from 'react'
 import { Link } from '../lib/router.jsx'
 import ProjectVisual from '../components/ProjectVisual.jsx'
+import TaskFlowDemo from '../demos/TaskFlowDemo.jsx'
 import { projects } from '../data/projects.js'
 import { useReveal } from '../hooks/useReveal.js'
 
 const META_DESC = {
   printora: 'PRINTORA case study — a print-on-demand e-commerce platform with a customer design studio, multi-currency storefront and full admin panel, built with the MERN stack by Shahid Raza.',
   educore: 'EduCore case study — a school management system in development by Shahid Raza. Honest project status; full details are published as they are verified.',
+  'secure-auth': 'Secure authentication case study — bcrypt hashing, login throttling, JWT sessions, server-side role-based access control and safe password recovery, implemented in PRINTORA by Shahid Raza.',
+  taskflow: 'TaskFlow case study — a working to-do list demo built into this portfolio with React and localStorage: add, edit, complete, delete and filter tasks, by Shahid Raza.',
   'pdf-toolkit-pro': 'PDF Toolkit Pro case study — eight client-side PDF tools (merge, convert, split, extract, rotate, reorder, watermark) built with React and pdf-lib by Shahid Raza. Files never leave the device.',
 }
 
@@ -102,6 +105,16 @@ export default function ProjectCase({ slug }) {
 
       {/* ——— Body with meta rail ——— */}
       <div className="bg-navy">
+        {project.demo === 'taskflow' && (
+          <section id="demo" className="border-b border-line bg-paper">
+            <div className="mx-auto max-w-shell px-5 py-14 sm:px-10">
+              <p className="folio text-cyan">Live interactive demo</p>
+              <h2 className="mt-3 font-display text-3xl font-semibold tracking-tight text-ink">Try TaskFlow right here.</h2>
+              <p className="mt-3 max-w-2xl leading-relaxed text-soft">This is the actual project, running in your browser — not a screenshot or a video. Add a task, edit it, filter the list; everything is saved only on your device.</p>
+              <div className="mt-8 max-w-3xl"><TaskFlowDemo /></div>
+            </div>
+          </section>
+        )}
         <div className="mx-auto grid max-w-shell gap-12 px-5 py-16 sm:px-10 lg:grid-cols-[13rem_1fr] lg:py-20">
           <aside className="hidden lg:block">
             <div className="sticky top-28">

@@ -17,6 +17,7 @@
 export const projects = [
   {
     slug: 'printora',
+    category: 'E-commerce',
     index: '01',
     title: 'PRINTORA',
     subtitle: 'Print-on-Demand E-Commerce Platform',
@@ -65,6 +66,7 @@ export const projects = [
   },
   {
     slug: 'educore',
+    category: 'Web Applications',
     index: '02',
     title: 'EduCore',
     subtitle: 'School Management System',
@@ -104,6 +106,7 @@ export const projects = [
   },
   {
     slug: 'pdf-toolkit-pro',
+    category: 'Web Applications',
     index: '03',
     title: 'PDF Toolkit Pro',
     subtitle: 'Browser-Based PDF Tools',
@@ -150,6 +153,94 @@ export const projects = [
     screenshot: '/images/pdf-toolkit-pro-cover.jpg', // Owner-supplied promotional artwork (concept visual — NOT an app screenshot).
     screenshotNote: 'Promotional concept artwork — not an application screenshot',
     screenshotSize: [1400, 933],
+    detailsPending: false,
+  },
+  {
+    slug: 'secure-auth',
+    category: 'Security',
+    index: '04',
+    title: 'Secure Authentication & Session Management',
+    subtitle: 'Authentication & Access Control — Technical Case Study',
+    status: 'Technical Case Study',
+    statusNote: 'This is not a standalone product: it is the authentication and session system designed and implemented inside PRINTORA (with role-based logins also in EduCore), documented here as a dedicated technical case study. Every protection listed was verified in the actual server code.',
+    year: '2026',
+    role: 'Design & implementation',
+    stack: ['Node.js', 'Express', 'MongoDB', 'JWT', 'bcrypt', 'Helmet', 'express-rate-limit'],
+    summary:
+      'The complete sign-in and access-control layer of a production MERN application — password hashing, login throttling, signed session tokens, server-side role enforcement and safe account recovery — built and tested as part of PRINTORA.',
+    challenge:
+      'A store that handles customer accounts, orders and an admin panel cannot treat login as a formality: weak password storage, unlimited login attempts, or permissions enforced only by hiding buttons would put customer data and the whole business at risk.',
+    approach:
+      'Security was implemented on the server, where it cannot be bypassed from the browser: passwords are hashed with bcrypt, sessions are signed JWTs verified on every request, roles are enforced by middleware on each protected route, and abuse controls (throttling, rate limits, account blocking) sit in front of the sensitive endpoints. Account changes re-verify the current password, and recovery uses single-use, expiring tokens stored only as hashes.',
+    features: [
+      'bcrypt password hashing (cost factor 12) — passwords are never stored or logged in plain text',
+      'Login responses that never reveal whether an email exists — the same generic error for unknown email and wrong password',
+      'Failed-login throttling (HTTP 429 after repeated failures) plus API rate limiting via express-rate-limit',
+      'Signed JWT sessions (7-day expiry) verified on every protected request, carrying the user id and role',
+      'Server-side role-based access control — a requireRole middleware guards every admin route; hiding UI buttons is never the enforcement',
+      'Blocked-account lockout: a blocked user is rejected (403) even with an otherwise valid token',
+      'Password change and email change both require re-entering the current password',
+      'Password recovery with single-use reset tokens — 32-byte random token, only its SHA-256 hash stored, 1-hour expiry',
+      'Helmet security headers and a strict CORS allowlist on the API',
+      'Automatic audit logging on admin mutations, reviewed in the admin Audit Log',
+    ],
+    users:
+      'Store customers whose accounts and orders the system protects, and the owner/staff team whose admin roles decide exactly what each person can see and change.',
+    challenges: [
+      { title: 'Client-side checks are not security', text: 'Forms validate for usability, but every rule that matters — hashing, throttling, role checks, blocked accounts — is enforced again on the server, because anything running only in the browser can be bypassed.' },
+      { title: 'Usability vs lockout', text: 'Throttling must stop brute force without punishing real customers: failed attempts are limited per account, errors stay generic, and legitimate users get a clear “try again in a few minutes” response instead of a silent failure.' },
+    ],
+    outcomes: [
+      'The full authentication flow — register, login, throttling, role guards, password/email change, recovery — runs in production as part of PRINTORA',
+      'Covered by the automated backend test chain (auth suites included in the 409-check run), not just manual clicking',
+      'The same role-based login pattern (Administrator / Teacher) is implemented in EduCore',
+      'Honest limits: tokens are Bearer JWTs (no cookie sessions), and there is no token blacklist — revocation works through account blocking and token expiry',
+    ],
+    links: { live: null, liveLabel: null, github: null, githubNote: 'Implemented inside PRINTORA (private repository) — code walkthrough available on request.' },
+    screenshot: '/images/projects/secure-auth-cover.webp', // Interface mockup created for this case study.
+    screenshotNote: 'Interface mockup — the implemented login, session & role controls',
+    screenshotSize: [1600, 1200],
+    detailsPending: false,
+  },
+  {
+    slug: 'taskflow',
+    category: 'Productivity',
+    index: '05',
+    title: 'TaskFlow — To-Do List Manager',
+    subtitle: 'Productivity / Task Management',
+    status: 'Interactive Demo',
+    statusNote: 'A small, genuinely working demo built into this portfolio — try it live in the demo section below. Tasks are stored only in your own browser (localStorage); there is no server and no account.',
+    year: '2026',
+    role: 'Design & development',
+    stack: ['React', 'JavaScript', 'Vite', 'Tailwind CSS', 'localStorage'],
+    summary:
+      'A clean task manager that runs entirely in the browser: add, edit, complete and delete tasks, filter by state, and pick up where you left off — tasks persist on your device between visits.',
+    challenge:
+      'Plenty of to-do demos look right but do nothing. This one had to be genuinely functional — real state, real persistence, real validation — while staying small enough to live inside a portfolio without a backend.',
+    approach:
+      'TaskFlow is a single self-contained React component with its own localStorage persistence layer. State is the single source of truth: the list, filters and counts all derive from it, edits happen inline, and every destructive action is one deliberate click. Empty states are designed for each filter, not left blank.',
+    features: [
+      'Add tasks with validation — empty tasks are rejected with an inline message',
+      'Edit any task inline and save or cancel',
+      'Mark tasks complete / pending with one click',
+      'Delete tasks, plus a clear-completed action',
+      'Filter All / Pending / Completed with live counts',
+      'Automatic persistence in localStorage — tasks survive a page refresh on the same device',
+      'Designed empty states for an empty list and for each filter',
+      'Responsive layout that works on mobile and desktop',
+    ],
+    users:
+      'Anyone who wants a simple, private task list — and, in this portfolio, a way to test the work directly instead of reading claims about it.',
+    outcomes: [
+      'Fully working in this portfolio — every feature above can be tried in the demo section of this page',
+      'No backend, no sign-up, no tracking: tasks never leave the visitor’s browser',
+      'Ships inside the portfolio’s normal production build with no extra services',
+    ],
+    links: { live: null, liveLabel: null, github: null, githubNote: 'Built into this portfolio — the live demo below is the project.' },
+    screenshot: '/images/projects/taskflow-cover.webp', // Real screenshot of the working demo on this page.
+    screenshotNote: 'Screenshot — the actual interactive demo on this page',
+    screenshotSize: [1600, 948],
+    demo: 'taskflow',
     detailsPending: false,
   },
 ]

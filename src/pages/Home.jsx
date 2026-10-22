@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Link } from '../lib/router.jsx'
 import SectionHeading from '../components/SectionHeading.jsx'
 import ProjectVisual from '../components/ProjectVisual.jsx'
@@ -217,6 +217,7 @@ function ProjectPanel({ project, flip }) {
           <p className="mt-6 font-mono text-[11px] uppercase tracking-widest2 text-muted">{project.stack.length ? project.stack.join(' · ') : 'Technology stack — to be confirmed by the owner'}</p>
           <div className="mt-7 flex flex-wrap gap-x-7 gap-y-3">
             <Link href={`/projects/${project.slug}`} className="arrow-link font-display font-semibold text-accent hover:text-cyan">View case study <span className="arr" aria-hidden="true">→</span></Link>
+            {project.demo && (<Link href={`/projects/${project.slug}`} className="arrow-link font-display font-semibold text-accent hover:text-cyan">Try the demo <span className="arr" aria-hidden="true">→</span></Link>)}
             {project.links.live && (
               <a href={project.links.live} target="_blank" rel="noreferrer" className="arrow-link font-display font-semibold text-accent hover:text-cyan">View live project <span className="arr" aria-hidden="true">↗</span></a>
             )}
@@ -230,13 +231,38 @@ function ProjectPanel({ project, flip }) {
   )
 }
 
+const PROJECT_FILTERS = ['All', ...Array.from(new Set(projects.map((p) => p.category).filter(Boolean)))]
+
+function ProjectFilters({ active, onChange }) {
+  return (
+    <div className="reveal mb-10 flex flex-wrap items-center gap-2" role="group" aria-label="Filter projects by category">
+      {PROJECT_FILTERS.map((f) => (
+        <button
+          key={f}
+          type="button"
+          onClick={() => onChange(f)}
+          aria-pressed={active === f}
+          className={`rounded-full border px-4 py-2 font-mono text-[11px] uppercase tracking-widest2 transition-colors ${active === f ? 'border-accent bg-accent/15 text-ink' : 'border-line text-soft hover:border-accent/60 hover:text-ink'}`}
+        >
+          {f}
+        </button>
+      ))}
+      <span className="ml-2 font-mono text-[11px] uppercase tracking-widest2 text-muted">
+        {active === 'All' ? `${projects.length} projects` : `${projects.filter((p) => p.category === active).length} of ${projects.length}`}
+      </span>
+    </div>
+  )
+}
+
 function Work() {
+  const [filter, setFilter] = useState('All')
   return (
     <section id="work" className="scroll-mt-24 bg-surface">
       <div className="mx-auto max-w-shell px-5 py-20 sm:px-10 sm:py-24">
         <SectionHeading index="04" eyebrow="Featured projects" title="Real products, honestly presented." intro="Live links where they are published, public source where the code is open, and a clear, honest status on every project." />
+        <ProjectFilters active={filter} onChange={setFilter} />
         <div className="space-y-8">
-          {projects.map((p, i) => (<ProjectPanel key={p.slug} project={p} flip={i % 2 === 1} />))}
+          {projects.map((p, i) => (<div key={p.slug} className={filter === 'All' || p.category === filter ? '' : 'hidden'}><ProjectPanel project={p} flip={i % 2 === 1} /></div>))}
         </div>
         <p className="reveal mx-auto mt-12 max-w-2xl text-center leading-relaxed text-soft">
           This portfolio itself is also my work — designed and built with React, Vite and Tailwind CSS, and deployed on Vercel.

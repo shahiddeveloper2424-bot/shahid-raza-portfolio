@@ -143,11 +143,34 @@ function RealImage({ project, fallback }) {
 
 const VISUALS = { printora: PrintoraVisual, educore: EduCoreVisual, 'pdf-toolkit-pro': PdfVisual }
 
+export function GenericVisual({ project }) {
+  const title = project ? project.title : 'Project'
+  const sub = project ? project.subtitle : ''
+  const stack = project ? project.stack.slice(0, 4) : []
+  return (
+    <Frame label="Project preview">
+      <div className="flex h-full flex-col justify-between p-6 sm:p-8" style={{ background: 'linear-gradient(150deg,#162238,#0B1220)' }}>
+        <div>
+          <p className="font-mono text-[10px] uppercase tracking-widest2" style={{ color: '#38BDF8' }}>Case study</p>
+          <p className="mt-3 font-display text-2xl font-semibold leading-tight text-white sm:text-3xl">{title}</p>
+          <p className="mt-2 text-sm" style={{ color: '#AAB7CC' }}>{sub}</p>
+        </div>
+        <div className="flex flex-wrap gap-2">
+          {stack.map((t) => (
+            <span key={t} className="rounded-full px-3 py-1.5 font-mono text-[10px] uppercase tracking-widest2" style={{ background: 'rgba(52,120,246,.18)', color: '#BFD7FF' }}>{t}</span>
+          ))}
+        </div>
+      </div>
+    </Frame>
+  )
+}
+
 export default function ProjectVisual({ slug }) {
-  const Visual = VISUALS[slug] || PrintoraVisual
   const project = projects.find((p) => p.slug === slug)
+  const Visual = VISUALS[slug]
+  const fallback = Visual ? <Visual /> : <GenericVisual project={project} />
   if (project && project.screenshot) {
-    return <RealImage project={project} fallback={<Visual />} />
+    return <RealImage project={project} fallback={fallback} />
   }
-  return <Visual />
+  return fallback
 }
