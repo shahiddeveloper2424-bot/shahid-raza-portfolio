@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { Link, usePath } from '../lib/router.jsx'
 import { site, navLinks } from '../data/site.js'
-import LogoMark from './LogoMark.jsx'
 
 const SECTION_IDS = ['about', 'skills', 'work', 'services', 'process', 'contact']
 
@@ -35,7 +34,7 @@ export default function Header() {
       <header className="sticky top-0 z-40 border-b border-line bg-navy/90 backdrop-blur">
         <div className="mx-auto flex max-w-shell items-center justify-between gap-4 px-5 py-3 sm:px-10 sm:py-3.5">
           <Link href="/" className="flex min-w-0 items-center gap-3" ariaLabel={`${site.name} — home`}>
-            <LogoMark className="h-10 w-10 shrink-0 sm:h-11 sm:w-11" />
+            <img src="/images/shahid-raza-sr-logo.png" alt="" aria-hidden="true" className="h-10 w-auto shrink-0 sm:h-11" />
             <span className="min-w-0 leading-none">
               <span className="block whitespace-nowrap font-display text-[1.12rem] font-bold tracking-tight text-ink sm:text-[1.3rem]">{site.name}</span>
               <span className="folio mt-1 hidden whitespace-nowrap text-[0.58rem] text-muted sm:block">{site.role} — Portfolio</span>
@@ -84,7 +83,7 @@ export default function Header() {
       >
         <div className="flex items-center justify-between px-5 pb-3 pt-[max(0.75rem,env(safe-area-inset-top))]">
           <span className="flex min-w-0 items-center gap-3">
-            <LogoMark className="h-10 w-10 shrink-0" />
+            <img src="/images/shahid-raza-sr-logo.png" alt="" aria-hidden="true" className="h-10 w-auto shrink-0" />
             <span className="whitespace-nowrap font-display text-lg font-bold">{site.name}</span>
           </span>
           <button
