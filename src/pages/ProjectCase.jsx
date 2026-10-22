@@ -8,6 +8,7 @@ import { useReveal } from '../hooks/useReveal.js'
 
 const META_DESC = {
   printora: 'PRINTORA case study — a print-on-demand e-commerce platform with a customer design studio, multi-currency storefront and full admin panel, built with the MERN stack by Shahid Raza.',
+  'ai-personal-agent': 'AI Personal Agent case study — a working project in development by Shahid Raza: an AI assistant for coding help, building and debugging web projects, research and scheduled tasks, with honestly labelled working, in-development and planned capabilities.',
   educore: 'EduCore case study — a school management system in development by Shahid Raza. Honest project status; full details are published as they are verified.',
   'authentication-session-security': 'Authentication & Session Security case study — bcrypt hashing, login throttling, JWT sessions, server-side role-based access control and safe password recovery, implemented in PRINTORA by Shahid Raza.',
   taskflow: 'TaskFlow case study — a working to-do list demo built into this portfolio with React and localStorage: add, edit, complete, delete and filter tasks, by Shahid Raza.',

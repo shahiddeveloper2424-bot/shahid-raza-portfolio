@@ -158,9 +158,34 @@ function About() {
             <p className="lede mt-5 text-soft">
               I work in verified stages — scope first, then build, test and deploy — and I present my work honestly: live projects are linked so you can try them, and anything still in development is labelled as such.
             </p>
-            <div className="mt-8 rounded-2xl border border-dashed border-line bg-navy/60 p-6">
-              <p className="folio text-cyan">Education & experience</p>
-              <p className="mt-2.5 leading-relaxed text-soft">Formal education and work-history details will be published here as soon as the owner adds the verified information — nothing is listed until it can be stated accurately.</p>
+            {site.education?.[0] && (
+              <div className="mt-8 rounded-2xl border border-line bg-card p-6">
+                <p className="folio text-cyan">Education</p>
+                <h3 className="mt-3 font-display text-xl font-semibold leading-snug text-ink">{site.education[0].degree}</h3>
+                <p className="mt-1.5 leading-relaxed text-soft">{site.education[0].institution}</p>
+                <div className="mt-4 flex flex-wrap gap-2">
+                  <span className="rounded-full border border-line bg-surface px-3.5 py-1.5 text-sm font-medium text-soft">Session {site.education[0].session}</span>
+                  <span className="rounded-full border border-accent/50 bg-surface px-3.5 py-1.5 text-sm font-medium text-cyan">{site.education[0].semester} — {site.education[0].status}</span>
+                </div>
+              </div>
+            )}
+            <div className="mt-6 rounded-2xl border border-line bg-card p-6">
+              <p className="folio text-cyan">Practical development experience</p>
+              <p className="mt-3 leading-relaxed text-soft">{site.experienceIntro}</p>
+              <ul className="mt-5 divide-y divide-line">
+                {site.experienceProjects.map((item) => {
+                  const p = projects.find((x) => x.slug === item.slug)
+                  if (!p) return null
+                  return (
+                    <li key={item.slug} className="flex flex-wrap items-baseline gap-x-4 gap-y-1 py-3.5">
+                      <Link href={`/projects/${p.slug}`} className="font-display font-semibold text-ink transition-colors hover:text-cyan">{p.title}</Link>
+                      <span className="font-mono text-[10px] uppercase tracking-widest2 text-muted">{p.status}</span>
+                      <span className="w-full text-sm leading-relaxed text-soft">{item.focus}</span>
+                    </li>
+                  )
+                })}
+              </ul>
+              <p className="mt-4 text-sm leading-relaxed text-muted">Independent project work as a BSCS student — no formal employment is claimed. Each project links to its case study with an honest status.</p>
             </div>
           </div>
         </div>
@@ -173,7 +198,7 @@ function Skills() {
   return (
     <section id="skills" className="scroll-mt-24 bg-navy">
       <div className="mx-auto max-w-shell px-5 py-20 sm:px-10 sm:py-24">
-        <SectionHeading index="03" eyebrow="Technical skills" title="The stack behind the work." intro="Every skill below is demonstrated in a shipped project on this page — grouped the way the work actually divides." />
+        <SectionHeading index="03" eyebrow="Technical skills" title="The stack behind the work." intro="Grounded in the projects on this page and my degree coursework — grouped the way the work actually divides. No percentages, no inflated ratings." />
         <div className="grid gap-5 md:grid-cols-2">
           {skillGroups.map((g, i) => (
             <article key={g.title} className="reveal lift rounded-2xl border border-line bg-card p-7 hover:border-accent/50">

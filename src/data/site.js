@@ -39,10 +39,29 @@ export const site = {
     linkedin: null, // PLACEHOLDER — owner to supply verified profile URL
   },
 
-  // PLACEHOLDER — education and formal experience have not been supplied yet.
-  // The About section renders an explicit placeholder instead of invented history.
-  education: [],
-  experience: [],
+  // Verified — supplied by the owner 2026-10-22. No CGPA, awards or
+  // certifications are claimed: none were provided or verified.
+  education: [
+    {
+      degree: 'Bachelor of Science in Computer Science (BSCS)',
+      institution: 'Government College University Faisalabad (GCUF)',
+      session: '2023–2027',
+      semester: '7th Semester',
+      status: 'Currently enrolled',
+    },
+  ],
+  // Practical experience = independent project work (no formal employment
+  // is claimed). Focus lines are verified against each project's case study.
+  experienceIntro:
+    'I build web applications and software projects to develop practical skills in frontend and backend development, database integration, authentication, responsive interfaces, and application problem-solving. I focus on turning ideas into usable software while continuously improving functionality, code quality, and user experience.',
+  experienceProjects: [
+    { slug: 'educore', focus: 'Small-school management system — student records, fees, attendance, exams and staff, with a working admin build' },
+    { slug: 'printora', focus: 'Print-on-demand e-commerce — storefront, product customisation studio and a full admin panel' },
+    { slug: 'pdf-toolkit-pro', focus: 'Browser-based PDF tools — eight utilities that process files entirely on the user’s device' },
+    { slug: 'ai-personal-agent', focus: 'A personal AI agent for development work — coding help, debugging, research and scheduled tasks; actively developed and tested' },
+    { slug: 'learnflow-ai', focus: 'AI-assisted learning from YouTube videos — transcripts, summaries, notes, quizzes and an assistant' },
+    { slug: 'authentication-session-security', focus: 'Authentication and session security implemented inside PRINTORA — hashing, throttling, JWT sessions and role-based access' },
+  ],
 }
 
 export const navLinks = [

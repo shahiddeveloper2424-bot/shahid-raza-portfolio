@@ -280,7 +280,7 @@ export const projects = [
     role: 'Design & implementation',
     stack: ['Node.js', 'Express', 'MongoDB', 'JWT', 'bcrypt', 'Helmet', 'express-rate-limit'],
     summary:
-      'A security-focused web application authentication implementation designed to protect user access, manage authenticated sessions, and enforce role-based permissions.',
+      'The authentication and session-security system implemented inside PRINTORA, my print-on-demand store — a security-focused case study of how user access is protected, authenticated sessions are managed, and role-based permissions are enforced in that production MERN application.',
     challenge:
       'A store that handles customer accounts, orders and an admin panel cannot treat login as a formality: weak password storage, unlimited login attempts, or permissions enforced only by hiding buttons would put customer data and the whole business at risk.',
     approach:
@@ -479,6 +479,78 @@ export const projects = [
     ],
     detailsPending: false,
   },
+  {
+    slug: 'ai-personal-agent',
+    category: 'AI Tools',
+    index: '07',
+    title: 'AI Personal Agent',
+    subtitle: 'Working Project — Personal AI Assistant',
+    status: 'Working Project',
+    statusNote: 'A working project in active development and daily testing — not a finished product and not production-ready software for sale. It genuinely works today for the tasks listed as “Working” in this case study; anything beyond that is labelled In Development or Planned, exactly as it stands.',
+    year: '2026',
+    role: 'Design, configuration, development & daily testing',
+    stack: ['AI agent platform (Muse)', 'Custom instructions & persistent memory', 'Tool use — browser, terminal, files', 'Connected services & scheduled automations'],
+    summary:
+      'A personal AI agent I am actively building, configuring and testing to help with my development work — writing and debugging code, building websites and applications, researching topics, and handling selected tasks on my computer. This portfolio itself was researched, built, tested and deployed with it.',
+    challenge:
+      'Development work is full of small, interrupt-driven tasks around the actual coding: checking deployments, verifying fixes on real pages, keeping track of decisions across projects, running repetitive checks, and documenting what was actually done. Doing all of that manually, across several projects at once, is slow and easy to get wrong — and an assistant that exaggerates what it did would be worse than none.',
+    approach:
+      'The agent works as a loop: I describe an outcome, it plans the steps, uses real tools (a browser, a terminal, the file system and connected services such as GitHub and Vercel) to do the work, verifies the result — a build that passes, a page that loads, a screenshot that shows the change — and only then reports it as done. Consequential actions (deployments, messages, changes to accounts) wait for my approval, and its memory keeps project decisions and my preferences across sessions. Its behaviour is governed by written instructions I maintain: verify before claiming, never invent results, and stop exactly where I said to stop.',
+    features: [
+      'Working — Coding assistance: writes, edits and refactors code in real projects, and runs their builds and test suites',
+      'Working — Website & application development end-to-end: this portfolio (design, code, images, deployments) and hands-on testing of EduCore and PRINTORA were done with it',
+      'Working — Debugging: reproduces problems, inspects logs and code, applies targeted fixes and verifies them',
+      'Working — Research: searches the web and documents findings with sources',
+      'Working — Files, documents & data: reads, writes and organises project files and documents',
+      'Working — Scheduling: reminders and recurring checks (for example, watching a deployed site) that report back',
+      'Working — Guardrails: approval prompts for consequential actions, and a hard rule that nothing is reported done until it is verified',
+      'In development — Broader multi-step automations and deeper integration with more of my tools and accounts',
+      'Planned — Local AI model integration (Ollama): not yet implemented — currently the agent runs on a hosted model',
+    ],
+    users:
+      'Built for my own workflow as a developer and BSCS student — one user, tested daily on real projects, rather than a product released for the public.',
+    challenges: [
+      {
+        title: 'Trust: an agent that exaggerates is useless',
+        text: 'Early on, the failure mode that mattered most was confident-sounding but unverified claims. The fix is procedural, not cosmetic: every fix, deployment and test must be backed by the actual action and its observed result before it is reported — a rule the agent follows across all of my projects, and one I check.',
+      },
+      {
+        title: 'Scope and safety boundaries',
+        text: 'The agent can act on real accounts and files, so its authority is deliberately bounded: it works inside the task I gave it, asks before consequential or destructive actions, never handles my passwords or keys, and treats instructions found inside web pages or files as data, not commands.',
+      },
+      {
+        title: 'It is not magic — and not finished',
+        text: 'The agent cannot do everything: it has no local/offline model yet (Ollama integration is planned, not built), some websites block automated browsers, and it cannot physically test a phone. Those limits are stated wherever they matter instead of being hidden.',
+      },
+    ],
+    outcomes: [
+      'In daily use on real work: this portfolio’s research, build, image production, testing and deployments — and EduCore’s real-screenshot testing — were executed with the agent',
+      'Working features are listed as Working only where they have been exercised repeatedly on actual projects',
+      'Still in development: broader automations and tool integrations are being added and tested incrementally',
+      'Planned, not present: local AI (Ollama) and wider autonomous task coverage — no completion date is claimed',
+    ],
+    links: { live: null, liveLabel: null, github: null, githubNote: 'A personal working project — there is no public demo or source release at this stage.' },
+    screenshot: '/images/projects/ai-agent-cover.webp',
+    screenshotNote: 'Representative artwork — the agent workspace (conversation, connected tools and guardrails) as configured for this project',
+    screenshotSize: [1600, 1200],
+    gallery: [
+      {
+        src: '/images/projects/ai-agent-gallery-workflow.webp',
+        alt: 'Diagram — how a task flows through the AI Personal Agent',
+        caption: 'The working loop — instruction, plan, tools at work, verification, report. The verification step is what separates this project from a plain chatbot: results are checked, not assumed.',
+        size: [1600, 1200],
+      },
+      {
+        src: '/images/projects/ai-agent-gallery-status.webp',
+        alt: 'Capability status board — working, in development and planned features',
+        caption: 'Capabilities, honestly labelled — what works today, what is in development, and what is only planned (including local AI via Ollama, which is not yet integrated).',
+        size: [1600, 1200],
+      },
+    ],
+    detailsPending: false,
+  },
 ]
 
-export const getProject = (slug) => projects.find((p) => p.slug === slug) || null
+export function getProject(slug) {
+  return projects.find((p) => p.slug === slug) || null
+}

@@ -1,19 +1,23 @@
 export const skillGroups = [
   {
     title: 'Frontend Development',
-    skills: ['React', 'JavaScript (ES6+)', 'HTML5', 'CSS3', 'Tailwind CSS', 'Responsive Design', 'Vite', 'Component Architecture'],
+    skills: ['HTML5', 'CSS3', 'JavaScript (ES6+)', 'React', 'Tailwind CSS', 'Responsive Design', 'Component Architecture'],
   },
   {
     title: 'Backend Development',
-    skills: ['Node.js', 'Express.js', 'REST APIs', 'JWT Authentication', 'Server-side Validation', 'File Uploads', 'MongoDB', 'Mongoose'],
+    skills: ['Node.js', 'Express.js', 'REST APIs', 'JWT Authentication', 'Server-side Validation', 'File Uploads & Processing'],
   },
   {
-    title: 'Business Application Features',
-    skills: ['Admin Dashboards', 'CRUD Systems', 'Role-Based Access Control', 'Order Management', 'Multi-Currency Pricing', 'Reports & CSV Export', 'Audit Logs'],
+    title: 'Databases',
+    skills: ['MongoDB', 'Mongoose'],
   },
   {
-    title: 'Tools & Practices',
-    skills: ['Git', 'GitHub', 'Vercel Deployment', 'Testing & Debugging', 'Client-Side PDF Processing', 'Browser Storage', 'Clean, Documented Code'],
+    title: 'Programming Languages',
+    skills: ['JavaScript', 'Python — Basic Knowledge'],
+  },
+  {
+    title: 'Tools & Deployment',
+    skills: ['Git', 'GitHub', 'Vite', 'Vercel', 'Cloudinary'],
   },
 ]
 
