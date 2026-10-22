@@ -15,7 +15,7 @@ export default function Portrait({ caption = true }) {
 
   return (
     <figure>
-      <div className="dotgrid relative aspect-[4/3] overflow-hidden border-2 border-ink bg-cobalt">
+      <div className="relative aspect-square overflow-hidden rounded-full border-2 border-ink bg-cobalt shadow-[8px_8px_0_rgba(23,23,23,0.9)]">
         {showPhoto && (
           <img
             src={site.photo}
@@ -32,9 +32,6 @@ export default function Portrait({ caption = true }) {
             <span className="font-display text-7xl font-bold tracking-tight sm:text-8xl">SR</span>
             <span className="folio mt-4 text-lime">{site.name}</span>
             <span className="folio mt-1.5 text-white/60">{site.role}</span>
-            <span className="absolute bottom-3 left-3 bg-ink px-2.5 py-1.5 font-mono text-[9px] uppercase tracking-widest2 text-white">
-              Real photo here soon — public/images/profilephoto.jpeg
-            </span>
           </div>
         )}
       </div>

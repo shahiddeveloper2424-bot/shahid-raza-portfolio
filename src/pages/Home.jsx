@@ -66,7 +66,9 @@ function Hero() {
           <div className="reveal relative lg:col-span-5">
             <div aria-hidden="true" className="absolute -right-3 -top-3 h-full w-full rotate-2 bg-coral" />
             <div className="hard relative border-2 border-ink bg-paper p-4 text-ink sm:p-5">
-              <Portrait />
+              <div className="mx-auto max-w-[320px]">
+                <Portrait />
+              </div>
               <div className="mt-4 border-t-2 border-ink pt-4">
                 <div className="flex items-start justify-between gap-4">
                   <div>
@@ -273,7 +275,7 @@ function About() {
         <SectionHeading accent="bg-coral" index="04" eyebrow="About & Skills" title={<>A developer who verifies<br />before he claims.</>} />
         <div className="grid gap-14 lg:grid-cols-12">
           <div className="lg:col-span-7">
-            <div className="reveal max-w-md">
+            <div className="reveal max-w-[280px]">
               <Portrait />
             </div>
             <p className="dropcap reveal lede mt-10 text-soft">
