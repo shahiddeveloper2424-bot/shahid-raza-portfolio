@@ -38,7 +38,7 @@ export default function Header() {
             even while the logo image is still loading. */}
         <div className="mx-auto flex min-h-[4.5rem] max-w-shell items-center justify-between gap-4 px-5 py-3.5 sm:px-10">
           <Link href="/" className="flex min-w-0 items-center gap-3" ariaLabel={`${site.name} — home`}>
-            <span className="inline-flex shrink-0 items-center justify-center rounded-[3px] bg-ink px-2 py-1.5"><img src="/images/shahid-raza-sr-logo.png" alt="" aria-hidden="true" className="h-8 w-auto" /></span>
+            <span className="inline-flex shrink-0 items-center justify-center"><img src="/images/shahid-raza-sr-logo.png" alt="" aria-hidden="true" className="h-9 w-auto" /></span>
             <span className="min-w-0 leading-none">
               <span className="block whitespace-nowrap font-display text-[1.12rem] font-bold tracking-tight text-ink sm:text-[1.3rem]">{site.name}</span>
               <span className="folio mt-1 hidden whitespace-nowrap text-[0.58rem] text-muted sm:block">{site.role} — Portfolio</span>
@@ -87,7 +87,7 @@ export default function Header() {
       >
         <div className="flex items-center justify-between px-5 pb-3.5 pt-[max(0.875rem,env(safe-area-inset-top))]">
           <span className="flex min-w-0 items-center gap-3">
-            <span className="inline-flex shrink-0 items-center justify-center rounded-[3px] bg-ink px-2 py-1.5"><img src="/images/shahid-raza-sr-logo.png" alt="" aria-hidden="true" className="h-8 w-auto" /></span>
+            <span className="inline-flex shrink-0 items-center justify-center"><img src="/images/shahid-raza-sr-logo.png" alt="" aria-hidden="true" className="h-9 w-auto" /></span>
             <span className="whitespace-nowrap font-display text-lg font-bold">{site.name}</span>
           </span>
           <button

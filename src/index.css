@@ -21,8 +21,13 @@
 html { scroll-behavior: smooth; scroll-padding-top: 6rem; }
 
 /* Masthead double rule — the newspaper device under the site header:
-   a 1px line, a 3px gap, a second 1px line. */
-.masthead { position: relative; }
+   a 1px line, a 3px gap, a second 1px line.
+   NOTE: do NOT set `position` here — this rule loads after Tailwind's
+   utilities and a `position: relative` here silently overrides the
+   header's `sticky` class, so the masthead scrolls away. Sticky itself
+   is a positioned box, so the ::after rule below still anchors to the
+   header exactly as before. */
+.masthead { }
 .masthead::after {
   content: '';
   position: absolute;
